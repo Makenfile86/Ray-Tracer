@@ -1,7 +1,7 @@
 # Ray-Tracer
 42 School project, not finished.
 
-# rtv1
+# rt
 //
 
 This is a 42 school project.
