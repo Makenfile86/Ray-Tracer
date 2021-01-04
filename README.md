@@ -24,4 +24,4 @@ From other camera angle:
 
 Something totally different: 
 
-![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/rt3.jpg?raw=true)
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/rt3.png?raw=true)
