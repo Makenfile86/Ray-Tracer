@@ -14,12 +14,14 @@ Example of the scene file:
 
 Each object has its coordinates, size, color and position according to possible rotation values. Also there are also the camera and spot(s) values that determine the position of the camera or the "eye" and spots that are the light sources with their own position and light power.
 
-Out of the example scene comes this image:
+Quakish scene:
 
 ![scene eval09 image:](https://github.com/Makenfile86/ray-tracer/blob/main/rt1.jpg?raw=true)
 
-From other camera angles:
+From other camera angle:
 
 ![scene eval09 image2:](https://github.com/Makenfile86/ray-tracer/blob/main/rt2.jpg?raw=true)
 
-![scene eval09 image3:](https://github.com/Makenfile86/rtv1/blob/main/palace3.png?raw=true)
+Something totally different: 
+
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/rt3.png?raw=true)
