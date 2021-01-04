@@ -1,0 +1,7 @@
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+  0 0 100 0 0 0 0 0 0
+* SPOT coord-XYZ power 
+100 45 30 50
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+50       50 -10 20 255    200 100 0 0 0
+

@@ -1,0 +1,28 @@
+* SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
+           0          ,    3         ,       8     ,         0   ,                   2   ,       3                 ,     5
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+0 50 200 0 -1 0 0 0 0
+* SPOT coord-XYZ power 
+0 30 170 50
+* SPOT coord-XYZ power 
+0 0 0 50
+* SPOT coord-XYZ power 
+0 50 100 50
+* SPOT coord-XYZ power 
+0 50 125 25
+* SPOT coord-XYZ power 
+0 0 -20 50
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+30 5 110 25 , 255 255 255 , 0 0 0 , 2 , 1 , 1 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 0  -30 , 0  0 0 , 255 255 255   0 0 0 , 4 , 0 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 160    0     0 0 0 150  150 150 0 0 0 , 1 , 0 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 -20    0     0 0 0 255  150 150 0 0 0 , 1 , 0 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+120 0    0     0 0 0 50     25 150 0 0 0 , 1 , 0 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+-120 0    0     0 0 0 150 50 25 0 0 0 , 1 , 0 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 0  350 , 0  0 0 , 25 25 25   0 0 0 , 1 , 0 , 3 , 0 0 0

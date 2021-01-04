@@ -1,0 +1,8 @@
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+  0 0 100 0 0 0 0 0 0
+* SPOT coord-XYZ power 
+11 100 110 50
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+0       0 -10 20 255    200 100 0 0 0
+* CYLINDER      start-XYZ        end-XYZ radius color-RGB  rotation-XYZ
+0       0 0 	    0 10 1 5 200      50 50 0 0 90

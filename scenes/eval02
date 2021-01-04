@@ -1,0 +1,6 @@
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+  0 0 100 0 0 0 0 0 0
+* SPOT coord-XYZ power 
+11 100 110 50
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 -1    0     0 0 0 150     150 25 0 0 0

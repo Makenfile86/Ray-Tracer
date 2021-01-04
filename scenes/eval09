@@ -1,0 +1,40 @@
+* SCENE background(0-1) lambert(1-5)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensity(1-10) reflection(1-10)
+       0        ,     2        ,       6     ,       1   ,                   2       ,       1             ,     5
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+  0 50 100 0 -1 0 -15 0 0
+* SPOT coord-XYZ power 
+30 50 200 50
+* SPOT coord-XYZ power 
+-30 50 200 50
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+-30 -30 10 7 100 100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+30 -30 10 7 100 100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+-30 30 10 7 100 100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+30 30 10 7 100 100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+-30 -30 50 7 100      100 100 0 0       0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+30 -30 50 7 100 100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+-30 30 50 7 100     100 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ
+30 30 50 7       100 100    100  0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+0 -25 70 , 5 , 0    255 100 0 0 0 , 2 , 2 , 1 , 0 100 255
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+0 -20 50 , 10  ,  0 100    255 , 0 0 0 , 2 , 1 , 1 , 0 0 255
+* CYLINDER        start-XYZ  end-XYZ radius color-RGB     rotation-XYZ material txt_type txt_size txt_color
+30 0 10     	30 1 10 5 200 50 50 0 0 0, 2 , 1 , 2 , 125 125 125
+* CYLINDER  start-XYZ  end-XYZ radius color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-30 0 10 	    -30 1 10    5 200 50 50 0 0 0, 2 , 1 , 2 , 0 0 0
+* CYLINDER  start-XYZ  end-XYZ radius color-RGB  rotation-XYZ material txt_type txt_size txt_color
+30 0 50 	30 1 50 5   200 50 50 0 0 0, 2 , 2 , 2 , 0 255 0
+* CYLINDER      start-XYZ        end-XYZ radius color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-30       0 50 	    -30 1 50 5 200      50 50 0 0 0, 2 , 1 , 2 , 0 0 125
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 0    -20 0     0 0 255 255 255   0 0 0 , 2 , 2 , 3 , 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
+0 -30    0     0 0 0 255     255 255 0 0 0 , 2 , 2 , 3 , 0 0 0
