@@ -16,10 +16,10 @@ Each object has its coordinates, size, color and position according to possible 
 
 Out of the example scene comes this image:
 
-![scene eval09 image:](https://github.com/Makenfile86/rtv1/blob/main/rt1.jpg?raw=true)
+![scene eval09 image:](https://github.com/Makenfile86/ray-tracer/blob/main/rt1.jpg?raw=true)
 
 From other camera angles:
 
-![scene eval09 image2:](https://github.com/Makenfile86/rtv1/blob/main/rt2.jpg?raw=true)
+![scene eval09 image2:](https://github.com/Makenfile86/ray-tracer/blob/main/rt2.jpg?raw=true)
 
 ![scene eval09 image3:](https://github.com/Makenfile86/rtv1/blob/main/palace3.png?raw=true)
