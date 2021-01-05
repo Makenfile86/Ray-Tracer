@@ -4,7 +4,9 @@
 # rt
 //
 
-This is a 42 school project. (Tutorial at the end.)
+This is a 42 school project. Done with C using Minilibx https://harm-smits.github.io/42docs/libs/minilibx
+Right now its only supported by Mac os. There is a user tutorial at the end.
+
 The objective was to get familiar with the concept of ray tracing and creating scenes using it. Our ray tracing program uses four different objects to create its scenes.
 (Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and has a few different texture mapping patterns. 
 
@@ -24,6 +26,14 @@ something more cartoonish:
 angle from behind:
 
 ![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom2.jpg?raw=true)
+
+** Installation
+
+Clone or download this repository and run "make" in command line while in the root of the repository. This will build executable called rt.
+
+Next you need to create a scene file or use one of the examples from the "scenes" folder.
+
+run ./rt scenes/"scene name" to open a scene.
 
 Example of the scene file:
 
@@ -70,6 +80,8 @@ txt_size (This determines the size of the texture or the pattern if you are usin
 txt_color (This determines the "other" color in the checker pattern, default is 0 0 0 black).
 
 normal (Only for planes, planes are flat rounded massive surfaces but you can turn their center to face other directions, 0 0 0 is default).
+
+After using makefi
 
 
 
