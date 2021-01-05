@@ -10,7 +10,7 @@ The objective was to get familiar with the concept of ray tracing and creating s
 
 Example of the scene file: (The tutorial.txt goes in to more detail).
 
-![scene eval09 file:](https://github.com/Makenfile86/rtv1/blob/main/scene_09.png?raw=true)
+![scene eval09 file:](https://github.com/Makenfile86/ray-tracer/blob/main/scene_file.jpg?raw=true)
 
 Each object has its coordinates, size, color and position according to possible rotation values. Also there are also the camera and spot(s) values that determine the position of the camera or the "eye" and spots that are the light sources with their own position and light power.
 
