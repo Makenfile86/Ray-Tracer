@@ -63,7 +63,6 @@ void						draw(t_data *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			//put_pixel(data, x, y, color);
 			get_color(data, x, y);
 			x++;
 		}
@@ -78,9 +77,6 @@ t_rgb get_background_color(t_data *data, int x, int y)
 	int i;
 	
 	i = y * (4 * WIDTH) + x * 4;
-	// printf("\n X: %d :\n", x);
-	 //printf("\n Y: %d :\n", y);
-	// printf("\n I: %d :\n", i);
 	rgb.red = data->texture->background_ppm[i + 1];
 		rgb.green = data->texture->background_ppm[i + 2];
 			rgb.blue = data->texture->background_ppm[i + 3];

@@ -30,8 +30,6 @@ t_data	*allocate_memory(t_data *data)
 		memory_allocation_fail();
 		if (!(data->texture = (t_texturemap *)malloc(sizeof(t_texturemap))))
 		memory_allocation_fail();
-		//if (!(data->texture->moon_ppm = (unsigned char *)malloc(sizeof(unsigned char))))
-		//memory_allocation_fail();
 			if (!(data->scene = (t_scene *)malloc(sizeof(t_scene))))
 		memory_allocation_fail();
 	return (data);
@@ -45,5 +43,6 @@ void	free_memory(t_data *data)
 	free(data->camera);
 	free(data->spot);
 	free(data->sphere);
+	free(data->texture);
 	free(data);
 }

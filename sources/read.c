@@ -67,8 +67,8 @@ if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 	parse_obj(line, data, 0, "scene");
 	else if (ft_strcmp(data_name, "CAMERA") == 0)
 		parse_obj(line, data, 0, "camera");
-	else if (ft_strcmp(data_name, "TEXTURE") == 0)
-		parse_texture(line, data);
+	//else if (ft_strcmp(data_name, "TEXTURE") == 0)
+		//parse_texture(line, data);
 }
 
 

@@ -21,7 +21,7 @@ void		init_cylinder(t_data *data, int e)
 	data->cylinder->axis[e] = normalized_vector(data->cylinder->axis[e]);
 	data->cylinder->nbr += 1;
 	if (data->cylinder->texture[e].type > 1)
-	copy_ppm(data, "cylinder", e, data->cylinder->texture[e].type);
+	data->cylinder->texture[e].txt_ppm = copy_ppm(data, data->cylinder->texture[e].type);
 
 }
 
@@ -72,6 +72,4 @@ void		copy_cylinder_data(t_data *data, char *str, int x, int e)
 	else
 		data->cylinder->texture[e].color.blue = ft_atoi(str);
 
-	
-	//ft_putnbr(data->cylinder->start_xyz[e].x);
 }

@@ -6,13 +6,13 @@
 void			init_scene(t_data *data)
 {
 	data->org_iter = data->scene->ref_iter;
-		if (data->scene->background == 1)
-	{
-		data->hit.texture.type = 9;
-		parse_ppm(data, 9);
-		draw_background(data);
-		data->hit.texture.type = 0;
-	}
+		//if (data->scene->background == 1)
+	//{
+		//data->hit.texture.type = 9;
+		//parse_ppm(data, 9);
+		//draw_background(data);
+		//data->hit.texture.type = 0;
+	//}
 }
 
 void		copy_scene_data(t_data *data, char *str, int x)

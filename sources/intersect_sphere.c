@@ -84,7 +84,6 @@ int					intersectsphere(t_ray ray, t_data *data, int h)
 			else
 			{
 			data->hit.t = t[0];
-			//ft_putendl("ei pitais olla");
 			}
 			return (1);
 		}

@@ -33,30 +33,21 @@ t_vector			new_start_dir_cylinder(t_data *data, t_ray *ray)
 	t_vector		scaled;
 	t_vector		n;
 	double			m;
-	//t_vector tmp;
+	
 
 	scaled = vectorscale(data->hit.t, ray->target);
-	//tmp = vectoradd(ray->newstart, scaled);
-	//printf("%f\n", ray->newstart.x);
-	//data->hit.normal = vectoradd(ray->newstart, scaled);
 	m = vectordot(ray->target, data->cylinder->axis[data->hit.obj_idx]) *
 		data->hit.t + vectordot(vector_minus(ray->start,
 					data->cylinder->start_xyz[data->hit.obj_idx]),
 				data->cylinder->axis[data->hit.obj_idx]);
 	ray->newstart = vectoradd(ray->start, scaled);
 	
-	//if (data->iter == data->org_iter)
-	//data->hit.normal = ray->newstart;
 	n = normalized_vector(vector_minus(vector_minus(ray->newstart,
 					data->cylinder->start_xyz[data->hit.obj_idx]),
 				vectorscale(m, data->cylinder->axis[data->hit.obj_idx])));
 	if (vectordot(ray->target, n) > 0.0001)
 		n = vectorscale(-1, n);
 	data->hit.normal = vector_copy(ray->newstart);
-//if (data->iter == data->org_iter)
-//data->hit.normal = vector_copy(n);
-		//data->hit.normal = vectoradd(ray->start, vectorscale(data->hit.t, ray->target));
-		//p = ft_add_vec3(r->origin, ft_mul_vec3(r->direction, t));
 	return (n);
 }
 

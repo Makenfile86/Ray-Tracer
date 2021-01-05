@@ -48,11 +48,16 @@ typedef	struct		s_texturemap
 	t_rgb2			color;
 	char			*name;
 	unsigned char			*wood_ppm;
+	int						wood_loaded;
 	unsigned char			*txt_ppm;
 	unsigned char			*earth_ppm;
+	int						earth_loaded;
 	unsigned char			*moon_ppm;
+	int						moon_loaded;
 	unsigned char			*background_ppm;
+	int						background_loaded;
 	unsigned char			*black_marble_ppm;
+	int						black_marble_loaded;
 
 
 }					t_texturemap;

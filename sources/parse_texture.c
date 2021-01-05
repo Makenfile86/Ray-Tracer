@@ -1,106 +1,111 @@
 #include "rtv1.h"
 #include "stdio.h"
 
-void copy_ppm(t_data *data, char *obj_name, int obj_idx, int type)
+unsigned char *copy_ppm(t_data *data, int type)
 {
-    
-    if ((ft_strcmp(obj_name, "sphere") == 0))
-    {
-        if (type == 2)
+
+ if (type == 2)
         {
-            if (data->texture->wood_ppm)
-             data->sphere->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
-            else
-            {
-            parse_ppm(data, type);
-            data->sphere->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
-            }
+            if (data->texture->wood_loaded == 1)
+            return (data->texture->wood_ppm);
+            return (parse_ppm(data, data->texture->wood_ppm, type));
         }
         else if (type == 4)
         {
-           
-        
-            //if (!(data->texture->moon_ppm))
-               parse_ppm(data, type);
-             data->sphere->texture[obj_idx].txt_ppm = data->texture->moon_ppm;
-    
-        }
+           if (data->texture->moon_loaded == 1)
+           return (data->texture->moon_ppm);
+            return (parse_ppm(data, data->texture->moon_ppm, type));
+         }
         else if (type == 3)
         {
-        //ft_putendl("moon");
-        //ft_putnbr(data->texture->moon_ppm[0]);
-            if (!(data->texture->earth_ppm))
-            parse_ppm(data, type);
-             
-                 data->sphere->texture[obj_idx].txt_ppm = data->texture->earth_ppm;
-         
-            }
-            else if (type == 5)
-        {
-        //ft_putendl("moon");
-        //ft_putnbr(data->texture->moon_ppm[0]);
-           // if (!(data->texture->black_marble_ppm))
-            parse_ppm(data, type);
-             
-                 data->sphere->texture[obj_idx].txt_ppm = data->texture->black_marble_ppm;
-         
-            }
-    
-    }
-    else if ((ft_strcmp(obj_name, "plane")) == 0)
-    {
-        if (type == 2)
-        {
-            if (data->texture->wood_ppm)
-            data->plane->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
+            if (data->texture->earth_loaded == 1)
+            return (data->texture->earth_ppm);
+           return (parse_ppm(data, data->texture->earth_ppm, type));
+         }
             else
-            {
-            parse_ppm(data, type);
-            data->plane->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
-            }
-        }
-        else if (type == 5)
         {
-    
-        //ft_putnbr(data->texture->moon_ppm[0]);
-          //  if (!(data->texture->black_marble_ppm))
-            parse_ppm(data, type);
-             
-                 data->plane->texture[obj_idx].txt_ppm = data->texture->black_marble_ppm;
-         
-            }
+            if (data->texture->black_marble_loaded == 1)
+            return (data->texture->black_marble_ppm);
+            return (parse_ppm(data, data->texture->black_marble_ppm, type));
+        }
+   
     }
-    else if ((ft_strcmp(obj_name, "cylinder")) == 0)
-    {
-        if (type == 2)
-        {
-            if (data->texture->wood_ppm)
-            data->cylinder->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
-            else
-            {
-            parse_ppm(data, type);
-            data->cylinder->texture[obj_idx].txt_ppm = data->texture->wood_ppm;
-            }
-        }
-        else if (type == 5)
-        {
+  
+    
 
-            parse_ppm(data, type);
-             
-                 data->cylinder->texture[obj_idx].txt_ppm = data->texture->black_marble_ppm;
-         
-            }
-    }
-    
+
+static void fourth_channel_padding(unsigned char *texture, int width, int height)
+{   
+    int i;
+
+    i = 0;
+	while (i < width * height)
+	{
+       texture[i * 4 + 0] = 1;
+		texture[i * 4 + 1] = 1;
+	texture[i * 4 + 2] = 1;
+		texture[i * 4 + 3] = 1;
+        i++;
+        }
 }
 
-void    parse_ppm(t_data *data, int type)
+static char *init_texture(t_data *data, int type, int width, int height)
+{
+
+if (type == 2)
+{
+    width = 4000;
+    height = 4000;
+    if (!(data->texture->wood_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
+	memory_allocation_fail();
+    fourth_channel_padding(data->texture->wood_ppm, width, height);
+    data->texture->wood_loaded = 1;
+    return ("./textures/ballroom4.ppm");
+}
+else if (type == 3)
+{
+if (!(data->texture->earth_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
+	memory_allocation_fail();
+    fourth_channel_padding(data->texture->earth_ppm, width, height);
+       data->texture->earth_loaded = 1;
+    return ("./textures/earth.ppm");
+}
+else if (type == 4)
+{
+  if (!(data->texture->moon_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
+	memory_allocation_fail();
+    fourth_channel_padding(data->texture->moon_ppm, width, height);
+       data->texture->moon_loaded = 1;
+    return ("./textures/moon.ppm");
+}
+else if (type == 5)
+{
+     width = 4016;
+    height = 4016;
+if (!(data->texture->black_marble_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
+	memory_allocation_fail();
+    fourth_channel_padding(data->texture->black_marble_ppm, width, height);
+       data->texture->black_marble_loaded = 1;
+    return ("./textures/black_marble.ppm");
+}
+else
+{
+if (!(data->texture->background_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
+	memory_allocation_fail();
+    fourth_channel_padding(data->texture->background_ppm, width, height);
+           data->texture->background_loaded = 1;
+    return ("./textures/background.ppm");
+}
+
+
+}
+
+unsigned char    *parse_ppm(t_data *data, unsigned char *texture, int type)
 {
     int     fd;
     int     check;
    char     text_data[1];
     int     i;
-//char    *data;
  char    *filename;
 int 	x;
     int     width;
@@ -113,113 +118,24 @@ int 	x;
 x = 0;
 i = 0;
 
-if (type == 2)
-{
-    filename = "./textures/ballroom4.ppm";
-    fd = open(filename, O_RDONLY);
-
-if (!(data->texture->wood_ppm = (unsigned char*)malloc(sizeof(unsigned char) * 4000 * 4000 * 4)))
-	ft_putendl("lisa mallo error");
-}
-else if (type == 3)
-{
-    filename = "./textures/earth.ppm";
- fd = open(filename, O_RDONLY);
-
-if (!(data->texture->earth_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
-	ft_putendl("./textures/lisa mallo error");
-}
-else if (type == 4)
-{
-    filename = "./textures/moon.ppm";
- fd = open(filename, O_RDONLY);
-
-if (!(data->texture->moon_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
-	ft_putendl("lisa mallo error");
-}
-else if (type == 5)
-{
-    filename = "./textures/black_marble.ppm";
- fd = open(filename, O_RDONLY);
-
-if (!(data->texture->black_marble_ppm = (unsigned char*)malloc(sizeof(unsigned char) * 4016 * 4016 * 4)))
-	ft_putendl("lisa mallo error");
-}
-else if (type == 9)
-{
-    filename = "./textures/lib.ppm";
- fd = open(filename, O_RDONLY);
-
- if (!(data->texture->background_ppm = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
-	ft_putendl("lisa mallo error");
-}
-
-
+filename = init_texture(data, type, width, height);
+fd = open(filename, O_RDONLY);
 
 	
-	i = 0;
-	while (i < width * height)
-	{
-        if (type == 2)
-        {
-       data->texture->wood_ppm[i * 4 + 0] = 1;
-		data->texture->wood_ppm[i * 4 + 1] = 1;
-	data->texture->wood_ppm[i * 4 + 2] = 1;
-		data->texture->wood_ppm[i * 4 + 3] = 1;
-        }
-      else if (type == 3)
-      {
-          data->texture->earth_ppm[i * 4 + 0] = 1;
-		data->texture->earth_ppm[i * 4 + 1] = 1;
-	data->texture->earth_ppm[i * 4 + 2] = 1;
-		data->texture->earth_ppm[i * 4 + 3] = 1;
-      }
-      else if (type == 4)
-      {
-       
-          data->texture->moon_ppm[i * 4 + 0] = 1;
-		data->texture->moon_ppm[i * 4 + 1] = 1;
-	data->texture->moon_ppm[i * 4 + 2] = 1;
-		data->texture->moon_ppm[i * 4 + 3] = 1;
-      }
-      else if (type == 5)
-      {
-       
-          data->texture->black_marble_ppm[i * 4 + 0] = 1;
-		data->texture->black_marble_ppm[i * 4 + 1] = 1;
-	data->texture->black_marble_ppm[i * 4 + 2] = 1;
-		data->texture->black_marble_ppm[i * 4 + 3] = 1;
-      }
-      else if (type == 9)
-      {
-       
-          data->texture->background_ppm[i * 4 + 0] = 1;
-		data->texture->background_ppm[i * 4 + 1] = 1;
-	data->texture->background_ppm[i * 4 + 2] = 1;
-		data->texture->background_ppm[i * 4 + 3] = 1;
-      }
-		i++;
-        }
-i = 0;
-while ((check = read(fd, text_data, 1)) > 0 && i < 4000 * 4000 * 4)
+if (!(texture = (unsigned char*)malloc(sizeof(unsigned char) * 4016 * 4016 * 4)))
+	memory_allocation_fail();
+
+while ((check = read(fd, text_data, 1)) > 0 && i < 4016 * 4016 * 4)
 {
 	if (x % 3 == 0)
 	i++;
 	x++;
-    if (type == 2)
-   data->texture->wood_ppm[i] = text_data[0];
-   else if (type == 3)
-   data->texture->earth_ppm[i] = text_data[0];
-   else if (type == 4)
-   data->texture->moon_ppm[i] = text_data[0];
-   else if (type == 5)
-   data->texture->black_marble_ppm[i] = text_data[0];
-   else if (type == 9)
-   data->texture->background_ppm[i] = text_data[0];
- 
+   texture[i] = text_data[0];
     i++;
 }
-
 close (fd);
+return (texture);
+
+
 
 }

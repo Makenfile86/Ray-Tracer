@@ -50,7 +50,6 @@ t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
 	ray.target = vectoradd(ray.target, v[1]);
 	ray.target = vec_rot_z(ray.target, data->camera->rot.z);
 	ray.target = normalized_vector(ray.target);
-	//data->hit.org_target = vector_copy(ray.target);
 	data->light_scale = 1;
 	data->hit.fresnel = 1;
 	data->iter = data->org_iter;

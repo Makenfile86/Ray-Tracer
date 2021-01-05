@@ -23,7 +23,8 @@ void			init_plane(t_data *data, int e)
 	data->plane->normal[e] = normalized_vector(data->plane->normal[e]);
 	data->plane->nbr += 1;
 	if (data->plane->texture[e].type > 1)
-	copy_ppm(data, "plane", e, data->plane->texture[e].type);
+	data->plane->texture[e].txt_ppm = copy_ppm(data, data->plane->texture[e].type);
+
 	
 }
 
@@ -65,11 +66,8 @@ void			copy_plane_data(t_data *data, char *str, int x, int e)
 		data->plane->texture[e].color.green = ft_atoi(str);
 	else 
 		data->plane->texture[e].color.blue = ft_atoi(str);
-	
-	//if (data->plane->mater[e] == 4)
-	//ft_putendl("hooi hoi hoi ");
+
 }
 
 
-	//init_plane(data, e, str);
 

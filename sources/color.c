@@ -62,7 +62,6 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 
 	if (data->hit.refract == 1)
 	{
-		//ft_putendl("moikka");
 	
 	ray.start = vector_copy(ray.newstart);
 	double etai;
@@ -100,58 +99,22 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 	else
 	ray.target = vectoradd(vectorscale(eta, ray.target),
 		vectorscale((eta * cosi - sqrtf(k)), n));
-	//data->hit.fresnel = calc_fresnel(n, ray.target, ior);
+	
 	data->iter += 1;
-	//data->hit.refract = 0;
+	
 	ray.target = normalized_vector(ray.target);
-	//ft_putendl("refraction");
+
 	}
 	else
 	{
-	//ft_putendl("reflection");
-	//if ((ft_strcmp(data->hit.obj_name, "plane") == 0) || data->hit.texture.type == 2)
-	//r_factor = 30;
-	//else
-	//if (data->hit.double_target == 1)
-	//{
-	//	ray.target = data->hit.org_target;
-		//data->hit.double_target = 0;
-	//}
+
 	r_factor = fabs(data->scene->reflection - 9.5);
 
 	ray.start = vector_copy(ray.newstart);
 	reflect = r_factor * vectordot(ray.target, n);
 	tmp = vectorscale(reflect, n);
 	ray.target = vector_minus(ray.target, tmp);
-	//data->hit.fresnel = calc_fresnel(n, ray.target, 1.5);
-		//data->hit.refraction = 0;
-		//data->hit.fresnel = 1;
 	}
-	
-	//{
-		//t_rgba	calc_refract(t_scene *scene, t_vec3 idir, t_raycast_hit hit, double ior)
-//{
-	//t_ray	refract_ray;
-	//t_rgba	color;
-
-	//ray.start = vector_copy(ray.newstart);
-/*
-	refract_ray.origin = hit.point;
-	refract_ray.direction = ft_refract_vec3(idir, hit.normal, ior);
-	refract_ray.direction = ft_normalize_vec3(refract_ray.direction);
-	refract_ray.is_shadow = FALSE;
-	refract_ray.last_color = hit.shape->material->diffuse;
-	color = raycast(&refract_ray, scene, hit.depth + 1);
-	if (scene->help_ray == 1)
-	{
-		print_rgba("refract color", color);
-		print_vec3("rdir: ", refract_ray.direction);
-	}
-	return (color);
-}
-	}
-	8?
-	*/
 	return (ray);
 }
 
@@ -182,7 +145,6 @@ static void copy_hit_data(t_data *data)
 	int i;
 	
 	i = data->hit.obj_idx;
-	//data->hit.normal = n;
 	
 	if (ft_strcmp(data->hit.obj_name, "sphere") == 0)
 	{
@@ -218,9 +180,6 @@ data->hit.mater = data->cone->mater[i];
 	}
 		if (data->hit.mater == 3)
 		data->hit.refract = 1;
-		
-			//if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.preobj_mater == 4)
-			//ft_putendl("Wtf");
 }
 
 static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
@@ -299,10 +258,6 @@ void				get_color(t_data *data, int x, int y)
 	t_rgb		rgb;
 	t_ray		ray;
 	ray = init_pixel(data, x, y, &rgb);
-	//data->x = ray.target.x;
-	//data->y = ray.target.y;
-	//printf("%f\n" ,ray.target.z);
-	//ft_putchar('\n');
 	while (data->iter > 0 && data->light_scale > 0.0f)
 	{
 		search_intersection(data, ray);

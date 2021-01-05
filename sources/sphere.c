@@ -17,7 +17,8 @@ void init_sphere(t_data *data, int e)
 {
 		data->sphere->nbr += 1;
 		if (data->sphere->texture[e].type > 1)
-		copy_ppm(data, "sphere", e, data->sphere->texture[e].type);
+	data->sphere->texture[e].txt_ppm = copy_ppm(data, data->sphere->texture[e].type);
+	
 }
 
 void		copy_sphere_data(t_data *data, char *str, int x, int e)
