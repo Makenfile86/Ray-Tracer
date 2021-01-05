@@ -37,13 +37,20 @@ Each object has its coordinates, size, color and position according to possible 
 
 Here is more details about the variables:
 
-background (You can only use this with the SCENE, and right now its recommended to put to 0 as the code is not completed yet).
+background (You can only use this with the SCENE only and it draws a background to your scene, its not working completely yet).
+
 lambert (how much lambert you want in your scene, 3-4 is recommende).
+
 light (You can change the all of the light sources light scale).
+
 shadows (0 no shadows, otherwise shadows).
+
 reflection_iteration (1 is no reflections, 2 is reflections, after that your reflections will have reflections and not really recommended).
+
 color_intesity (How intense you want your colors to be ?, 2-5 is recommended).
+
 reflection (How intense you want your reflections to be? 1-5 is recommended).
+
 power (spots lights power).
 
 coord-XYZ (ALl the objects, spots and camera has the XYZ value that determine the location of that item in the 3D space. 0 0 0 is the center).
