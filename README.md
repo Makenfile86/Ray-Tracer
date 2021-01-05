@@ -6,9 +6,9 @@
 
 This is a 42 school project.
 The objective was to get familiar with the concept of ray tracing and creating scenes using it. Our ray tracing program uses four different objects to create its scenes.
-(Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections.
+(Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and has a few different texture mapping patterns. 
 
-Example of the scene file:
+Example of the scene file: (The tutorial.txt goes in to more detail).
 
 ![scene eval09 file:](https://github.com/Makenfile86/rtv1/blob/main/scene_09.png?raw=true)
 
