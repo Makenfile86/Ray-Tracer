@@ -37,15 +37,15 @@ Each object has its coordinates, size, color and position according to possible 
 
 Here is more details about the variables:
 
-background (You can only use this with the SCENE only and it draws a background to your scene, its not working completely yet).
+background (You can only use this with the SCENE and it draws a background to your scene, its not working completely yet so its recommended to leave at 0).
 
-lambert (how much lambert you want in your scene, 3-4 is recommende).
+lambert (how much lambert you want in your scene, 3-4 is recommended).
 
-light (You can change the all of the light sources light scale).
+light (You can change all of the light sources "power").
 
 shadows (0 no shadows, otherwise shadows).
 
-reflection_iteration (1 is no reflections, 2 is reflections, after that your reflections will have reflections and not really recommended).
+reflection_iteration (1 is no reflections, 2 is realistic reflections, more than 2 your reflections will have reflections and not really recommended).
 
 color_intesity (How intense you want your colors to be ?, 2-5 is recommended).
 
@@ -54,13 +54,22 @@ reflection (How intense you want your reflections to be? 1-5 is recommended).
 power (spots lights power).
 
 coord-XYZ (ALl the objects, spots and camera has the XYZ value that determine the location of that item in the 3D space. 0 0 0 is the center).
+
 radius (The radius of the object. Determines the size of the object)
+
 color-RGB (The objects color in RGB, red green blue values between 0-255).
+
 rotation (objects rotational angle, you can rotate certain objects in the 3D space. 0 0 0 is no roation).
+
 material (What kind of material is the object, 1 is very little reflection, 2 is the normal, 4 is like a mirror).
+
 txt_type (You can texture map a texture on the objects surface, 1 is a checker pattern, 3 is a earth texture, 4 is a moon texture, 5 is a marble texture).
+
 txt_size (This determines the size of the texture or the pattern if you are using one, you can choose how big your checker patterns are for example).
+
 txt_color (This determines the "other" color in the checker pattern, default is 0 0 0 black).
+
+normal (Only for planes, planes are flat rounded massive surfaces but you can fold them to other shapes, 0 0 0 is flat).
 
 
 
