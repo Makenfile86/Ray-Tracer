@@ -25,3 +25,7 @@ From other camera angle:
 something more cartoonish: 
 
 ![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom1.jpg?raw=true)
+
+angle from behind:
+
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom2.jpg?raw=true)
