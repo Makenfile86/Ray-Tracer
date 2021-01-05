@@ -33,7 +33,7 @@ You need a SCENE, CAMERA, atleast one SPOT (light) and a object.
 
 So first line is  "* SCENE...", Where you first declare where your second lines input goes. To declare data you only need the "* NAME". The variables after that are simply to help you fill the values for them in the same order in the second line. 
 
-Each object has its coordinates, size, color and position according to possible rotation values. There is also a camera you can move that faces towards "target". Spot(s) are light sources with and you can change their position and light power.
+Each object has its coordinates, size, color and position according to possible rotation values. There is also a camera you can move that faces towards "target". Spot(s) are light sources and you can change their position and light power.
 
 Here is more details about the variables:
 
