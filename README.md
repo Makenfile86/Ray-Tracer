@@ -69,7 +69,7 @@ txt_size (This determines the size of the texture or the pattern if you are usin
 
 txt_color (This determines the "other" color in the checker pattern, default is 0 0 0 black).
 
-normal (Only for planes, planes are flat rounded massive surfaces but you can fold them to other shapes, 0 0 0 is flat).
+normal (Only for planes, planes are flat rounded massive surfaces but you can turn their center to face other directions, 0 0 0 is default).
 
 
 
