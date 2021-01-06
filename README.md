@@ -2,7 +2,6 @@
 42 School project, not finished.
 
 # rt
-//
 
 This is a 42 school project. Done with C using Minilibx https://harm-smits.github.io/42docs/libs/minilibx
 
@@ -12,19 +11,19 @@ The objective was to get familiar with the concept of ray tracing and creating s
 (Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and has a few different texture mapping patterns. 
 
 
-Quakeish scene:
+# Quakeish scene:
 
 ![scene eval09 image:](https://github.com/Makenfile86/ray-tracer/blob/main/rt1.jpg?raw=true)
 
-From other camera angle:
+# From other camera angle:
 
 ![scene eval09 image2:](https://github.com/Makenfile86/ray-tracer/blob/main/rt2.jpg?raw=true)
 
-something more cartoonish: 
+# something more cartoonish: 
 
 ![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom1.jpg?raw=true)
 
-angle from behind:
+# angle from behind:
 
 ![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom2.jpg?raw=true)
 
