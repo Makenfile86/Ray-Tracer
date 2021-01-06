@@ -35,7 +35,7 @@ Next you need to create a scene file or use one of the examples from the "scenes
 
 run ./rt scenes/"scene name" to open a scene.
 
-# Example of the scene file:
+# Example of a scene file:
 
 ![scene eval09 file:](https://github.com/Makenfile86/ray-tracer/blob/main/scene_file.jpg?raw=true)
 
