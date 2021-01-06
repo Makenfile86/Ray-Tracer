@@ -45,7 +45,7 @@ So first line is  "* SCENE...", Where you first declare where your second lines 
 
 Each object has its coordinates, size, color and position according to possible rotation values. There is also a camera you can move that faces towards "target". Spot(s) are light sources and you can change their position and light power.
 
-Here is more details about the variables:
+# The variables: 
 
 background (You can only use this with the SCENE and it draws a background to your scene, its not working completely yet so its recommended to leave at 0).
 
