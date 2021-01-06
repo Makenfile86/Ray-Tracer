@@ -81,7 +81,6 @@ txt_color (This determines the "other" color in the checker pattern, default is 
 
 normal (Only for planes, planes are flat rounded massive surfaces but you can turn their center to face other directions, 0 0 0 is default).
 
-After using makefi
 
 
 
