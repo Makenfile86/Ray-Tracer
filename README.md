@@ -27,7 +27,7 @@ The objective was to get familiar with the concept of ray tracing and creating s
 
 ![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom2.jpg?raw=true)
 
-** Installation
+# ** Installation
 
 Clone or download this repository and run "make" in command line while in the root of the repository. This will build executable called rt.
 
@@ -35,7 +35,7 @@ Next you need to create a scene file or use one of the examples from the "scenes
 
 run ./rt scenes/"scene name" to open a scene.
 
-Example of the scene file:
+# Example of the scene file:
 
 ![scene eval09 file:](https://github.com/Makenfile86/ray-tracer/blob/main/scene_file.jpg?raw=true)
 
