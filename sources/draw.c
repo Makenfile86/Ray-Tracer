@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "stdio.h"
+#include "rt.h"
+
 
 static void					put_pixel(t_data *data, int x, int y, t_color color)
 {
@@ -57,46 +57,23 @@ void						draw(t_data *data)
 	int				x;
 	t_color color;
 	color.channel[0] = 0;
+	//y = data->start_line;
 	y = 0;
+	//while (y < data->finish_line)
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
+			data->test_x = x;
+			data->test_y = y;
+			//printf("\nX : %d\n", x);
+			//printf("\nY : %d\n", y);
 			get_color(data, x, y);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
-}
 
-t_rgb get_background_color(t_data *data, int x, int y)
-{
-	t_rgb rgb;
-	int i;
 	
-	i = y * (4 * WIDTH) + x * 4;
-	rgb.red = data->texture->background_ppm[i + 1];
-		rgb.green = data->texture->background_ppm[i + 2];
-			rgb.blue = data->texture->background_ppm[i + 3];
-			return (rgb);
-}
-
-void		draw_background(t_data *data)
-{
-	int x;
-	int y;
-	
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH )
-		{
-			put_color(data, get_background_color(data, x, y), x, y);
-			x++;
-		}
-		y++;
-	}
 }

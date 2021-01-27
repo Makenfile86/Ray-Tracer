@@ -1,6 +1,5 @@
-#include "rtv1.h"
-#include "../libft/libft.h"
-#include "stdio.h"
+#include "rt.h"
+
 
 
 void			init_scene(t_data *data)

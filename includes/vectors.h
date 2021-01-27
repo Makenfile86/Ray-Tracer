@@ -1,8 +1,8 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
-#include "rtv1.h"
-# include "../libft/libft.h"
+#include "rt.h"
+
 
 typedef struct		s_vector
 {
@@ -13,8 +13,8 @@ typedef struct		s_vector
 
 typedef struct		s_vect
 {
-	double			u;
-	double			v;
+	float		u;
+	float			v;
 }					t_vec2;
 
 #endif

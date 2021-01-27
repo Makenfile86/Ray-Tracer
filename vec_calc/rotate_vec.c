@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "../libft/libft.h"
+#include "rt.h"
+
 
 t_vector		rotate_vector(t_vector origin, t_vector target,
 		t_vector rot, int no_z)

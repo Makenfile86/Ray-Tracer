@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #include "stdio.h"
 
 t_vector				new_start_dir_plane(t_data *data, t_ray *ray)

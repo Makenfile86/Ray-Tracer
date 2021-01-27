@@ -1,6 +1,5 @@
-#include "rtv1.h"
-#include "../libft/libft.h"
-#include "stdio.h"
+#include "rt.h"
+
 
 
 
@@ -25,6 +24,14 @@ void		copy_data(t_data *data, char *str, int *x, int e)
     copy_camera_data(data, str, i);
     else if (ft_strcmp(data->obj_name, "SCENE") == 0)
     copy_scene_data(data, str, i);
+     else if (ft_strcmp(data->obj_name, "MODEL") == 0)
+    {
+        	ft_putendl("koikka");
+      
+    ft_putendl("hoikka");
+     copy_model_data(data, str, i, e);
+    }
+       
     *x += 1;
 }
 

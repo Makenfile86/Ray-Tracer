@@ -15,8 +15,14 @@
 # define OBJECTS_H
 
 # include "vectors.h"
-# include "rtv1.h"
+# include "rt.h"
 # include "../libft/libft.h"
+
+typedef struct		s_res
+{
+	double			x;
+	double			y;
+}					t_res;
 
 typedef struct		s_material
 {
@@ -42,24 +48,14 @@ typedef struct		s_rgb2
 typedef	struct		s_texturemap
 {
 	int				size;
-	int				width;
-	int				length;
+	t_res		res;
+	int				txt_loaded;
+	int				txt_pattern;
 	int				type;
 	t_rgb2			color;
 	char			*name;
-	unsigned char			*wood_ppm;
-	int						wood_loaded;
+	char 			*path;
 	unsigned char			*txt_ppm;
-	unsigned char			*earth_ppm;
-	int						earth_loaded;
-	unsigned char			*moon_ppm;
-	int						moon_loaded;
-	unsigned char			*background_ppm;
-	int						background_loaded;
-	unsigned char			*black_marble_ppm;
-	int						black_marble_loaded;
-
-
 }					t_texturemap;
 
 typedef struct		s_rgb

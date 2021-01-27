@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		init_cylinder(t_data *data, int e)
 {
@@ -20,8 +20,20 @@ void		init_cylinder(t_data *data, int e)
 			data->cylinder->end_xyz[e]);
 	data->cylinder->axis[e] = normalized_vector(data->cylinder->axis[e]);
 	data->cylinder->nbr += 1;
-	if (data->cylinder->texture[e].type > 1)
-	data->cylinder->texture[e].txt_ppm = copy_ppm(data, data->cylinder->texture[e].type);
+	
+
+
+		if ((ft_strcmp(data->cylinder->texture[e].name, "checker") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "gradient") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0))
+data->cylinder->texture[e].txt_pattern = TRUE;
+		if (data->cylinder->texture[e].txt_pattern != TRUE && (validate_file(data->cylinder->texture[e].name, &data->cylinder->texture[e].path) == 1))
+		{
+
+	data->cylinder->texture[e].txt_ppm = parse_ppm(data->cylinder->texture[e].txt_ppm, data->cylinder->texture[e].path, &data->cylinder->texture[e].res);
+		if (data->cylinder->texture[e].txt_ppm != NULL)
+		data->cylinder->texture[e].txt_loaded = TRUE;
+	
+		}
+
 
 }
 
@@ -62,7 +74,10 @@ void		copy_cylinder_data(t_data *data, char *str, int x, int e)
 	else if (x == 13)
 		data->cylinder->mater[e] = ft_atoi(str);
 	else if (x == 14)
-		data->cylinder->texture[e].type = ft_atoi(str);
+	{
+	data->cylinder->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	ft_strcpy(data->cylinder->texture[e].name, str);
+	}
 		else if (x == 15)
 		data->cylinder->texture[e].size = ft_atoi(str);
 		else if (x == 16)

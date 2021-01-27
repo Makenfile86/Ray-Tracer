@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #include "../libft/libft.h"
 
 static double		get_discr_sphere(t_data *data, t_ray ray, int h)
@@ -74,19 +74,19 @@ int					intersectsphere(t_ray ray, t_data *data, int h)
 			t[0] = t[1];
 		if ((t[0] > 0.001f) && (t[0] < data->hit.t))
 		{
-			if (data->sphere->mater[h] == 3)
-			{
-				data->hit.refract = 1;
-				if (t[0] < data->hit.refract_lent)
-				data->hit.refract_lent = t[0];
-				return (0);
-			}
-			else
-			{
+			//if (data->sphere->mater[h] == 3)
+			//{
+				//data->hit.refract = 1;
+				//if (t[0] < data->hit.refract_lent)
+				//data->hit.refract_lent = t[0];
+			//	return (0);
+			//}
+			//else
+			//{
 			data->hit.t = t[0];
-			}
+			
 			return (1);
 		}
 		return (0);
-	}
+	}	
 }

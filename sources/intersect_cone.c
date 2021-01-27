@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static double		get_discr_cone(t_data *data,
 		t_ray ray, t_vector to_cone, int h)

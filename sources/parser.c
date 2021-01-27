@@ -1,5 +1,5 @@
-#include "rtv1.h"
-#include "../libft/libft.h"
+#include "rt.h"
+
 
 char *parse_data_line(char *str, char *line, int *i, int y)
 {
@@ -8,13 +8,14 @@ char *parse_data_line(char *str, char *line, int *i, int y)
     x = *i;
 
    
-		while (ft_isdigit(line[x]) == 0 && line[x] != '\0' && line[x] != '-')
+		while (ft_isdigit(line[x]) == 0 && (ft_isalpha(line[x]) == 0) && line[x] != '\0' && line[x] != '-')
 			x++;
 		str = if_negative(line, str, &x, &y);
-		while (ft_isdigit(line[x]) == 1 && line[x] != '\0' && line[x] != '-'
-				&& y < 6)
+		while ((ft_isdigit(line[x]) == 1 || (ft_isalpha(line[x]) == 1)) && line[x] != '\0' && line[x] != '-'
+				&& y < 20)
 			str[y++] = line[x++];
             *i = x;
+		str[y] = '\0';
         return (str);
 }
 
@@ -43,14 +44,16 @@ void			parse_obj(char *line, t_data *data, int *obj_idx, char *type)
 	char	*str;
 	int		x;
 	int e;
-	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0))
+	
+	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0) || (ft_strcmp(type, "model") == 0))
 	e = 0;
 	else 
 	e = *obj_idx;
 	x = 0;
 	i = 0;
 	
-	if (!(str = (char *)malloc(sizeof(char) * 6 + 1)))
+
+	if (!(str = (char *)malloc(sizeof(char) * 15 + 1)))
 		memory_allocation_fail();
 	while (line[i] != '\0')
 	{

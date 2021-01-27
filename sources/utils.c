@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int				keypressed(int keycode)
 {
@@ -37,8 +37,8 @@ t_vector		copy_lightpos(t_data *data, int i)
 void			set_hit(t_data *data, char *name, int h)
 {
 		
-	if (data->hit.refract_lent < data->hit.t)
-	data->hit.refract = 1;
+	//if (data->hit.refract_lent < data->hit.t)
+	//data->hit.refract = 1;
 	data->hit.obj_name = name;
 	data->hit.obj_idx = h;
 	

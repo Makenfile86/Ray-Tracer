@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "../libft/libft.h"
+#include "rt.h"
+
 
 double			vector_length(t_vector v)
 {

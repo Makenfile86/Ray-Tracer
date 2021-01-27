@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "../libft/libft.h"
-#include "stdio.h"
+#include "rt.h"
+
 
 void		copy_spot_data(t_data *data, char *str, int x, int e)
 {

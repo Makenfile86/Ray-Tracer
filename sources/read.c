@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		handle_expose(t_data *tmp_data)
 {
@@ -52,6 +52,7 @@ char			*if_negative(char *line, char *str, int *i, int *y)
 
 static void		check_name(t_data *data, char *data_name, char *line)
 {
+	
 if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 		parse_obj(line, data, &data->sphere->nbr, "object");
 	else if ((ft_strcmp(data_name, "CYLINDER") == 0) && data->cylinder->nbr
@@ -67,6 +68,11 @@ if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 	parse_obj(line, data, 0, "scene");
 	else if (ft_strcmp(data_name, "CAMERA") == 0)
 		parse_obj(line, data, 0, "camera");
+	else if ((ft_strcmp(data_name, "MODEL") == 0))
+	{	
+		
+		parse_obj(line, data, 0, "model");
+	}
 	//else if (ft_strcmp(data_name, "TEXTURE") == 0)
 		//parse_texture(line, data);
 }
@@ -79,6 +85,8 @@ int				read_scene(t_data *data)
 	int		i;
 	int		x;
 	int 	fd;
+	
+
 	fd = 0; 
 if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		init_data(data);
@@ -86,6 +94,7 @@ if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		wrong_scene_name();
 	if (!(data->obj_name = (char *)malloc((sizeof(char) * (8 + 1)))))
 		memory_allocation_fail();
+			
 	x = 0;
 	i = 0;
 	while ((get_next_line(fd, &line)) == 1)
@@ -100,10 +109,21 @@ if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		if (line[i] != '*')
 			free(line);
 	}
+	
+	close(fd);
 free(data->obj_name);
+//init_obj(data);
+////init_obj(data);
 init_mlx(data);
 init_scene(data);
+
 	
 	draw(data);
+	//pthread(data);
+
+	
+
+	//handle_expose(data);
+
 	return (0);
 }

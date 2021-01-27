@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #include "stdio.h"
 
 static double		get_discr_cylinder(t_data *data, t_vector to_x,

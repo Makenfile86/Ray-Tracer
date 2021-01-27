@@ -1,5 +1,5 @@
-#include "rtv1.h"
-#include "stdio.h"
+#include "rt.h"
+
 #include "math.h"
 
 static void cylindrical_map(t_data *data, t_vector point)
@@ -28,7 +28,8 @@ point = vec_rot_zyx(point, vectornew(angle * 180 / M_PI, 0, 0));
 point = vector_minus(point, data->cylinder->start_xyz[i]);
 point = vec_rot_zyx(point, vectornew(0, -data->cylinder->rot[i].y, 0));
 	
-
+//uv.u *= 240;
+//uv.v *= 90;
 	uv.u = (atan2(point.x, point.z)) / (2.0 * M_PI) + 0.5;
 	uv.v = point.y - floor(point.y);
 	data->cylinder->uv[data->hit.obj_idx].u = uv.u * 12;
@@ -56,10 +57,10 @@ static void planar_map(t_data *data, t_vector point)
 	uv.u = vectordot(u, p);
 	uv.v = vectordot(cross_vector(n, u), p);
 
-if (data->hit.texture.type == 5)
+if (data->hit.texture.txt_pattern != TRUE)
 {
-	uv.u = uv.u / 240 / scale;
-	uv.v = uv.v / 180 / scale;
+	uv.u = uv.u / (data->hit.texture.res.x / 6) / scale;
+	uv.v = uv.v / (data->hit.texture.res.y / 6) / scale;
 }
 else 
 {
@@ -78,7 +79,7 @@ else
 
 }
 
-static void spherical_map(t_data *data, t_vector p)
+static t_vec2 spherical_map(t_data *data, t_vector p)
 {
 	t_vec2 uv;
 	double theta;
@@ -104,27 +105,44 @@ i = data->hit.obj_idx;
 
 	uv.u = theta;
 	uv.v = phi;
-	data->sphere->uv[i].u = uv.u;
-	data->sphere->uv[i].v = uv.v;
-	if (data->hit.texture.type == 1)
-	{
-data->sphere->uv[i].u = uv.u * 9;
-	data->sphere->uv[i].v = uv.v * 6;
-	}
-	if (data->hit.texture.type == 5)
-	{
-data->sphere->uv[i].u = uv.u / 180;
-	data->sphere->uv[i].v = uv.v / 180;
-	}
+	//data->sphere->uv[i].u = uv.u;
+	//data->sphere->uv[i].v = uv.v;
+	if (data->hit.texture.txt_pattern == TRUE)
+{
+	ft_putendl("hoihoi");
+//data->sphere->uv[i].u = uv.u * 9;
+	//data->sphere->uv[i].v = uv.v * 6;
+	//ft_putendl("moii");
+	uv.u *= 9;
+	uv.v *= 6;
+}
+	//else (data->hit.texture.type == 5)
+	//{
+//data->sphere->uv[i].u = uv.u / 180;
+	//data->sphere->uv[i].v = uv.v / 180;
+	//uv.u /= 180;
+	//uv.v /= 180;
+	//}
+	
+
+	//printf("\nUV.U: %f\n", data->sphere->uv[i].u);
+	
+	return (uv);
 
 }
 
 void texture_mapping(t_data *data, t_vector n, char *obj_name)
 {
-if (ft_strcmp(obj_name, "sphere") == 0)
-    spherical_map(data, n);
+	int i;
+	 i = data->hit.obj_idx;
+
+		 if (ft_strcmp(obj_name, "sphere") == 0)
+ data->sphere->uv[i] = spherical_map(data, n);
 if (ft_strcmp(obj_name, "plane") == 0)
-   planar_map(data, n);
+ 
+	  planar_map(data, n);
+ 
 if (ft_strcmp(obj_name, "cylinder") == 0)
 	cylindrical_map(data, n);
+	 
 }

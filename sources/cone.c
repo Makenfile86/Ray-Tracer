@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "../libft/libft.h"
+#include "rt.h"
+
 
 void		init_cone(t_data *data, int e)
 {

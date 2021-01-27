@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void			init_plane(t_data *data, int e)
 {
+	
+	
+
 	if (data->plane->xyz[e].y == 0)
 	data->plane->xyz[e].y = 0.0001;
 	data->plane->normal[e] = rotate_vector(data->plane->xyz[e],
@@ -22,8 +25,18 @@ void			init_plane(t_data *data, int e)
 			data->plane->xyz[e]);
 	data->plane->normal[e] = normalized_vector(data->plane->normal[e]);
 	data->plane->nbr += 1;
-	if (data->plane->texture[e].type > 1)
-	data->plane->texture[e].txt_ppm = copy_ppm(data, data->plane->texture[e].type);
+
+		if ((ft_strcmp(data->plane->texture[e].name, "checker") == 0) || (ft_strcmp(data->plane->texture[e].name, "gradient") == 0) || (ft_strcmp(data->plane->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->plane->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->plane->texture[e].name, "hstripe") == 0))
+data->plane->texture[e].txt_pattern = TRUE;
+		if (data->plane->texture[e].txt_pattern != TRUE && (validate_file(data->plane->texture[e].name, &data->plane->texture[e].path) == 1))
+		{
+
+	data->plane->texture[e].txt_ppm = parse_ppm(data->plane->texture[e].txt_ppm, data->plane->texture[e].path, &data->plane->texture[e].res);
+		if (data->plane->texture[e].txt_ppm != NULL)
+		data->plane->texture[e].txt_loaded = TRUE;
+	
+		}
+	
 
 	
 }
@@ -57,7 +70,10 @@ void			copy_plane_data(t_data *data, char *str, int x, int e)
 	else if (x == 12)
 		data->plane->mater[e] = atoi(str);
 	else if (x == 13)
-	data->plane->texture[e].type = ft_atoi(str);
+{
+	data->plane->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	ft_strcpy(data->plane->texture[e].name, str);
+	}
 	else if (x == 14)
 	data->plane->texture[e].size = ft_atoi(str);
 	else if (x == 15)

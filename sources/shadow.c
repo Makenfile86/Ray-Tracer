@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-#include "../libft/libft.h"
+#include "rt.h"
+
 
 static int	search_shadow_intersection(t_data *data, t_ray ray, int i)
 {
@@ -21,19 +21,25 @@ static int	search_shadow_intersection(t_data *data, t_ray ray, int i)
 		if (data->sphere->nbr > i && (intersectsphere(ray, data, i) == 1))
 		{
 			if (data->hit.t <= vector_length(vector_minus(
-							ray.target, ray.start)) + 0.001f)
+							ray.target, ray.start)) + 0.001f && data->sphere->mater[i] != 3)
 				return (1);
 		}
 		if (data->cone->nbr > i && (intersectcone(ray, data, i) == 1))
 		{
 			if (data->hit.t <= vector_length(vector_minus(
-							ray.target, ray.start)) + 0.001f)
+							ray.target, ray.start)) + 0.001f && data->cone->mater[i] != 3)
 				return (1);
 		}
 		if (data->cylinder->nbr > i && (intersectcylinder(ray, data, i) == 1))
 		{
 			if (data->hit.t <= vector_length(vector_minus(
-							ray.target, ray.start)) + 0.001f)
+							ray.target, ray.start)) + 0.001f && data->plane->mater[i] != 3)
+				return (1);
+		}
+		if (data->plane->nbr > i && (intersectcylinder(ray, data, i) == 1))
+		{
+			if (data->hit.t <= vector_length(vector_minus(
+							ray.target, ray.start)) + 0.001f && data->plane->mater[i] != 3)
 				return (1);
 		}
 		i--;
