@@ -1,7 +1,7 @@
 * SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
            0          ,    3         ,       5     ,         1   ,                   2   ,       3                 ,     5
 * CAMERA coord-XYZ target-XYZ rot-XYZ
-  -30 55 130 0 -1 0 0 0 0
+  0 55 300 0 -1 0 0 0 0
 * SPOT coord-XYZ power 
 0 80 90 , 50
 * SPOT coord-XYZ power 

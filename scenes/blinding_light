@@ -1,0 +1,10 @@
+* SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
+           0          ,    3         ,       8     ,         0   ,                   2   ,       3                 ,     5
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+  -12 15 95 0 -1 0 0 0 0
+* SPOT coord-XYZ power 
+-5 14 100 100
+* SPOT coord-XYZ power 
+-30 10 100 100
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+0 0 25 , 60 , 255 255 255 , 0 0 0 , 2 , 2 , 1 , 0 0 0 

@@ -73,7 +73,7 @@
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
 0 0 -600 , 0 0 0 , 100 25 25 , 0 0 0 , 4 , 1 , 2 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 -30 0 , 0 0 0 , 0 0 0 , 0 0 0 , 1 , 5 , 2 , 255 255 255
+0 -30 0 , 0 0 0 , 0 0 0 , 0 0 0 , 1 , blackmarble , 2 , 255 255 255
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ
 0 360  0   0 0 0 0  150 150 0 0 0 , 1 , 2 , 2 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ

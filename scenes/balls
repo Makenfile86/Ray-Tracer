@@ -1,18 +1,14 @@
 * SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
            0          ,    3         ,       6     ,         1   ,                   2   ,       3                 ,     5
 * CAMERA coord-XYZ target-XYZ rot-XYZ
--30 25 150 0 -1 0 0 0 0 0
+0 40 150 0 -1 0 0 0 0 0
 * SPOT coord-XYZ power 
-0 50 100 50
+0 100 50 75
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 -1 0 , 0 0 0 , 150 225 100 , 0 0 0 , 1 , tile , 1 , 255 255 255
+0 -1 0 , 0 0 0 , 125 125 125 , 0 0 0 , 1 , checker , 6 , 25 25 25
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-55 20 30 , 20 , 25 65 176 , 0 0 0 , 2 , tile , 1 , 0 0 0 
+55 20 40 , 18 , 25 65 176 , 0 0 0 , 2 , gradient , 1 , 0 0 0 
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-5 20 30 , 20 , 176 25 65 , 0 0 0 , 2 , checker , 1 , 0 0 0 
+-45 20 40  , 18 , 176 25 65 , 0 0 0 , 2 , checker , 1 , 0 0 0 
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
--45 20 30 , 20 , 176 25 65 , 0 0 0 , 4 , 0 , 1 , 0 0 0 
-* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-115 20 30 , 20 , 50 100 200 , 0 0 0 , 2 , vstripe , 1 , 0 0 0 
-* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-10 10 90 , 10 , 50 100 200 , 0 0 0 , 3 , vstripe , 1 , 0 0 0 
+5 20 40 , 18 , 176 25 65 , 0 0 0 , 4 , 0 , 1 , 0 0 0 
