@@ -27,11 +27,30 @@ i = data->hit.obj_idx;
 	
 	else
 		n = vectorscale(-1, data->plane->normal[i]);
-	data->plane->tmp_xyz = vector_copy(ray->newstart);
+	data->hit.point = vector_copy(ray->newstart);
 	data->hit.normal = data->plane->normal[i];
 	return (n);
 }
+/*
+t_vector				new_start_dir_plane(t_data *data, t_ray *ray)
+{
+	t_vector		scaled;
+	t_vector		n;
+	int i;
 
+i = data->hit.obj_idx;
+	scaled = vectorscale(data->hit.t, ray->target);
+	ray->newstart = vectoradd(ray->start, scaled);
+	if (vectordot(ray->target, data->plane->normal[i]) < 0)
+		n = data->plane->normal[i];
+	
+	else
+		n = vectorscale(-1, data->plane->normal[i]);
+	data->hit.point = vector_copy(ray->newstart);
+	data->hit.normal = n;
+	return (n);
+}
+*/
 int						intersectplane(t_data *data, int h, t_ray ray)
 {
 	double			dot;
@@ -51,3 +70,4 @@ int						intersectplane(t_data *data, int h, t_ray ray)
 	}
 	return (0);
 }
+

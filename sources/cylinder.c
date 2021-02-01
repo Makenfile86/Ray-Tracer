@@ -23,7 +23,8 @@ void		init_cylinder(t_data *data, int e)
 	
 
 
-		if ((ft_strcmp(data->cylinder->texture[e].name, "checker") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "gradient") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0))
+		if ((ft_strcmp(data->cylinder->texture[e].name, "checker") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "gradient") == 0) ||
+		(ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0))
 data->cylinder->texture[e].txt_pattern = TRUE;
 		if (data->cylinder->texture[e].txt_pattern != TRUE && (validate_file(data->cylinder->texture[e].name, &data->cylinder->texture[e].path) == 1))
 		{
@@ -33,7 +34,8 @@ data->cylinder->texture[e].txt_pattern = TRUE;
 		data->cylinder->texture[e].txt_loaded = TRUE;
 	
 		}
-
+if (data->cylinder->texture[e].txt_loaded == TRUE || data->cylinder->texture[e].txt_pattern == TRUE)
+data->scene->texture = TRUE;
 
 }
 

@@ -36,7 +36,8 @@ data->plane->texture[e].txt_pattern = TRUE;
 		data->plane->texture[e].txt_loaded = TRUE;
 	
 		}
-	
+	if (data->plane->texture[e].txt_loaded == TRUE || data->plane->texture[e].txt_pattern == TRUE)
+data->scene->texture = TRUE;
 
 	
 }

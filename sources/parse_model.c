@@ -118,20 +118,22 @@ t_vector rotate;
 rotate.x = 0;
 rotate.y = 0;
 rotate.z = 0;
-	location.x = -12;
-	location.y = 15;
-	location.z = 38;
+	location.x = 0;
+	location.y = 0;
+	location.z = 1;
 
-rotate.x = obj->model->rot[0].x;
-rotate.y = obj->model->rot[0].y;
-rotate.z = obj->model->rot[0].z;
-	location.x = obj->model->xyz[0].x;
-	location.y = obj->model->xyz[0].y;
-	location.z = obj->model->xyz[0].z;
-	scale = obj->model->size;
+rotate.x = obj->model.rot.x;
+rotate.y = obj->model.rot.y;
+rotate.z = obj->model.rot.z;
+	location.x = obj->model.xyz.x;
+	location.y = obj->model.xyz.y;
+	location.z = obj->model.xyz.z;
+
+	
+		scale = obj->model.size * 0.15;
 	//if (scale > 2.88)
 	//scale = 2.88;
-		scale = 2.5;
+		//scale = 0.15;
 
 
 
@@ -155,7 +157,7 @@ rotate.z = obj->model->rot[0].z;
 		free(line);
 		
 	}
-
+	
 	//	printf("%f x geometry	\n", obj->geometry[2].x);
 
 	//	printf("%f y\n", obj->geometry[2].y);
@@ -180,9 +182,9 @@ t_vector	parse_normals(char *line)
 
 k = 0;
 	i = 1;
-tmp = (char *)malloc(sizeof(char) * 15);
-tmp2 = (char *)malloc(sizeof(char) * 15);
-tmp3 = (char *)malloc(sizeof(char) * 25);
+tmp = (char *)malloc(sizeof(char) * 30);
+tmp2 = (char *)malloc(sizeof(char) * 30);
+tmp3 = (char *)malloc(sizeof(char) * 50);
 
 
 		while (line[i] != ' ')
@@ -214,9 +216,11 @@ tmp3 = (char *)malloc(sizeof(char) * 25);
 	vector.x = atof(tmp);
 	vector.y = atof(tmp2);
 	vector.z = atof(tmp3);
+	
 free(tmp3);
 free(tmp2);
 free(tmp);
+
 	return (vector);
 
 }
@@ -231,8 +235,8 @@ t_vec2	parse_coord(char *line)
 
 	k = 0;
 	i = 1;
-	tmp = (char *)malloc(sizeof(char) * 20);
-tmp2 = (char *)malloc(sizeof(char) * 20);
+	tmp = (char *)malloc(sizeof(char) * 40);
+tmp2 = (char *)malloc(sizeof(char) * 40);
 
 
 
@@ -260,6 +264,7 @@ tmp2 = (char *)malloc(sizeof(char) * 20);
 
 free(tmp2);
 free(tmp);
+
 	//printf("%f\n", vector.y);
 	return (vector);
 
@@ -276,9 +281,9 @@ t_vector	parse_geo(char *line)
 	int	i;
 	int k;
 
-tmp = (char *)malloc(sizeof(char) * 15);
-tmp2 = (char *)malloc(sizeof(char) * 15);
-tmp3 = (char *)malloc(sizeof(char) * 20);
+tmp = (char *)malloc(sizeof(char) * 30);
+tmp2 = (char *)malloc(sizeof(char) * 30);
+tmp3 = (char *)malloc(sizeof(char) * 40);
 
 k = 0;
 	i = 1;
@@ -337,7 +342,7 @@ t_obj    *create_obj_data(void)
 */
 
 
-t_data  *init_obj(t_data *data)
+t_obj  init_obj(t_obj *obj, int *obj_nbr)
 {
 
  //t_obj *obj;
@@ -347,8 +352,14 @@ char *filename;
 
  
  
- //if ((ft_strcmp(data->obj->model->name, "diamond") == 0))
- filename = "diamond.obj";
+ if ((ft_strcmp(obj->model.name, "crate") == 0))
+ filename = "crate.obj";
+ if ((ft_strcmp(obj->model.name, "chair") == 0))
+ filename = "chair.obj";
+  if ((ft_strcmp(obj->model.name, "cat") == 0))
+ filename = "cat.obj";
+   if ((ft_strcmp(obj->model.name, "table") == 0))
+ filename = "table.obj";
  //else if ((ft_strcmp(data->obj->model->name, "cat") == 0))
  //filename = "cat.obj";
 ft_putendl(filename);
@@ -360,14 +371,14 @@ ft_putendl(filename);
 	
 
 fd = open(filename, O_RDONLY);
- read_obj(data->obj, fd);
+read_obj(obj, fd);
  close (fd);
 	fd = open(filename, O_RDONLY);
 
 
 
 
-		read_obj_data(fd, data->obj);
+		read_obj_data(fd, obj);
 		
 
 
@@ -378,7 +389,9 @@ fd = open(filename, O_RDONLY);
 	//printf("%f y\n", obj->polygonals[0].normal.y);
 
 		//printf("%f z\n", obj->polygonals[0].normal.z);
-   data->objnbr = data->obj->num_polygonals;
-    return (data);
+		if (*obj_nbr < (int)obj->num_polygonals)
+   *obj_nbr = obj->num_polygonals;
+   ft_putnbr(*obj_nbr);
+    return (*obj);
 
 }

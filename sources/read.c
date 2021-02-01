@@ -116,10 +116,11 @@ free(data->obj_name);
 ////init_obj(data);
 init_mlx(data);
 init_scene(data);
-
-	
-	draw(data);
-	//pthread(data);
+	//data->scene->texture = FALSE;
+	//if (data->scene->texture == TRUE)
+	//draw(data);
+	//else
+	pthread(data);
 
 	
 

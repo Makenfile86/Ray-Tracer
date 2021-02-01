@@ -16,14 +16,14 @@
 static void					put_pixel(t_data *data, int x, int y, t_color color)
 {
 	int					i;
-
+//pthread_mutex_lock(&data->mutexsum);
 	i = (x * data->bits_per_pixel / 8) + (y * data->size_line);
 
 	data->data_addr[i] = color.channel[3];
 	data->data_addr[++i] = color.channel[2];
 	data->data_addr[++i] = color.channel[1];
 	data->data_addr[++i] = color.channel[0];
-	
+	//pthread_mutex_unlock(&data->mutexsum);
 	
 }
 
@@ -55,12 +55,25 @@ void						draw(t_data *data)
 	
 	int				y;
 	int				x;
+	int				height;
+	//t_data 			*tmp;
+	//tmp = data;
 	t_color color;
 	color.channel[0] = 0;
-	//y = data->start_line;
-	y = 0;
-	//while (y < data->finish_line)
-	while (y < HEIGHT)
+
+	//if (data->scene->texture == TRUE)
+	//{
+		//y = 0;
+		//height = HEIGHT;
+	//}
+	//else
+	//{
+	y = data->start_line;
+	height = data->finish_line;
+	//}
+	//y = 0;
+	while (y < height)
+	//while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)

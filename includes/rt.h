@@ -21,6 +21,7 @@
 # include "objects.h"
 # include "renderer.h"
 # include "model.h"
+# include "pthread.h"
 
 
 
@@ -73,6 +74,8 @@ typedef	struct		s_hit
 	double			t;
 	char			*obj_name;
 	int				obj_idx;
+	int				poly_idx;
+	int				poly;
 	char 			*preobj_name;
 	int				preobj_mater;
 	int				preobj_idx;
@@ -84,6 +87,8 @@ typedef	struct		s_hit
 	t_texturemap 	texture;
 	t_ray 			*pre_refract_ray;
 	t_vector		point;
+	t_rgb2			color;
+	int				radius;
 	int				mater;
 	int				refract;
 	int				was_refract;
@@ -113,6 +118,7 @@ typedef struct		s_scene
 	int				reflection;
 	int				light_scale;
 	int				background;
+	int				texture;
 
 }					t_scene;
 
@@ -133,6 +139,7 @@ typedef struct		s_data
 	int				start_line;
 	int				finish_line;
 	int				objnbr;
+	int				modelnbr;
 	double			light_scale;
 	int				org_iter;
 	int				iter;
@@ -146,6 +153,7 @@ typedef struct		s_data
 	int				test_y;
 	double 			pattern;
 	char 			*obj_name;
+	pthread_mutex_t mutexsum;
 	t_hit			hit;
 	t_sphere		*sphere;
 	t_cylinder		*cylinder;
@@ -154,7 +162,7 @@ typedef struct		s_data
 	t_plane			*plane;
 	t_camera		*camera;
 	t_scene			*scene;
-	t_obj			*obj;
+	t_obj			obj[30];
 	t_texturemap		*texture;
 	t_model			*model;
 }					t_data;
@@ -228,7 +236,7 @@ void 				put_color(t_data *data, t_rgb rgb, int x, int y);
 void				wrong_scene_name(void);
 t_vector 			copy_lightpos(t_data *data, int i);
 int		handle_expose(t_data *tmp_data);
-void texture_mapping(t_data *data, t_vector n, char *obj_name);
+t_vec2 texture_mapping(t_data *data, t_vector n, char *obj_name);
 unsigned char    *parse_ppm(unsigned char *texture, char *path, t_res *res);
 t_rgb2 assign_ppm_texture(t_data *data, unsigned char *ppm_image, t_vec2 uv);
 unsigned char *copy_ppm(t_data *data, char *name);
@@ -252,18 +260,22 @@ void			copy_camera_data(t_data *data, char *str, int x);
 void		init_cylinder(t_data *data, int e);
 void		init_cone(t_data *data, int e);
 void		init_plane(t_data *data, int e);
-void			init_model(t_data *data);
+void			init_model(t_data *data, int e);
 void init_sphere(t_data *data, int e);
 void			init_parsed_data(t_data *data, char *type, int e);
 void	pthread(t_data *data);
-t_data    *init_obj(t_data *data);
-int		intersecttriangle(t_ray ray, t_data *data, int h);
+t_obj    init_obj(t_obj *obj, int *obj_nbr);
+int		intersecttriangle(t_ray ray, t_data *data, int y, int h);
 int validate_file(char *txt_name, char **path);
-t_rgb2 checker_pattern(t_data *data, t_vec2 uv, t_rgb2 obj_color);
+t_rgb2 checker_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
 t_rgb2 vstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
-t_rgb2 ppm_texture(t_data *data, unsigned char *ppm_image, t_vec2 uv);
-double pattern_size(t_data *data, char *obj_name);
+t_rgb2 ppm_texture(int width, int height, unsigned char *ppm_image, t_vec2 uv);
+double pat_size(double scale, char *obj_name, int radius);
 t_rgb2 hstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
 t_rgb2 gradient_pattern(t_vec2 uv, t_rgb2 obj_color, double pat_size);
+t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit);
+t_material plane_reflection(t_data *data, int i);
+t_vector				new_start_dir_triangle(t_data *data, t_ray *ray);
+t_vector	vector_div(t_vector v, double div);
 
 #endif

@@ -8,9 +8,9 @@
 typedef struct	s_model
 {
 	char        *name;
-    t_rgb2      rgb2[3];
-    t_vector    xyz[3];
-    t_vector    rot[3];
+    t_rgb2      rgb2;
+    t_vector    xyz;
+    t_vector    rot;
     double      mater;
     double       size;
     int         nbr;
@@ -38,7 +38,7 @@ typedef struct	s_obj
     t_vector    *normals;
     size_t      num_polygonals;
     t_vertices  *polygonals;
-    t_model     *model;
+    t_model     model;
   
 
 }				t_obj;

@@ -62,3 +62,15 @@ t_vector		vector_minus(t_vector v1, t_vector v2)
 	v3.z = v1.z - v2.z;
 	return (v3);
 }
+
+t_vector	vector_div(t_vector v, double div)
+{
+	t_vector result;
+
+	if (div == 0.0)
+		return (v);
+	result.x = v.x / div;
+	result.y = v.y / div;
+	result.z = v.z / div;
+	return (result);
+}

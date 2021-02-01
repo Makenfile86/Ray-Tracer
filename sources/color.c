@@ -76,7 +76,7 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 	double k;
 
 	etai = 1;
-	ior = 5;
+	ior = 10;
 	etat = ior;
 
 	cosi = vectordot(ray.target, n);
@@ -114,7 +114,7 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 	else
 	{
 	r_factor = fabs(data->scene->reflection - 9.5);
-
+//r_factor = 3.5;
 	ray.start = vector_copy(ray.newstart);
 	reflect = r_factor * vectordot(ray.target, n);
 	tmp = vectorscale(reflect, n);
@@ -132,6 +132,7 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 static void			search_intersection(t_data *data, t_ray ray)
 {
 	int			i;
+	int 		y;
 	
 	
 	i = data->objnbr - 1;
@@ -151,7 +152,7 @@ static void			search_intersection(t_data *data, t_ray ray)
 	
 	while (i >= 0)
 	{
-		
+		y = (data->modelnbr - 1);
 		if (data->cylinder->nbr > i && intersectcylinder(ray, data, i) == 1)
 			set_hit(data, "cylinder", i);
 		if (data->sphere->nbr > i && intersectsphere(ray, data, i) == 1)
@@ -160,8 +161,12 @@ static void			search_intersection(t_data *data, t_ray ray)
 			set_hit(data, "plane", i);
 		if (data->cone->nbr > i && intersectcone(ray, data, i) == 1)
 			set_hit(data, "cone", i);
-		if ((int)data->obj->num_polygonals > i && intersecttriangle(ray, data, i) == 1)
-			set_hit(data, "triangle", i);
+		while (y >= 0)
+		{
+		if ((int)data->obj[y].num_polygonals > i  && intersecttriangle(ray, data, y, i) == 1)
+			set_hit(data, "triangle", y);
+			y--;
+		}
 		i--;
 	}
 	
@@ -184,7 +189,11 @@ static void copy_hit_data(t_data *data)
 	data->hit.texture.color.red = data->sphere->texture[i].color.red;
 	data->hit.texture.color.green = data->sphere->texture[i].color.green;
 	data->hit.texture.color.blue = data->sphere->texture[i].color.blue;
+	data->hit.color.red = data->sphere->rgb2[i].red;
+	data->hit.color.green = data->sphere->rgb2[i].green;
+	data->hit.color.blue = data->sphere->rgb2[i].blue;
 	data->hit.mater = data->sphere->mater[i];
+	data->hit.radius = data->sphere->radius[i];
 	//ft_putendl("\nHIT MATER\n");
 	//ft_putnbr(data->hit.mater);
 	//ft_putchar('\n');
@@ -200,6 +209,9 @@ static void copy_hit_data(t_data *data)
 	data->hit.texture.color.red = data->plane->texture[i].color.red;
 	data->hit.texture.color.green = data->plane->texture[i].color.green;
 	data->hit.texture.color.blue = data->plane->texture[i].color.blue;
+	data->hit.color.red = data->plane->rgb2[i].red;
+	data->hit.color.green = data->plane->rgb2[i].green;
+	data->hit.color.blue = data->plane->rgb2[i].blue;
 	data->hit.mater = data->plane->mater[i];
 
 	}
@@ -214,16 +226,25 @@ static void copy_hit_data(t_data *data)
 	data->hit.texture.color.red = data->cylinder->texture[i].color.red;
 	data->hit.texture.color.green = data->cylinder->texture[i].color.green;
 	data->hit.texture.color.blue = data->cylinder->texture[i].color.blue;
+	data->hit.color.red = data->cylinder->rgb2[i].red;
+	data->hit.color.green = data->cylinder->rgb2[i].green;
+	data->hit.color.blue = data->cylinder->rgb2[i].blue;
 	data->hit.mater = data->cylinder->mater[i];
 	}
 	if (ft_strcmp(data->hit.obj_name, "cone") == 0)
 	{
 data->hit.mater = data->cone->mater[i];
+data->hit.color.red = data->cone->rgb2[i].red;
+data->hit.color.green = data->cone->rgb2[i].green;
+data->hit.color.blue = data->cone->rgb2[i].blue;
 	}
 	if (ft_strcmp(data->hit.obj_name, "triangle") == 0)
 	{
 data->hit.mater = 1;
 data->hit.texture.txt_loaded = FALSE;
+  data->hit.color.red =  data->obj[i].model.rgb2.red;
+  data->hit.color.green = data->obj[i].model.rgb2.green;
+  data->hit.color.blue = data->obj[i].model.rgb2.blue;
 	}
 		if (data->hit.mater == 3)
 			data->hit.refract = 1;
@@ -231,6 +252,7 @@ data->hit.texture.txt_loaded = FALSE;
 			//data->hit.was_refract = 0;
 		
 }
+
 
 static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
 {
@@ -267,11 +289,11 @@ static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
 		*n = new_start_dir_plane(data, &ray);
 	if (ft_strcmp(data->hit.obj_name, "cylinder") == 0)
 		*n = new_start_dir_cylinder(data, &ray);
-		if (ft_strcmp(data->hit.obj_name, "triangle") == 0)
-		{
-			*n = data->hit.normal;
-			ray.newstart = data->hit.point;
-		}
+	 if (ft_strcmp(data->hit.obj_name, "triangle") == 0)
+		*n = new_start_dir_triangle(data, &ray);
+		else
+		data->hit.normal = *n;
+		
 	copy_hit_data(data);
 	return (ray);
 }
@@ -289,18 +311,12 @@ static t_rgb		search_light_and_shadow(t_data *data, t_ray ray,
 	i = (data->spot->nbr - 1);
 	
 		
-		if (data->hit.texture.txt_loaded == TRUE || data->hit.texture.txt_pattern == TRUE)
-		texture_mapping(data, n, name);
+		
 		
 	while (i >= 0)
 	{
 	if (data->iter == data->org_iter && data->scene->shadows > 0)
-		{
-
-			if (shadow(data, ray.newstart, i) != 1)
-				rgb = get_light(data, rgb, ray, i);
-		}
-		else	
+		shadow(data, ray.newstart, i);
 		rgb = get_light(data, rgb, ray, i);
 		i--;
 	}
@@ -314,7 +330,7 @@ void				get_color(t_data *data, int x, int y)
 	t_rgb		rgb;
 	t_ray		ray;
 	
-	
+
 	ray = init_pixel(data, x, y, &rgb);
 	while (data->iter > 0 && data->light_scale > 0.0f)
 	{
@@ -328,6 +344,7 @@ void				get_color(t_data *data, int x, int y)
 		search_intersection(data, ray);
 		if (data->hit.obj_idx == -1)
 			break ;
+			
 		ray = new_hit_direction(data, ray, &n);
 		if (n.x == 101010)
 			break ;
@@ -335,14 +352,17 @@ void				get_color(t_data *data, int x, int y)
 		rgb = search_light_and_shadow(data, ray, n, rgb);
 		if (data->hit.mater != 3 && data->hit.mater != 4)
 		data->iter--;
+		if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
+		data->iter--;
 		if ((ft_strcmp(data->hit.preobj_name, "empty") != 0) && data->hit.mater == 3 && data->hit.preobj_mater != 4)
 		data->iter = 0;
 		set_old_hit(data);
 		ray = reflection_direction(ray, n, data);
 		
+		
 		if (data->hit.was_refract != 1)
 		put_color(data, rgb, x, y);
 		//test++;
 	}
-	
+
 }

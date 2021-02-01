@@ -31,7 +31,7 @@ void			init_parsed_data(t_data *data, char *type, int e)
 	else if (ft_strcmp(data->obj_name, "SCENE") == 0)
 	init_scene(data);
 		else if (ft_strcmp(data->obj_name, "MODEL") == 0)
-	init_model(data);
+	init_model(data, e);
 }
 
 t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
@@ -74,7 +74,7 @@ void			init_data(t_data *data)
 	data->cone->nbr = 0;
 	data->cylinder->nbr = 0;
 	data->plane->nbr = 0;
-	//data->sphere->texture[0].type = 0;
+	
 	//data->sphere->texture[1].type = 0;
 	data->hit.find_shadow = 0;
 	data->hit.preobj_name = "empty";

@@ -41,6 +41,8 @@ void			set_hit(t_data *data, char *name, int h)
 	//data->hit.refract = 1;
 	data->hit.obj_name = name;
 	data->hit.obj_idx = h;
+	//if (ft_strcmp(data->hit.obj_name, "triangle") != 0)
+	//data->hit.poly = -1;
 	
 	
 }

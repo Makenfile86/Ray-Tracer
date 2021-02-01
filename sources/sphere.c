@@ -17,10 +17,11 @@ void init_sphere(t_data *data, int e)
 {
 		
 
-		
+		ft_putendl("mmoikka");
 		data->sphere->nbr += 1;
 if ((ft_strcmp(data->sphere->texture[e].name, "checker") == 0) || (ft_strcmp(data->sphere->texture[e].name, "gradient") == 0) || (ft_strcmp(data->sphere->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->sphere->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->sphere->texture[e].name, "hstripe") == 0))
 data->sphere->texture[e].txt_pattern = TRUE;
+
 		if (data->sphere->texture[e].txt_pattern != TRUE && (validate_file(data->sphere->texture[e].name, &data->sphere->texture[e].path) == 1))
 		{
 
@@ -30,10 +31,10 @@ data->sphere->texture[e].txt_pattern = TRUE;
 	
 		}
 	//free(data->sphere->texture[e].path);
-	data->sphere->uv[e].u = 0;
-	data->sphere->uv[e].v = 0;
+if (data->sphere->texture[e].txt_loaded == TRUE || data->sphere->texture[e].txt_pattern == TRUE)
+data->scene->texture = TRUE;
 
-	
+	ft_putendl("hoikka");
 
 }
 /*
@@ -51,8 +52,8 @@ void init_sphere(t_data *data, int e)
 void		copy_sphere_data(t_data *data, char *str, int x, int e)
 {
 	
-	if (x == 0)
-		data->sphere->xyz[e].x = ft_atoi(str);
+	if (x == 0)	
+	data->sphere->xyz[e].x = ft_atoi(str);
 	else if (x == 1)
 		data->sphere->xyz[e].y = ft_atoi(str);
 	else if (x == 2)
@@ -82,7 +83,7 @@ void		copy_sphere_data(t_data *data, char *str, int x, int e)
 	}
 	else if (x == 11)
 	{
-		
+		ft_putendl("horhor");
 	data->sphere->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
 	ft_strcpy(data->sphere->texture[e].name, str);
 	}

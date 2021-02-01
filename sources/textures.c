@@ -1,21 +1,17 @@
 #include "rt.h"
 #include "math.h"
 
-double pattern_size(t_data *data, char *obj_name)
+double pat_size(double scale, char *obj_name, int radius)
 {
 	double size;
-	int i;
-	double scale;
-
-	scale = data->hit.texture.size;
-	i = data->hit.obj_idx;
-	if (ft_strcmp(obj_name, "cone") == 0)
-		size = 0.5;
-	else if (ft_strcmp(obj_name, "sphere") == 0)
-
-		size = (0.125 * data->sphere->radius[i] / 5 * (scale / 2));
 	
-	
+	//double scale;
+
+	//scale = dahit.texture.size;
+	//i = data->hit.obj_idx;
+	//ft_putendl(obj_name);
+	if (ft_strcmp(obj_name, "sphere") == 0)
+	size = (0.125 * radius / 5 * (scale / 2));
 	else if (ft_strcmp(obj_name, "plane") == 0)
 	size = 0.5;
 	else 
@@ -23,15 +19,31 @@ double pattern_size(t_data *data, char *obj_name)
 	return (size);
 }
 
-t_rgb2 vstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size)
+t_rgb2 checker_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size)
 {
-    
-   // double pat_size;
+   
+   // doule pat_size;
    // pat_size = calculate_checker_size(data, data->hit.obj_name);
+   if (fmod(uv.u, pat_size * 2) < pat_size)
+	{
+		if (fmod(uv.v, pat_size * 2) < pat_size)
+			return (obj_color);
+		else
+			return (texture_color);
+	}
+	else
+	{
+		if (fmod(uv.v, pat_size * 2) < pat_size)
+			return (texture_color);
+		else
+			return (obj_color);
+	}
+   /*
  if (fmod(uv.u, pat_size * 2) < pat_size)
 			return (obj_color);
 		else
 			return (texture_color);
+			*/
 
 } 
 
@@ -63,25 +75,26 @@ t_rgb2 gradient_pattern(t_vec2 uv, t_rgb2 obj_color, double pat_size)
 } 
 
 
-t_rgb2 checker_pattern(t_data *data, t_vec2 uv, t_rgb2 obj_color)
+t_rgb2 vstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size)
 {
 	
-		double	pat_size;
-	double u;
-	double v;
-	u = uv.u;
-	v = uv.v;
-	pat_size = pattern_size(data, data->hit.obj_name);
+		//double	pat_size;
+	
+//	pat_size = pat_size(data, data->hit.obj_name);
 
 
-
+ if (fmod(uv.u, pat_size * 2) < pat_size)
+			return (obj_color);
+		else
+			return (texture_color);
+			
 
 /*
 	
 	if (fmod(u, pat_size * 2) < pat_size)
 	return (obj_color);
 		else
-			return (data->hit.texture.color);
+			return (txt_color);
 			*/
 		//data->test_x = 0;
 		//obj_color.red += (min(fabs(obj_color.red * uv.v), 255));
@@ -92,33 +105,17 @@ obj_color.red = (min(fabs(((obj_color.red * uv.u) + ((obj_color.red * (uv.v))) *
 	obj_color.green = (min(fabs((obj_color.green * uv.u) + (( obj_color.green * (uv.v))) * 0.75), 255));
 	obj_color.blue = (min(fabs((obj_color.blue * uv.u) + ((obj_color.blue * (uv.v)))), 255));
 */
-	if (fmod(u, pat_size * 2) < pat_size)
-	{
-		if (fmod(v, pat_size * 2) < pat_size)
-			return (obj_color);
-		else
-			return (data->hit.texture.color);
-	}
-	else
-	{
-		if (fmod(v, pat_size * 2) < pat_size)
-			return (data->hit.texture.color);
-		else
-			return (obj_color);
-	}
-	
-	return (obj_color);
+
 
 }
 
-t_rgb2 ppm_texture(t_data *data, unsigned char *ppm_image, t_vec2 uv)
+t_rgb2 ppm_texture(int width, int height, unsigned char *ppm_image, t_vec2 uv)
 {
 
 	t_rgb2 color;
 	double x;
 	double y;
-	int width;
-	int height;
+
 	int i;
 
 
@@ -145,8 +142,7 @@ t_rgb2 ppm_texture(t_data *data, unsigned char *ppm_image, t_vec2 uv)
 		height = 512;
 	}
 	*/
-width = data->hit.texture.res.x;
-height = data->hit.texture.res.y;
+
 
 	x = uv.u * (width - 1);
 	y = uv.v * (height - 1);

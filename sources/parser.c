@@ -45,8 +45,10 @@ void			parse_obj(char *line, t_data *data, int *obj_idx, char *type)
 	int		x;
 	int e;
 	
-	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0) || (ft_strcmp(type, "model") == 0))
+	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0))
 	e = 0;
+	else if (ft_strcmp(type, "model") == 0)
+	e = data->modelnbr;
 	else 
 	e = *obj_idx;
 	x = 0;

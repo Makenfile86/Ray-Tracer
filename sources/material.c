@@ -31,3 +31,23 @@ i = 4;
 
             return (material);
 }
+t_material plane_reflection(t_data *data, int i)
+{
+    t_material material;
+
+        if (ft_strcmp(data->hit.preobj_name, "plane") == 0)
+        {
+            material.diffuse_red = 0.05;
+		material.diffuse_green = 0.05;
+		material.diffuse_blue = 0.05;
+        }
+        else
+        {
+        
+	    material.diffuse_red = ((double)data->spot->power[i] / 500);
+		material.diffuse_green = ((double)data->spot->power[i] / 500);
+		material.diffuse_blue = ((double)data->spot->power[i] / 500);
+        }
+
+        return (material);
+}

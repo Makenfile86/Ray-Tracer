@@ -2,7 +2,7 @@
 
 #include "math.h"
 
-static void cylindrical_map(t_data *data, t_vector point)
+static t_vec2 cylindrical_map(t_data *data, t_vector point)
 {
 	t_vec2 uv;
 	t_vector up;
@@ -32,11 +32,11 @@ point = vec_rot_zyx(point, vectornew(0, -data->cylinder->rot[i].y, 0));
 //uv.v *= 90;
 	uv.u = (atan2(point.x, point.z)) / (2.0 * M_PI) + 0.5;
 	uv.v = point.y - floor(point.y);
-	data->cylinder->uv[data->hit.obj_idx].u = uv.u * 12;
-	data->cylinder->uv[data->hit.obj_idx].v = uv.v;
+	uv.u *= 12;
+	return (uv);
 }
 
-static void planar_map(t_data *data, t_vector point)
+static t_vec2 planar_map(t_data *data, t_vector point)
 {
 
 	double scale;
@@ -47,7 +47,8 @@ static void planar_map(t_data *data, t_vector point)
 	t_vector	n;
 	t_vector	u;
 	double	temp[3];
-	point = vector_copy(data->plane->tmp_xyz);
+
+	point = vector_copy(data->hit.point);
 	n = data->hit.normal;
 	
 	u = normalized_vector(vectornew(n.y, -n.x, 0));
@@ -67,15 +68,13 @@ else
 	uv.u = uv.u / 9 / scale;
 	uv.v = uv.v / 6 / scale;
 }
-	temp[0] = 0;
+	temp[0] = data->plane->rot[data->hit.obj_idx].y * M_PI / 180;
 	temp[1] = uv.u * cos(temp[0]) - uv.v * sin(temp[0]);
 	temp[2] = uv.v * cos(temp[0]) + uv.u * sin(temp[0]);
 	uv.u = temp[1] - floor(temp[1]);
 	uv.v = temp[2] - floor(temp[2]);
-	
-	data->plane->uv[data->hit.obj_idx].u = uv.u;
-
-  data->plane->uv[data->hit.obj_idx].v = uv.v;
+		
+	return (uv);
 
 }
 
@@ -109,7 +108,7 @@ i = data->hit.obj_idx;
 	//data->sphere->uv[i].v = uv.v;
 	if (data->hit.texture.txt_pattern == TRUE)
 {
-	ft_putendl("hoihoi");
+	
 //data->sphere->uv[i].u = uv.u * 9;
 	//data->sphere->uv[i].v = uv.v * 6;
 	//ft_putendl("moii");
@@ -131,18 +130,42 @@ i = data->hit.obj_idx;
 
 }
 
-void texture_mapping(t_data *data, t_vector n, char *obj_name)
+t_vec2 texture_mapping(t_data *data, t_vector n, char *obj_name)
 {
 	int i;
 	 i = data->hit.obj_idx;
 
 		 if (ft_strcmp(obj_name, "sphere") == 0)
- data->sphere->uv[i] = spherical_map(data, n);
+ return(spherical_map(data, n));
 if (ft_strcmp(obj_name, "plane") == 0)
+ return(planar_map(data, n));
  
-	  planar_map(data, n);
- 
-if (ft_strcmp(obj_name, "cylinder") == 0)
-	cylindrical_map(data, n);
+else
+	return(cylindrical_map(data, n));
 	 
+}
+
+t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit)
+{
+	char *name;
+	
+	name = hit.obj_name;
+	
+
+	if ((ft_strcmp(name, "cone") == 0) || (ft_strcmp(name, "triangle") == 0) ||  (ft_strcmp(name, "cone") == 0))
+		return (color);
+	else
+	{
+		if ((ft_strcmp(hit.texture.name, "checker") == 0))
+		return (checker_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		else if ((ft_strcmp(hit.texture.name, "vstripe") == 0))
+		return (vstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		else if ((ft_strcmp(hit.texture.name, "hstripe") == 0))
+		return (hstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		else if ((ft_strcmp(hit.texture.name, "gradient") == 0))
+		return (gradient_pattern(uv, color, pat_size(hit.texture.size, name, hit.radius)));
+		else
+		return (color);
+	}
+	
 }

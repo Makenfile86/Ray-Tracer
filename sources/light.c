@@ -93,22 +93,10 @@ static t_material	get_material(t_data *data, int i)
 	t_material	material;
 
 
-
-
-	if ((data->iter != data->org_iter) && (ft_strcmp(data->hit.obj_name, "plane") == 0) && data->hit.preobj_mater != 4 && data->hit.was_refract != 1)
-	{
-		material.diffuse_red = ((double)data->spot->power[i] / 500);
-		material.diffuse_green = ((double)data->spot->power[i] / 500);
-		material.diffuse_blue = ((double)data->spot->power[i] / 500);
-	}
-	else
-	{
-	material.diffuse_red = ((double)data->spot->power[i] / 200);
-	material.diffuse_green = ((double)data->spot->power[i] / 200);
-	material.diffuse_blue = ((double)data->spot->power[i] / 200);
-	}
-
-if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
+material.diffuse_red = ((double)data->spot->power[i] / 200);
+material.diffuse_green = ((double)data->spot->power[i] / 200);
+material.diffuse_blue = ((double)data->spot->power[i] / 200);
+	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
 {
 
 material.diffuse_red = ((double)data->spot->power[i] / 1000);
@@ -119,7 +107,8 @@ else if (data->hit.mater == 4)
 material = mirror_effect(data, i);
 if (data->hit.preobj_mater == 3)
 material = glass_effect(data, i);
-
+if ((data->iter != data->org_iter) && (ft_strcmp(data->hit.obj_name, "plane") == 0)   && data->hit.preobj_mater != 4 && data->hit.was_refract != 1)
+material = plane_reflection(data, i);
 if ((ft_strcmp(data->hit.obj_name, "plane") == 0) &&
 			data->iter != data->org_iter && data->hit.preobj_mater < 3 && data->hit.was_refract != 1)
 	{
@@ -127,8 +116,7 @@ if ((ft_strcmp(data->hit.obj_name, "plane") == 0) &&
 		material.diffuse_green = 0.05;
 		material.diffuse_blue = 0.05;
 	}
-
-if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && (ft_strcmp(data->hit.obj_name, "plane") == 0) &&
+	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && (ft_strcmp(data->hit.obj_name, "plane") == 0) &&
 			data->iter != data->org_iter)
 	{
 		if (data->hit.preobj_mater == 4)
@@ -144,110 +132,73 @@ if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && (ft_strcmp(data->hit.obj
 		material.diffuse_blue = 0;
 		}
 	}
-	if (data->hit.was_refract == 1)
+	/*
+	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) &&
+			data->iter != data->org_iter && data->hit.preobj_mater < 3 && data->hit.was_refract != 1)
 	{
-		material.diffuse_red = ((double)data->spot->power[i] / 200);
-	material.diffuse_green = ((double)data->spot->power[i] / 200);
-	material.diffuse_blue = ((double)data->spot->power[i] / 200);
+		material.diffuse_red = 0;
+		material.diffuse_green = 0;
+		material.diffuse_blue = 0;
 	}
+	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
+			
+			
+				{
+		material.diffuse_red = 0;
+		material.diffuse_green = 0;
+		material.diffuse_blue = 0;
+	}
+		*/
+//if (data->hit.was_refract == 1)
+
+//if (data->hit.was_refract == 1)
+	//{
+	//material.diffuse_red = ((double)data->spot->power[i] / 200);
+	//material.diffuse_green = ((double)data->spot->power[i] / 200);
+	//material.diffuse_blue = ((double)data->spot->power[i] / 200);
+//	}
 	//liikaa heijastusta tuli peilista seinaa
-if (ft_strcmp(data->hit.texture.name, "redmarble") == 0)
-{
-	material.diffuse_red = ((double)data->spot->power[i] / 55);
-	material.diffuse_green = ((double)data->spot->power[i] / 75);
-	material.diffuse_blue = ((double)data->spot->power[i] / 225);
-}
+/*
+   if (ft_strcmp(data->hit.preobj_name, "triangle") == 0)
+         {
+            material.diffuse_red = 0;
+		material.diffuse_green = 0;
+		material.diffuse_blue = 0;
+        }
 
-
-
-
+*/
 	return (material);
 }
 
 
 
 
-static t_rgb		get_light_intensity(t_data *data, int h)
+static t_rgb		get_light_intensity(t_data *data)
 {
 	t_rgb		intensity;
 	t_rgb2		color;
-
 	int i;
-		 	
+	
 	
 	i = data->hit.obj_idx;
-	if (ft_strcmp(data->hit.obj_name, "cone") == 0)
-		color = data->cone->rgb2[h];
-	else if (ft_strcmp(data->hit.obj_name, "sphere") == 0)
-	{	
-	
-		if (data->hit.texture.txt_loaded == TRUE)
-		{	
-			
-			color = ppm_texture(data, data->sphere->texture[i].txt_ppm, data->sphere->uv[i]);
-		}
-		else if ((ft_strcmp(data->hit.texture.name, "checker") == 0))
-			color = checker_pattern(data, data->sphere->uv[i], data->sphere->rgb2[i]);
-		else if ((ft_strcmp(data->hit.texture.name, "vstripe") == 0))
-		color = vstripe_pattern(data->sphere->uv[i], data->sphere->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "hstripe") == 0))
-		color = hstripe_pattern(data->sphere->uv[i], data->sphere->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "gradient") == 0))
-		color = gradient_pattern(data->sphere->uv[i], data->sphere->rgb2[i], pattern_size(data, data->hit.obj_name));
-		else
-		color = data->sphere->rgb2[h];
-	
-	}
-	else if (ft_strcmp(data->hit.obj_name, "plane") == 0)
-	{	
-	if (data->hit.texture.txt_loaded == TRUE)
-			color = ppm_texture(data, data->plane->texture[i].txt_ppm, data->plane->uv[i]);
-	else if ((ft_strcmp(data->hit.texture.name, "checker") == 0))
-			color = checker_pattern(data, data->plane->uv[i], data->plane->rgb2[i]);
-		else if ((ft_strcmp(data->hit.texture.name, "vstripe") == 0))
-		color = vstripe_pattern(data->plane->uv[i], data->plane->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "hstripe") == 0))
-		color = hstripe_pattern(data->plane->uv[i], data->plane->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "gradient") == 0))
-		color = gradient_pattern(data->plane->uv[i], data->plane->rgb2[i], pattern_size(data, data->hit.obj_name));
-		else
-		color = data->plane->rgb2[h];
-	}
-	else if (ft_strcmp(data->hit.obj_name, "cylinder") == 0)
+	if (data->hit.texture.txt_pattern == TRUE)
+	color = add_texture(texture_mapping(data, data->hit.normal, data->hit.obj_name), data->hit.color, data->hit);
+	else if (data->hit.texture.txt_loaded == TRUE)
 	{
-		if (data->hit.texture.txt_loaded == TRUE)
-			color = ppm_texture(data, data->cylinder->texture[i].txt_ppm, data->cylinder->uv[i]);
-		else if ((ft_strcmp(data->hit.texture.name, "checker") == 0))
-			color = checker_pattern(data, data->cylinder->uv[i], data->cylinder->rgb2[i]);
-		else if ((ft_strcmp(data->hit.texture.name, "vstripe") == 0))
-		color = vstripe_pattern(data->cylinder->uv[i], data->cylinder->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "hstripe") == 0))
-		color = hstripe_pattern(data->cylinder->uv[i], data->cylinder->rgb2[i], data->hit.texture.color, pattern_size(data, data->hit.obj_name));
-		else if ((ft_strcmp(data->hit.texture.name, "gradient") == 0))
-		color = gradient_pattern(data->cylinder->uv[i], data->cylinder->rgb2[i], pattern_size(data, data->hit.obj_name));
-		else
-		color = data->cylinder->rgb2[h];
-			
+		if (ft_strcmp(data->hit.obj_name, "sphere") == 0)
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->sphere->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
+		else if (ft_strcmp(data->hit.obj_name, "plane") == 0)
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->plane->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
+		else 
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->cylinder->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
 	}
-		else if (ft_strcmp(data->hit.obj_name, "cone") == 0)
-	{
-		if (data->hit.texture.txt_loaded == TRUE)
-			color = ppm_texture(data, data->cone->texture[i].txt_ppm, data->cone->uv[i]);
-		else if (data->hit.texture.type == 1)
-		color = checker_pattern(data, data->cone->uv[i] , data->cone->rgb2[i]);
-		else
-			color = data->cone->rgb2[h];
-			
-	}
-	else if (ft_strcmp(data->hit.obj_name, "triangle") == 0)
-	{
-	
-			  color = data->obj->model->rgb2[0];
-	}
-		
+	else 
+	color = data->hit.color;
+
 	intensity.red = ((double)color.red / (fabs(data->scene->color_intensity - 9.5) * 25));
 	intensity.green = ((double)color.green / (fabs(data->scene->color_intensity - 9.5) * 25));
 	intensity.blue = ((double)color.blue / (fabs(data->scene->color_intensity - 9.5) * 25));
+
 	return (intensity);
 }
 
@@ -256,12 +207,13 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 	t_material	material;
 	t_vector	light_pos;
 	t_rgb		intensity;
+	double		shadow;
 	int			h;
 	
 
 	h = data->hit.obj_idx;
 	light_pos = copy_lightpos(data, i);
-	intensity = get_light_intensity(data, h);
+	intensity = get_light_intensity(data);
 		if (vectordot(ray.target, get_dist(light_pos, ray.newstart)) <= 0.0f)
 		return (rgb);
 	data->hit.t = sqrt(vectordot(get_dist(light_pos, ray.newstart),
@@ -270,17 +222,23 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 		return (rgb);
 	
 	material = get_material(data, i);
+
+	if (data->hit.find_shadow == 1)
+	shadow = 0.35;
+	else
+	shadow = 1;
+	
 //if (data->hit.was_refract == 1)
 //{
 		rgb.red += get_lambert(data, ray.target, ray.newstart,
 			get_dist(light_pos, ray.newstart))
-		* intensity.red * material.diffuse_red * data->hit.fresnel;
+		* intensity.red * material.diffuse_red * data->hit.fresnel * shadow;
 	rgb.green += get_lambert(data, ray.target, ray.newstart,
 			get_dist(light_pos, ray.newstart))
-		* intensity.green * material.diffuse_green * data->hit.fresnel;
+		* intensity.green * material.diffuse_green * data->hit.fresnel * shadow;
 	rgb.blue += get_lambert(data, ray.target, ray.newstart,
 			get_dist(light_pos, ray.newstart))
-		* intensity.blue * material.diffuse_blue * data->hit.fresnel;
+		* intensity.blue * material.diffuse_blue * data->hit.fresnel * shadow;
 //}
 //else 
 //{
