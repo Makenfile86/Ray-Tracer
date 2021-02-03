@@ -47,7 +47,7 @@ typedef struct		s_rgb2
 
 typedef	struct		s_texturemap
 {
-	int				size;
+	int				scale;
 	t_res		res;
 	int				txt_loaded;
 	int				txt_pattern;

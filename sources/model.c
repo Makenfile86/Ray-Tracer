@@ -47,7 +47,7 @@ void			init_model(t_data *data, int e)
 	else if (x == 10)
 		data->obj[e].model.mater = ft_atoi(str);
         else
-        data->obj[e].model.size = ft_atoi(str);
+        data->obj[e].model.scale = ft_atoi(str);
         
 
 //if (x == 10)

@@ -14,7 +14,7 @@ static t_vec2 cylindrical_map(t_data *data, t_vector point)
 	int i;
 	i = data->hit.obj_idx;
 
-	scale = data->hit.texture.size;
+	scale = data->hit.texture.scale;
 	point = vector_copy(data->hit.normal);
 	axis = data->cylinder->axis[i];
 
@@ -41,7 +41,7 @@ static t_vec2 planar_map(t_data *data, t_vector point)
 
 	double scale;
 
-	scale = data->hit.texture.size;
+	scale = data->hit.texture.scale;
 		t_vec2	uv;
 	t_vector	p;
 	t_vector	n;
@@ -60,8 +60,8 @@ static t_vec2 planar_map(t_data *data, t_vector point)
 
 if (data->hit.texture.txt_pattern != TRUE)
 {
-	uv.u = uv.u / (data->hit.texture.res.x / 6) / scale;
-	uv.v = uv.v / (data->hit.texture.res.y / 6) / scale;
+	uv.u = uv.u / (double)((data->hit.texture.res.x / 9) / (scale * 0.10));
+	uv.v = uv.v / (double)((data->hit.texture.res.y / 9) / (scale * 0.10));
 }
 else 
 {
@@ -134,7 +134,7 @@ t_vec2 texture_mapping(t_data *data, t_vector n, char *obj_name)
 {
 	int i;
 	 i = data->hit.obj_idx;
-
+	
 		 if (ft_strcmp(obj_name, "sphere") == 0)
  return(spherical_map(data, n));
 if (ft_strcmp(obj_name, "plane") == 0)
@@ -157,13 +157,13 @@ t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit)
 	else
 	{
 		if ((ft_strcmp(hit.texture.name, "checker") == 0))
-		return (checker_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		return (checker_pattern(uv, color, hit.texture.color, pat_size(hit.texture.scale, name, hit.radius)));
 		else if ((ft_strcmp(hit.texture.name, "vstripe") == 0))
-		return (vstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		return (vstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.scale, name, hit.radius)));
 		else if ((ft_strcmp(hit.texture.name, "hstripe") == 0))
-		return (hstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.size, name, hit.radius)));
+		return (hstripe_pattern(uv, color, hit.texture.color, pat_size(hit.texture.scale, name, hit.radius)));
 		else if ((ft_strcmp(hit.texture.name, "gradient") == 0))
-		return (gradient_pattern(uv, color, pat_size(hit.texture.size, name, hit.radius)));
+		return (gradient_pattern(uv, color, pat_size(hit.texture.scale, name, hit.radius)));
 		else
 		return (color);
 	}

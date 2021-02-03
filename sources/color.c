@@ -9,6 +9,30 @@
 /*   Updated: 2020/11/18 12:53:16 by anikkane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*
+_fresnel_params params;
+
+	etai = 1;
+	etat = ior;
+	cosi = ft_clamp_range(ft_dot_vec3(idir, normal), -1, 1);
+	if (cosi > 0)
+		ft_swap_d(&etai, &etat);
+	sint = etai / etat *
+		sqrtf(ft_max_d(0.f, 1 - cosi * cosi));
+	if (sint >= 1)
+		kr = 1;
+	else
+	{
+		cost = sqrtf(ft_max_d(0.f, 1 - sint * sint));
+		cosi = fabs(cosi);
+		rs = ((etat * cosi) - (etai * cost))
+			/ ((etat * cosi) + (etai * cost));
+		rp = ((etai * cosi) - (etat * cost))
+			/ ((etai * cosi) + (etat * cost));
+		kr = (rs * rs + rp * rp) / 2;
+	}
+	return (kr);
+*/
 
 #include "rt.h"
 #include "stdio.h"
@@ -21,79 +45,97 @@ static double	return_max(double a, double b)
 		return (b);
 }
 
+static double get_ior(double scale)
+{
+	double ior;
+
+	ior = (1 + (scale * 0.05));
+	if (ior == 1)
+	return (1.01);
+	return (ior);
+}
+
+
+
 
 static double calc_fresnel(t_vector normal, t_vector target, double ior)
 {
-	t_fresnel params;
-	double tmp;
+	//t_fresnel params;
+	//double tmp;
+	double etai;
+	double etat;
+	double cosi;
+	double rs;
+	double rp;
+	double kr;
+	double cost;
+	double sint;
 
-	params.etai = 1;
-	params.etat = ior;
-	params.cosi = vectordot(target, normal);
-	if (params.cosi > 0)
-	{
-		tmp = params.etai;
-		params.etai = params.etat;
-		params.etat = tmp;
-	} 
-	params.sint = params.etai / params.etat *
-		sqrtf(return_max(0.f, 1 - params.cosi * params.cosi));
-	if (params.sint >= 1)
-		params.kr = 1;
+	etai = 1;
+	etat = ior;
+	cosi = clamp(-1, 1 , (vectordot(target, normal)));
+	if (cosi > 0)
+dswap(&etai, &etat);
+	sint = etai / etat *
+		sqrtf(return_max(0.0f, 1 - cosi * cosi));
+	if (sint >= 1)
+		kr = 1;
 	else
 	{
-		params.cost = sqrtf(return_max(0.f, 1 - params.sint * params.sint));
-		params.cosi = fabs(params.cosi);
-		params.rs = ((params.etat * params.cosi) - (params.etai * params.cost))
-			/ ((params.etat * params.cosi) + (params.etai * params.cost));
-		params.rp = ((params.etai * params.cosi) - (params.etat * params.cost))
-			/ ((params.etai * params.cosi) + (params.etat * params.cost));
-		params.kr = (params.rs * params.rs + params.rp * params.rp) / 2;
+		cost = sqrtf(return_max(0.f, 1 - sint * sint));
+		cosi = fabs(cosi);
+		rs = ((etat * cosi) - (etai * cost))
+			/ ((etat * cosi) + (etai * cost));
+		rp = ((etai * cosi) - (etat * cost))
+			/ ((etai * cosi) + (etat * cost));
+		kr = (rs * rs + rp * rp) / 2;
 	}
-	return (params.kr);
+
+	
+	return (kr);
 }
 
 
 static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 {
+	
 	t_vector	tmp;
 	double		reflect;
 	double		r_factor;
 
-	if (data->hit.refract == 1)
+	data->hit.org_start = vector_copy(ray.start);
+  data->hit.org_target = vector_copy(ray.target);
+  data->hit.fresnel = calc_fresnel(n, ray.target, get_ior(data->hit.texture.scale));
+  //if (data->hit.mater == 3)
+  //{//
+	 
+	//printf("%f\n", data->hit.fresnel);
+  //}
+	if (data->hit.refract == 1 && data->hit.fresnel < 1)
 	{
-	//data->hit.org_start = vector_copy(ray.start);
-		//data->hit.org_target = vector_copy(ray.target);
+	
 
-	//ft_putendl("moikka");
+
+	////ft_putendl("moikka");
 	ray.start = vector_copy(ray.newstart);
 	double etai;
-	double ior;
 	double etat;
 	double eta;
-	double tmp;
+	//double tmp;
 	double cosi;
 	double k;
+	//double sint;
 
 	etai = 1;
-	ior = 10;
-	etat = ior;
+	etat = get_ior(data->hit.texture.scale);
 
-	cosi = vectordot(ray.target, n);
-	if (cosi < -1)
-	cosi = -1;
-	if (cosi > 1)
-	cosi = 1;
+	cosi = clamp(-1, 1, vectordot(ray.target, n));
 	if (cosi < 0)
 	cosi = cosi * -1;
 	else
 	{
-		tmp = etai;
-		etai = etat;
-		etat = tmp;
-		n.x = n.x * -1;
-		n.y = n.y * -1;
-		n.z = n.z * -1;
+		dswap(&etai, &etat);
+		reverse_vector(n);
 	}
 	eta = etai / etat;
 	k = 1 - eta * eta * (1 - cosi * cosi);
@@ -102,15 +144,27 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 	else
 	ray.target = vectoradd(vectorscale(eta, ray.target),
 		vectorscale((eta * cosi - sqrtf(k)), n));
-	
-	//data->iter += 1;
-	data->hit.refract = 0;
+		ray.start = vector_copy(ray.newstart);
+			data->hit.refract = 0;
 	data->hit.was_refract = 1;
 	ray.target = normalized_vector(ray.target);
 	data->hit.org_normal = normalized_vector(data->hit.org_normal);
-	data->hit.fresnel = calc_fresnel(n, ray.target, ior);
+	data->hit.fresnel = 1 - data->hit.fresnel;
+		}
+	
+		
+	//data->iter += 1;
+	
+
+
+	//r_factor = fabs(data->scene->reflection - 9.5);
+//r_factor = 3.5;
+	//ray.start = vector_copy(ray.newstart);
+//	reflect = 1.3 * vectordot(ray.target, n);
+	//tmp = vectorscale(reflect, n);
+	//ray.target = vector_minus(ray.target, tmp);
 	//printf("%f\n", data->hit.fresnel);
-	}
+	
 	else
 	{
 	r_factor = fabs(data->scene->reflection - 9.5);
@@ -123,6 +177,7 @@ static t_ray		reflection_direction(t_ray ray, t_vector n, t_data *data)
 	//data->hit.fresnel = calc_fresnel(ray.start, ray.target, 1.5);
 	if (data->hit.was_refract == 1)
 	data->hit.was_refract = 0;
+		data->hit.fresnel = 1 - data->hit.fresnel;
 
 
 	}
@@ -185,7 +240,7 @@ static void copy_hit_data(t_data *data)
 		data->hit.texture.txt_pattern = data->sphere->texture[i].txt_pattern;
 		data->hit.texture.res.x = data->sphere->texture[i].res.x;
 		data->hit.texture.res.y = data->sphere->texture[i].res.y;
-	data->hit.texture.size = data->sphere->texture[i].size;
+	data->hit.texture.scale = data->sphere->texture[i].scale;
 	data->hit.texture.color.red = data->sphere->texture[i].color.red;
 	data->hit.texture.color.green = data->sphere->texture[i].color.green;
 	data->hit.texture.color.blue = data->sphere->texture[i].color.blue;
@@ -205,7 +260,7 @@ static void copy_hit_data(t_data *data)
 			data->hit.texture.txt_pattern = data->plane->texture[i].txt_pattern;
 			data->hit.texture.res.x = data->plane->texture[i].res.x;
 		data->hit.texture.res.y = data->plane->texture[i].res.y;
-	data->hit.texture.size = data->plane->texture[i].size;
+	data->hit.texture.scale = data->plane->texture[i].scale;
 	data->hit.texture.color.red = data->plane->texture[i].color.red;
 	data->hit.texture.color.green = data->plane->texture[i].color.green;
 	data->hit.texture.color.blue = data->plane->texture[i].color.blue;
@@ -221,8 +276,8 @@ static void copy_hit_data(t_data *data)
 		data->hit.texture.txt_loaded = data->cylinder->texture[i].txt_loaded;
 			data->hit.texture.txt_pattern = data->cylinder->texture[i].txt_pattern;
 			data->hit.texture.res.x = data->cylinder->texture[i].res.x;
-		data->hit.texture.res.x = data->cylinder->texture[i].res.y;
-	data->hit.texture.size = data->cylinder->texture[i].size;
+		data->hit.texture.res.y = data->cylinder->texture[i].res.y;
+	data->hit.texture.scale = data->cylinder->texture[i].scale;
 	data->hit.texture.color.red = data->cylinder->texture[i].color.red;
 	data->hit.texture.color.green = data->cylinder->texture[i].color.green;
 	data->hit.texture.color.blue = data->cylinder->texture[i].color.blue;
@@ -237,10 +292,14 @@ data->hit.mater = data->cone->mater[i];
 data->hit.color.red = data->cone->rgb2[i].red;
 data->hit.color.green = data->cone->rgb2[i].green;
 data->hit.color.blue = data->cone->rgb2[i].blue;
+data->hit.texture.scale = 1;
+data->hit.mater = 1;
+data->hit.texture.txt_loaded = FALSE;
+data->hit.texture.txt_pattern = FALSE;
 	}
 	if (ft_strcmp(data->hit.obj_name, "triangle") == 0)
 	{
-data->hit.mater = 1;
+data->hit.mater = data->obj[i].model.mater;
 data->hit.texture.txt_loaded = FALSE;
   data->hit.color.red =  data->obj[i].model.rgb2.red;
   data->hit.color.green = data->obj[i].model.rgb2.green;
@@ -348,7 +407,6 @@ void				get_color(t_data *data, int x, int y)
 		ray = new_hit_direction(data, ray, &n);
 		if (n.x == 101010)
 			break ;
-	if (data->hit.mater != 3 && data->hit.mater != 4)
 		rgb = search_light_and_shadow(data, ray, n, rgb);
 		if (data->hit.mater != 3 && data->hit.mater != 4)
 		data->iter--;
@@ -360,7 +418,7 @@ void				get_color(t_data *data, int x, int y)
 		ray = reflection_direction(ray, n, data);
 		
 		
-		if (data->hit.was_refract != 1)
+		//if (data->hit.was_refract != 1)
 		put_color(data, rgb, x, y);
 		//test++;
 	}

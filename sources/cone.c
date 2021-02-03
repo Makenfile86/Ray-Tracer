@@ -46,5 +46,4 @@ void		copy_cone_data(t_data *data, char *str, int x, int e)
 	else
 		data->cone->mater[e] = ft_atoi(str);
 
-
 }

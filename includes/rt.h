@@ -277,5 +277,11 @@ t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit);
 t_material plane_reflection(t_data *data, int i);
 t_vector				new_start_dir_triangle(t_data *data, t_ray *ray);
 t_vector	vector_div(t_vector v, double div);
+double			clamp(double min, double max, double value);
+void			dswap(double *a, double *b);
+t_vector		reverse_vector(t_vector v);
+t_material get_material(t_data *data, t_hit hit, int light_power);
+
+
 
 #endif

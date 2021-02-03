@@ -88,7 +88,7 @@ void		copy_sphere_data(t_data *data, char *str, int x, int e)
 	ft_strcpy(data->sphere->texture[e].name, str);
 	}
 	else if (x == 12)
-	data->sphere->texture[e].size = ft_atoi(str);
+	data->sphere->texture[e].scale = ft_atoi(str);
 	else if (x == 13)
 		data->sphere->texture[e].color.red = ft_atoi(str);
 	else if (x == 14)

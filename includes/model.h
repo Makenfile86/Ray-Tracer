@@ -12,7 +12,7 @@ typedef struct	s_model
     t_vector    xyz;
     t_vector    rot;
     double      mater;
-    double       size;
+    double       scale;
     int         nbr;
   
 

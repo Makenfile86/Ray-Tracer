@@ -52,7 +52,7 @@ t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
 	ray.target = vectoradd(ray.target, v[1]);
 	ray.target = vec_rot_z(ray.target, data->camera->rot.z);
 	ray.target = normalized_vector(ray.target);
-	data->light_scale = 1;
+	data->light_scale = (double)((data->scene->light_scale) * 0.2);
 	data->hit.fresnel = 1;
 	data->iter = data->org_iter;
 	data->hit.preobj_name = "empty";
@@ -62,6 +62,11 @@ t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
 	data->hit.refract = 0;
 	data->hit.was_refract = 0;
 	data->hit.refract_lent = 1200;
+		data->hit.texture.name = "empty";
+		data->hit.texture.txt_loaded = FALSE;
+			data->hit.texture.txt_pattern = FALSE;
+			data->hit.texture.res.x = 0;
+		data->hit.texture.res.y = 0;
 	return (ray);
 }
 

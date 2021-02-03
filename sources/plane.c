@@ -76,7 +76,7 @@ void			copy_plane_data(t_data *data, char *str, int x, int e)
 	ft_strcpy(data->plane->texture[e].name, str);
 	}
 	else if (x == 14)
-	data->plane->texture[e].size = ft_atoi(str);
+	data->plane->texture[e].scale = ft_atoi(str);
 	else if (x == 15)
 		data->plane->texture[e].color.red = ft_atoi(str);
 	else if (x == 16)

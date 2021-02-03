@@ -74,3 +74,11 @@ t_vector	vector_div(t_vector v, double div)
 	result.z = v.z / div;
 	return (result);
 }
+
+t_vector	reverse_vector(t_vector v)
+{
+	v.x = -v.x;
+	v.y *= -v.y;
+	v.z *= -v.z;
+	return (v);
+}

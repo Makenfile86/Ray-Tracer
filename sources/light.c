@@ -12,6 +12,7 @@
 
 #include "rt.h"
 #include "math.h"
+#include "stdio.h"
 /*
 static t_rgb2 checker_pattern(t_data *data, t_vec2 uv, t_rgb2 obj_color)
 {
@@ -87,35 +88,37 @@ static t_vector		get_dist(t_vector light_pos, t_vector newstart)
 	dist = (vector_minus(light_pos, newstart));
 	return (dist);
 }
-
+/*
 static t_material	get_material(t_data *data, int i)
 {
 	t_material	material;
 
 
-material.diffuse_red = ((double)data->spot->power[i] / 200);
-material.diffuse_green = ((double)data->spot->power[i] / 200);
-material.diffuse_blue = ((double)data->spot->power[i] / 200);
-	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
-{
+//material.diffuse_red = ((double)data->spot->power[i] / 200);
+//material.diffuse_green = ((double)data->spot->power[i] / 200);
+//material.diffuse_blue = ((double)data->spot->power[i] / 200);
+	//if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
+//{
 
-material.diffuse_red = ((double)data->spot->power[i] / 1000);
-		material.diffuse_green = ((double)data->spot->power[i] / 1000);
-		material.diffuse_blue = ((double)data->spot->power[i] / 1000);
-}
-else if (data->hit.mater == 4)
-material = mirror_effect(data, i);
-if (data->hit.preobj_mater == 3)
-material = glass_effect(data, i);
-if ((data->iter != data->org_iter) && (ft_strcmp(data->hit.obj_name, "plane") == 0)   && data->hit.preobj_mater != 4 && data->hit.was_refract != 1)
-material = plane_reflection(data, i);
-if ((ft_strcmp(data->hit.obj_name, "plane") == 0) &&
-			data->iter != data->org_iter && data->hit.preobj_mater < 3 && data->hit.was_refract != 1)
-	{
-		material.diffuse_red = 0.05;
-		material.diffuse_green = 0.05;
-		material.diffuse_blue = 0.05;
-	}
+//material.diffuse_red = ((double)data->spot->power[i] / 1000);
+		//material.diffuse_green = ((double)data->spot->power[i] / 1000);
+		//material.diffuse_blue = ((double)data->spot->power[i] / 1000);
+//}
+//else if (data->hit.mater == 4)
+//material = mirror_effect(data, i);
+
+//if (data->hit.preobj_mater == 3)
+//material = glass_effect(data, i);
+//if ((data->iter != data->org_iter) && (ft_strcmp(data->hit.obj_name, "plane") == 0)   && data->hit.preobj_mater != 4 && data->hit.was_refract != 1)
+//material = plane_reflection(data, i);
+//if ((ft_strcmp(data->hit.obj_name, "plane") == 0) &&
+		//	data->iter != data->org_iter && data->hit.preobj_mater < 3 && data->hit.was_refract != 1)
+	//{
+	//	material.diffuse_red = 0.05;
+		//material.diffuse_green = 0.05;
+		//material.diffuse_blue = 0.05;
+	//}
+	
 	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && (ft_strcmp(data->hit.obj_name, "plane") == 0) &&
 			data->iter != data->org_iter)
 	{
@@ -132,44 +135,18 @@ if ((ft_strcmp(data->hit.obj_name, "plane") == 0) &&
 		material.diffuse_blue = 0;
 		}
 	}
-	/*
-	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) &&
-			data->iter != data->org_iter && data->hit.preobj_mater < 3 && data->hit.was_refract != 1)
+	if (data->hit.mater == 3)
 	{
-		material.diffuse_red = 0;
-		material.diffuse_green = 0;
-		material.diffuse_blue = 0;
-	}
-	if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
-			
-			
-				{
-		material.diffuse_red = 0;
-		material.diffuse_green = 0;
-		material.diffuse_blue = 0;
-	}
-		*/
-//if (data->hit.was_refract == 1)
 
-//if (data->hit.was_refract == 1)
-	//{
-	//material.diffuse_red = ((double)data->spot->power[i] / 200);
-	//material.diffuse_green = ((double)data->spot->power[i] / 200);
-	//material.diffuse_blue = ((double)data->spot->power[i] / 200);
-//	}
-	//liikaa heijastusta tuli peilista seinaa
-/*
-   if (ft_strcmp(data->hit.preobj_name, "triangle") == 0)
-         {
-            material.diffuse_red = 0;
-		material.diffuse_green = 0;
-		material.diffuse_blue = 0;
-        }
+	material.diffuse_red = ((double)data->spot->power[i] / 1800);
+	material.diffuse_green = ((double)data->spot->power[i] / 1800);
+	material.diffuse_blue = ((double)data->spot->power[i] / 1800);
 
-*/
+	}
+
 	return (material);
 }
-
+*/
 
 
 
@@ -185,6 +162,7 @@ static t_rgb		get_light_intensity(t_data *data)
 	color = add_texture(texture_mapping(data, data->hit.normal, data->hit.obj_name), data->hit.color, data->hit);
 	else if (data->hit.texture.txt_loaded == TRUE)
 	{
+
 		if (ft_strcmp(data->hit.obj_name, "sphere") == 0)
 		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->sphere->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
 		else if (ft_strcmp(data->hit.obj_name, "plane") == 0)
@@ -221,7 +199,7 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 	if (data->hit.t <= 0.0f)
 		return (rgb);
 	
-	material = get_material(data, i);
+	material = get_material(data, data->hit, data->spot->power[i]);
 
 	if (data->hit.find_shadow == 1)
 	shadow = 0.35;
@@ -230,6 +208,23 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 	
 //if (data->hit.was_refract == 1)
 //{
+	
+	/*
+	if (data->hit.mater == 3)
+	{
+				rgb.red += get_lambert(data, ray.target, ray.newstart,
+			get_dist(light_pos, ray.newstart))
+		* intensity.red * material.diffuse_red * data->hit.fresnel * shadow * 0.15;
+	rgb.green += get_lambert(data, ray.target, ray.newstart,
+			get_dist(light_pos, ray.newstart))
+		* intensity.green * material.diffuse_green * data->hit.fresnel * shadow * 0.15;
+	rgb.blue += get_lambert(data, ray.target, ray.newstart,
+			get_dist(light_pos, ray.newstart))
+		* intensity.blue * material.diffuse_blue * data->hit.fresnel * shadow * 0.15;
+	}
+	else
+	{
+		*/
 		rgb.red += get_lambert(data, ray.target, ray.newstart,
 			get_dist(light_pos, ray.newstart))
 		* intensity.red * material.diffuse_red * data->hit.fresnel * shadow;
@@ -239,6 +234,7 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 	rgb.blue += get_lambert(data, ray.target, ray.newstart,
 			get_dist(light_pos, ray.newstart))
 		* intensity.blue * material.diffuse_blue * data->hit.fresnel * shadow;
+	//}
 //}
 //else 
 //{
@@ -254,5 +250,6 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
 		* intensity.blue * material.diffuse_blue;
 		*/
 //}
+//ft_putendl("light");
 	return (rgb);
 }

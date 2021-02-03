@@ -81,7 +81,7 @@ void		copy_cylinder_data(t_data *data, char *str, int x, int e)
 	ft_strcpy(data->cylinder->texture[e].name, str);
 	}
 		else if (x == 15)
-		data->cylinder->texture[e].size = ft_atoi(str);
+		data->cylinder->texture[e].scale = ft_atoi(str);
 		else if (x == 16)
 		data->cylinder->texture[e].color.red = ft_atoi(str);
 	else if (x == 17)

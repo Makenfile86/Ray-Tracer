@@ -12,6 +12,27 @@
 
 #include "rt.h"
 
+/*
+Vec3f refract(const Vec3f &I, const Vec3f &N, const float &ior) 
+{ 
+    float cosi = clamp(-1, 1, dotProduct(I, N)); 
+    float etai = 1, etat = ior; 
+    Vec3f n = N; 
+    if (cosi < 0) { cosi = -cosi; } else { std::swap(etai, etat); n= -N; } 
+    float eta = etai / etat; 
+    float k = 1 - eta * eta * (1 - cosi * cosi); 
+    return k < 0 ? 0 : eta * I + (eta * cosi - sqrtf(k)) * n; 
+} 
+*/
+void			dswap(double *a, double *b)
+{
+	double tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 int				keypressed(int keycode)
 {
 	if (keycode == MAIN_PAD_ESC)
@@ -22,6 +43,15 @@ int				keypressed(int keycode)
 int				min(int num1, int num2)
 {
 	return ((num1 > num2) ? num2 : num1);
+}
+
+double			clamp(double min, double max, double value)
+{
+	if (value < min)
+	return (min);
+	if (value > max)
+	return (max);
+	return (value);
 }
 
 t_vector		copy_lightpos(t_data *data, int i)
