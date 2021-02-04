@@ -159,16 +159,16 @@ static t_rgb		get_light_intensity(t_data *data)
 	
 	i = data->hit.obj_idx;
 	if (data->hit.texture.txt_pattern == TRUE)
-	color = add_texture(texture_mapping(data, data->hit.normal, data->hit.obj_name), data->hit.color, data->hit);
+	color = add_texture(texture_mapping(data->hit, data->hit.obj_name), data->hit.color, data->hit);
 	else if (data->hit.texture.txt_loaded == TRUE)
 	{
 
 		if (ft_strcmp(data->hit.obj_name, "sphere") == 0)
-		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->sphere->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->sphere->texture[i].txt_ppm, texture_mapping(data->hit, data->hit.obj_name));
 		else if (ft_strcmp(data->hit.obj_name, "plane") == 0)
-		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->plane->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->plane->texture[i].txt_ppm, texture_mapping(data->hit, data->hit.obj_name));
 		else 
-		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->cylinder->texture[i].txt_ppm, texture_mapping(data, data->hit.normal, data->hit.obj_name));
+		color = ppm_texture(data->hit.texture.res.x, data->hit.texture.res.y, data->cylinder->texture[i].txt_ppm, texture_mapping(data->hit, data->hit.obj_name));
 	}
 	else 
 	color = data->hit.color;

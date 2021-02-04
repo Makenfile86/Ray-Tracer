@@ -1,34 +1,32 @@
 * SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
            0          ,    3         ,       4     ,         1  ,                   2   ,       3                 ,     5
 * CAMERA coord-XYZ target-XYZ rot-XYZ
-  50 30 150 0 -1 0 15 0 0
+  50 30 110 0 -1 0 15 0 0
 * SPOT coord-XYZ power 
 0 80 90 , 50
 * SPOT coord-XYZ power 
 0 80 150 , 50
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
--50 60 -20 , 16 , 255 255 255 , 0 0 0 , 2 , world , 1 , 50 200 200
-* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
--220 110 -20 , 40 , 255 255 255 , 0 0 0 , 4 , 0 , 1 , 200 200 50
+-75 60 -25 , 18 , 255 255 255 , 0 0 0 , 2 , world , 1 , 50 200 200
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 0 -180 , 0 0 0 , 150 150 0 , 0 0 0 , 1 , bostons , 10 , 0 0 0
+0 0 -150 , 0 0 0 , 150 150 0 , 0 0 0 , 1 , bostons , 10 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 260 0 , 0 0 0 , 150 150 150 , 0 0 0 , 1 , 0 , 3 , 0 0 0
+0 200 0 , 0 0 0 , 150 150 150 , 0 0 0 , 1 , 0 , 3 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
 0 -20 0 , 0 0 0 100  100 200 0 0 0 , 1 , vstripe , 3 , 200 200 200
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
--215 0 0 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , 0 , 1 , 0 0 0
+-160 0 0 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , 0 , 1 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-175 0 0 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , 0 , 1 , 0 0 0
+150 0 0 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , 0 , 1 , 0 0 0
 * MODEL
-crate -185 50 -150 200 100 100 0 0 0 2 2
+crate -265 50 -150 200 100 100 0 0 0 2 2
 * MODEL
-crate 155 35 -200 50 200 50 0 0 0 2 1
+crate 155 40 -200 50 200 50 0 0 0 2 1
 * MODEL
-chair 125 0 70 200 200 25 0 0 0 2 3
+chair 105 0 60 200 200 25 0 0 0 2 3
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-40 30 100 , 20 , 200 200 200 , 0 0 0 , 3 , 0 , 1 , 200 200 50
+-50 -5 70 , 12 , 255 255 255 , 0 0 0 , 2 , letters , 1 , 50 200 200
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
--120 -5 50 , 12 , 255 255 255 , 0 0 0 , 2 , checker , 3 , 50 200 200
+0 -5 90 , 12 , 255 255 255 , 0 0 0 , 2 , numbers , 1 , 50 200 200
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-15 -5 35 , 12 , 255 255 255 , 0 0 0 , 2 , letters , 1 , 50 200 200
+40 30 80 , 15 , 200 200 200 , 0 0 0 , 3 , 0 , 1 , 200 200 50

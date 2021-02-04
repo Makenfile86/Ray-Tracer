@@ -70,9 +70,7 @@ typedef struct		s_sphere
 	t_vector		xyz[30];
 	t_material		material[30];
 	int				radius[30];
-	int				rot_x[30];
-	int				rot_y[30];
-	int				rot_z[30];
+	t_vector		rot[30];
 	t_rgb2			rgb2[30];
 	int				nbr;
 	double				mater[30];

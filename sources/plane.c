@@ -42,47 +42,27 @@ data->scene->texture = TRUE;
 	
 }
 
-void			copy_plane_data(t_data *data, char *str, int x, int e)
+void			copy_plane_data(t_data *data, char **parts, int e)
 {
-	if (x == 0)
-		data->plane->xyz[e].x = ft_atoi(str);
-	else if (x == 1)
-		data->plane->xyz[e].y = ft_atoi(str);
-	else if (x == 2)
-		data->plane->xyz[e].z = ft_atoi(str);
-	else if (x == 3)
-		data->plane->normal[e].x = ft_atoi(str);
-	else if (x == 4)
-		data->plane->normal[e].y = ft_atoi(str);
-	else if (x == 5)
-		data->plane->normal[e].z = ft_atoi(str);
-	else if (x == 6)
-		data->plane->rgb2[e].red = ft_atoi(str);
-	else if (x == 7)
-		data->plane->rgb2[e].green = ft_atoi(str);
-	else if (x == 8)
-		data->plane->rgb2[e].blue = ft_atoi(str);
-	else if (x == 9)
-		data->plane->rot[e].x = ft_atoi(str);
-	else if (x == 10)
-		data->plane->rot[e].y = ft_atoi(str);
-	else if (x == 11)
-		data->plane->rot[e].z = ft_atoi(str);
-	else if (x == 12)
-		data->plane->mater[e] = atoi(str);
-	else if (x == 13)
-{
-	data->plane->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
-	ft_strcpy(data->plane->texture[e].name, str);
-	}
-	else if (x == 14)
-	data->plane->texture[e].scale = ft_atoi(str);
-	else if (x == 15)
-		data->plane->texture[e].color.red = ft_atoi(str);
-	else if (x == 16)
-		data->plane->texture[e].color.green = ft_atoi(str);
-	else 
-		data->plane->texture[e].color.blue = ft_atoi(str);
+		data->plane->xyz[e].x = ft_atoi(parts[0]);
+		data->plane->xyz[e].y = ft_atoi(parts[1]);
+		data->plane->xyz[e].z = ft_atoi(parts[2]);
+		data->plane->normal[e].x = ft_atoi(parts[3]);
+		data->plane->normal[e].y = ft_atoi(parts[4]);
+		data->plane->normal[e].z = ft_atoi(parts[5]);
+		data->plane->rgb2[e].red = ft_atoi(parts[6]);
+		data->plane->rgb2[e].green = ft_atoi(parts[7]);
+		data->plane->rgb2[e].blue = ft_atoi(parts[8]);
+		data->plane->rot[e].x = ft_atoi(parts[9]);
+		data->plane->rot[e].y = ft_atoi(parts[10]);
+		data->plane->rot[e].z = ft_atoi(parts[11]);
+		data->plane->mater[e] = ft_atoi(parts[12]);
+	data->plane->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(parts[13]) + 1);
+	ft_strcpy(data->plane->texture[e].name, parts[13]);
+	data->plane->texture[e].scale = ft_atoi(parts[14]);
+		data->plane->texture[e].color.red = ft_atoi(parts[15]);
+		data->plane->texture[e].color.green = ft_atoi(parts[16]);
+		data->plane->texture[e].color.blue = ft_atoi(parts[17]);
 
 }
 

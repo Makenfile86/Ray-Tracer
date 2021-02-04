@@ -21,29 +21,18 @@ void		init_cone(t_data *data, int e)
 
 }
 
-void		copy_cone_data(t_data *data, char *str, int x, int e)
+void		copy_cone_data(t_data *data, char **parts, int e)
 {
-	if (x == 0)
-		data->cone->start_xyz[e].x = ft_atoi(str);
-	else if (x == 1)
-		data->cone->start_xyz[e].y = ft_atoi(str);
-	else if (x == 2)
-		data->cone->start_xyz[e].z = ft_atoi(str);
-	else if (x == 3)
-		data->cone->angle[e] = ft_atoi(str);
-	else if (x == 4)
-		data->cone->rgb2[e].red = ft_atoi(str);
-	else if (x == 5)
-		data->cone->rgb2[e].green = ft_atoi(str);
-	else if (x == 6)
-		data->cone->rgb2[e].blue = ft_atoi(str);
-	else if (x == 7)
-		data->cone->rot[e].x = ft_atoi(str);
-	else if (x == 8)
-		data->cone->rot[e].y = ft_atoi(str);
-	else if (x == 9)
-		data->cone->rot[e].z = ft_atoi(str);
-	else
-		data->cone->mater[e] = ft_atoi(str);
+		data->cone->start_xyz[e].x = ft_atoi(parts[0]);
+		data->cone->start_xyz[e].y = ft_atoi(parts[1]);
+		data->cone->start_xyz[e].z = ft_atoi(parts[2]);
+		data->cone->angle[e] = ft_atoi(parts[3]);
+		data->cone->rgb2[e].red = ft_atoi(parts[4]);
+		data->cone->rgb2[e].green = ft_atoi(parts[5]);
+		data->cone->rgb2[e].blue = ft_atoi(parts[6]);
+		data->cone->rot[e].x = ft_atoi(parts[7]);
+		data->cone->rot[e].y = ft_atoi(parts[8]);
+		data->cone->rot[e].z = ft_atoi(parts[9]);
+		data->cone->mater[e] = ft_atoi(parts[10]);
 
 }

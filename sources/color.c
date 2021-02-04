@@ -249,12 +249,16 @@ static void copy_hit_data(t_data *data)
 	data->hit.color.blue = data->sphere->rgb2[i].blue;
 	data->hit.mater = data->sphere->mater[i];
 	data->hit.radius = data->sphere->radius[i];
+	data->hit.rot = data->sphere->rot[i];
+	data->hit.pos = data->sphere->xyz[i];
 	//ft_putendl("\nHIT MATER\n");
 	//ft_putnbr(data->hit.mater);
 	//ft_putchar('\n');
 	}
 		if (ft_strcmp(data->hit.obj_name, "plane") == 0)
 	{
+		data->hit.pos = data->plane->xyz[i];
+		data->hit.rot = data->plane->rot[i];
 		data->hit.texture.name = data->plane->texture[i].name;
 		data->hit.texture.txt_loaded = data->plane->texture[i].txt_loaded;
 			data->hit.texture.txt_pattern = data->plane->texture[i].txt_pattern;
@@ -272,6 +276,10 @@ static void copy_hit_data(t_data *data)
 	}
 	if (ft_strcmp(data->hit.obj_name, "cylinder") == 0)
 	{
+		data->hit.rot = data->cylinder->rot[i];
+		data->hit.pos = data->cylinder->start_xyz[i];
+		data->hit.axis = data->cylinder->axis[i];
+
 		data->hit.texture.name = data->cylinder->texture[i].name;
 		data->hit.texture.txt_loaded = data->cylinder->texture[i].txt_loaded;
 			data->hit.texture.txt_pattern = data->cylinder->texture[i].txt_pattern;
@@ -293,7 +301,7 @@ data->hit.color.red = data->cone->rgb2[i].red;
 data->hit.color.green = data->cone->rgb2[i].green;
 data->hit.color.blue = data->cone->rgb2[i].blue;
 data->hit.texture.scale = 1;
-data->hit.mater = 1;
+//ft_putnbr(data->cone->mater[i]);
 data->hit.texture.txt_loaded = FALSE;
 data->hit.texture.txt_pattern = FALSE;
 	}
@@ -333,6 +341,7 @@ static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
 	{
 		
 		*n = new_start_dir_sphere(data, &ray);
+		data->hit.point = *n;
 		temp = vectordot(*n, *n);
 		if (temp == 0)
 		{
@@ -341,7 +350,7 @@ static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
 		}
 		temp = 1.0f / sqrt(temp);
 		*n = vectorscale(temp, *n);
-		
+		data->hit.point = *n;
 	
 		}
 	if (ft_strcmp(data->hit.obj_name, "plane") == 0)

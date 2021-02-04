@@ -1,5 +1,6 @@
 #include "rt.h"
 #include "math.h"
+#include "stdio.h"
 
 double pat_size(double scale, char *obj_name, int radius)
 {
@@ -47,10 +48,26 @@ t_rgb2 checker_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double
 
 } 
 
+t_rgb2 split_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size)
+{
+   // double pat_size;
+   // pat_size = calculate_checker_size(data, data->hit.obj_name);
+ pat_size = 0;
+ uv.v /= 6.0;
+// printf("%d\n", obj_color.red);
+  	if (uv.v < 0.5)
+	  return (obj_color);
+	  else
+	return (texture_color);
+	  
+
+} 
+
 t_rgb2 hstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size)
 {
    // double pat_size;
    // pat_size = calculate_checker_size(data, data->hit.obj_name);
+
  
   	if (fmod(uv.v, pat_size * 2) < pat_size)
 			return (obj_color);

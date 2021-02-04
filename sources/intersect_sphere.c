@@ -38,6 +38,7 @@ t_vector			new_start_dir_sphere(t_data *data, t_ray *ray)
 	scaled = vectorscale(data->hit.t, ray->target);
 	ray->newstart = vectoradd(ray->start, scaled);
 	n = vector_minus(ray->newstart, data->sphere->xyz[data->hit.obj_idx]);
+	
 	//data->hit.org_start = vector_copy(ray->newstart);
 	//data->tmp_x = ray->newstart.x;
 	//data->tmp_y = ray->newstart.y;

@@ -14,21 +14,21 @@ void			init_scene(t_data *data)
 	//}
 }
 
-void		copy_scene_data(t_data *data, char *str, int x)
+void		copy_scene_data(t_data *data, char **parts)
 {
-	if (x == 0)
-	data->scene->background = ft_atoi(str);
-	else if (x == 1)
-		data->scene->lambert = ft_atoi(str);
-        else if (x == 2)
-		data->scene->light_scale = ft_atoi(str);
-	else if (x == 3)
-		data->scene->shadows = ft_atoi(str);
-	else if (x == 4)
-		data->scene->ref_iter = ft_atoi(str);
-    else if (x == 5)
-        data->scene->color_intensity = ft_atoi(str);
-    else
-        data->scene->reflection = ft_atoi(str);
+
+	data->scene->background = ft_atoi(parts[0]);
+
+		data->scene->lambert = ft_atoi(parts[1]);
+
+		data->scene->light_scale = ft_atoi(parts[2]);
+
+		data->scene->shadows = ft_atoi(parts[3]);
+
+		data->scene->ref_iter = ft_atoi(parts[4]);
+  
+        data->scene->color_intensity = ft_atoi(parts[5]);
+ 
+        data->scene->reflection = ft_atoi(parts[6]);
    
 }

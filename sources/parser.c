@@ -1,5 +1,5 @@
 #include "rt.h"
-
+#include <stdio.h>
 
 char *parse_data_line(char *str, char *line, int *i, int y)
 {
@@ -39,30 +39,29 @@ char		*parse_name(char *line, char *name)
 
 void			parse_obj(char *line, t_data *data, int *obj_idx, char *type)
 {
-	int		i;
-	int		y;
-	char	*str;
-	int		x;
 	int e;
-	
+	char **parts;
+	int x;
+	int i;
+	char *str;
+	x = 0;
+	i = 0;
+	str = (char *)malloc(sizeof(char) * ft_strlen(line) + 1);
 	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0))
 	e = 0;
 	else if (ft_strcmp(type, "model") == 0)
 	e = data->modelnbr;
 	else 
 	e = *obj_idx;
-	x = 0;
-	i = 0;
-	
-
-	if (!(str = (char *)malloc(sizeof(char) * 15 + 1)))
-		memory_allocation_fail();
-	while (line[i] != '\0')
+	while (line[x] != '\0')
 	{
-		y = 0;
-		copy_data(data, parse_data_line(str, line, &i, y), &x, e);
-		ft_memset(str, 0, ft_strlen(str));
+		while (ft_isdigit(line[x]) != 1 && line[x] != '\0' && line[x] != ' ' && line[x] != '-' && ft_isalpha(line[x]) != 1)
+		x++;
+		str[i++] = line[x++];
 	}
+	//while (i < ft_strlen(line))
+	//ft_putendl(str);
+	parts = ft_strsplit(str, ' ');
+	copy_data(data, parts, e);
 	init_parsed_data(data, type, e);
-	free(str);
 }

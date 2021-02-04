@@ -49,50 +49,56 @@ void init_sphere(t_data *data, int e)
 	
 }
 */
-void		copy_sphere_data(t_data *data, char *str, int x, int e)
+void		copy_sphere_data(t_data *data, char **parts, int e)
 {
 	
-	if (x == 0)	
-	data->sphere->xyz[e].x = ft_atoi(str);
-	else if (x == 1)
-		data->sphere->xyz[e].y = ft_atoi(str);
-	else if (x == 2)
-		data->sphere->xyz[e].z = ft_atoi(str);
-	else if (x == 3)
-		data->sphere->radius[e] = ft_atoi(str);
-	else if (x == 4)
-		data->sphere->rgb2[e].red = ft_atoi(str);
-	else if (x == 5)
-		data->sphere->rgb2[e].green = ft_atoi(str);
-	else if (x == 6)
-		data->sphere->rgb2[e].blue = ft_atoi(str);
-	else if (x == 7)
-		data->sphere->rot_x[e] = ft_atoi(str);
-	else if (x == 8)
-		data->sphere->rot_y[e] = ft_atoi(str);
-	else if (x == 9)
-		data->sphere->rot_z[e] = ft_atoi(str);
-	else if (x == 10)
-	{
+	data->sphere->xyz[e].x = ft_atoi(parts[0]);
+	data->sphere->xyz[e].y = ft_atoi(parts[1]);
+data->sphere->xyz[e].z = ft_atoi(parts[2]);
+		data->sphere->radius[e] = ft_atoi(parts[3]);
+		data->sphere->rgb2[e].red = ft_atoi(parts[4]);
+		data->sphere->rgb2[e].green = ft_atoi(parts[5]);
+
+		data->sphere->rgb2[e].blue = ft_atoi(parts[6]);
+
+		data->sphere->rot[e].x = ft_atoi(parts[7]);
+
+		data->sphere->rot[e].y = ft_atoi(parts[8]);
+
+		data->sphere->rot[e].z = ft_atoi(parts[9]);
+
+	
 		//ft_putendl(str);
 		//ft_putchar('\n');
-		data->sphere->mater[e] = ft_atoi(str);
+		data->sphere->mater[e] = ft_atoi(parts[10]);
 		//ft_putendl("hoi");
 		//ft_putnbr(data->sphere->mater[e]);
 		//ft_putendl("\nloppu");
-	}
-	else if (x == 11)
-	{
-		ft_putendl("horhor");
-	data->sphere->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
-	ft_strcpy(data->sphere->texture[e].name, str);
-	}
-	else if (x == 12)
-	data->sphere->texture[e].scale = ft_atoi(str);
-	else if (x == 13)
-		data->sphere->texture[e].color.red = ft_atoi(str);
-	else if (x == 14)
-		data->sphere->texture[e].color.green = ft_atoi(str);
-	else 
-		data->sphere->texture[e].color.blue = ft_atoi(str);
+	
+
+	
+	
+	data->sphere->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(parts[11]) + 1);
+	ft_strcpy(data->sphere->texture[e].name, parts[11]);
+
+	data->sphere->texture[e].scale = ft_atoi(parts[12]);
+if (parts[13])
+{
+		ft_putendl("miksi");
+		data->sphere->texture[e].color.red = ft_atoi(parts[13]);
+		ft_putendl("siksi");
+}
+ft_putendl(parts[14]);
+if (parts[14])
+{
+		ft_putendl("moi");
+		data->sphere->texture[e].color.green = ft_atoi(parts[14]);
+		ft_putendl("hoi");
+}
+if (parts[15])
+{
+	ft_putendl("koira");
+		data->sphere->texture[e].color.blue = ft_atoi(parts[15]);
+		ft_putendl("moi");
+}
 }
