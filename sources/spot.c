@@ -12,16 +12,10 @@
 
 #include "rt.h"
 
-
 void		copy_spot_data(t_data *data, char **parts, int e)
 {
-
-		data->spot->x[e] = ft_atoi(parts[0]);
-
-		data->spot->y[e] = ft_atoi(parts[1]);
-
-		data->spot->z[e] = ft_atoi(parts[2]);
-
-		data->spot->power[e] = ft_atoi(parts[3]);
-
+	data->spot->x[e] = ft_atoi(parts[0]);
+	data->spot->y[e] = ft_atoi(parts[1]);
+	data->spot->z[e] = ft_atoi(parts[2]);
+	data->spot->power[e] = ft_atoi(parts[3]);
 }

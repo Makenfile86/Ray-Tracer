@@ -112,7 +112,7 @@ void				get_color(t_data *data, int x, int y)
 		if (n.x == 101010)
 			break ;
 		rgb = search_light_and_shadow(data, ray, n, rgb);
-		manage_iter(data->iter, data->hit.mater,
+		data->iter = manage_iter(data->iter, data->hit.mater,
 		data->hit.preobj_mater, data->hit.preobj_name);
 		set_old_hit(data);
 		ray = reflection_dir(ray, n, data);
