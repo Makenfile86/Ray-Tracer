@@ -80,6 +80,7 @@ typedef	struct		s_hit
 	int				preobj_mater;
 	int				preobj_idx;
 	int				find_shadow;
+	int				in_shadow;
 	t_vector		org_target;
 	t_vector		org_start;
 	t_vector		org_normal;
@@ -176,7 +177,6 @@ void				parse_scene(char *line, t_data *data);
 void				init_data(t_data *data);
 void				init_camera(t_data *data);
 t_vector			init_target(int x, int y);
-void			init_scene(t_data *data);
 void				parse_sphere(char *line, t_data *data);
 void				parse_cylinder(char *line, t_data *data);
 void				parse_cone(char *line, t_data *data);
@@ -281,10 +281,22 @@ t_rgb2 split_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double p
 t_material plane_reflection(t_data *data, int i);
 t_vector				new_start_dir_triangle(t_data *data, t_ray *ray);
 t_vector	vector_div(t_vector v, double div);
-double			clamp(double min, double max, double value);
 void			dswap(double *a, double *b);
 t_vector		reverse_vector(t_vector v);
 t_material get_material(t_data *data, t_hit hit, int light_power);
+t_rgb2 cyl_checker_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
+char *get_objpath(char *model);
+void copy_hit (t_data *data, char *obj_name);
+void copy_hit_sphere(t_data *data, int i);
+void copy_hit_plane(t_data *data, int i);
+void copy_hit_cylinder(t_data *data, int i);
+void copy_hit_cone(t_data *data, int i);
+void copy_hit_model(t_data *data, int i);
+t_hit set_hit_default(t_hit hit);
+int check_texture_pattern(char *name);
+t_ray		shadow_ray(double *t, t_hit hit, t_ray ray, char *obj_name);
+t_hit init_hit(t_hit hit);
+t_ray		reflection_dir(t_ray ray, t_vector n, t_data *data);
 
 
 

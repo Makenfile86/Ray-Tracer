@@ -82,6 +82,7 @@ typedef struct		s_plane
 {
 	int				nbr;
 	t_vector		xyz[30];
+	int				radius[30];
 	t_vector 		point[30];
 	t_vector		normal[30];
 	t_rgb2			rgb2[30];
@@ -111,6 +112,7 @@ typedef struct		s_cylinder
 	t_vector		axis[30];
 	t_vector		rot[30];
 	int				radius[30];
+	int				length[30];
 	int				nbr;
 	t_rgb2			rgb2[30];
 	double				mater[30];
