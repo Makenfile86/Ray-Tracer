@@ -48,32 +48,15 @@ void						draw(t_data *data)
 	int				y;
 	int				x;
 	int				height;
-	//t_data 			*tmp;
-	//tmp = data;
-	t_color color;
-	color.channel[0] = 0;
 
-	//if (data->scene->texture == TRUE)
-	//{
-		//y = 0;
-		//height = HEIGHT;
-	//}
-	//else
-	//{
+
 	y = data->start_line;
 	height = data->finish_line;
-	//}
-	//y = 0;
 	while (y < height)
-	//while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			data->test_x = x;
-			data->test_y = y;
-			//printf("\nX : %d\n", x);
-			//printf("\nY : %d\n", y);
 			get_color(data, x, y);
 			x++;
 		}

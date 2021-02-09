@@ -14,30 +14,29 @@
 
 void			init_plane(t_data *data, int e)
 {
-	
+	data->plane->nbr += 1;
 	if (data->plane->xyz[e].y == 0)
 	data->plane->xyz[e].y = 0.0001;
 	if (data->plane->radius[e] < 1)
 	data->plane->radius[e] = 1000;
 	data->plane->normal[e] = rotate_vector(data->plane->xyz[e],
-			data->plane->normal[e], data->plane->rot[e], 0);
+	data->plane->normal[e], data->plane->rot[e], 0);
 	data->plane->normal[e] = vector_minus(data->plane->normal[e],
 			data->plane->xyz[e]);
 	data->plane->normal[e] = normalized_vector(data->plane->normal[e]);
-	data->plane->nbr += 1;
-data->plane->texture[e].txt_pattern = check_texture_pattern(data->plane->texture[e].name);
-		if (data->plane->texture[e].txt_pattern != TRUE && (validate_file(data->plane->texture[e].name, &data->plane->texture[e].path) == 1))
+data->plane->texture[e].txt_pattern =
+check_texture_pattern(data->plane->texture[e].name);
+		if (data->plane->texture[e].txt_pattern != TRUE && (validate_file
+		(data->plane->texture[e].name, &data->plane->texture[e].path) == 1))
 		{
-
-	data->plane->texture[e].txt_ppm = parse_ppm(data->plane->texture[e].txt_ppm, data->plane->texture[e].path, &data->plane->texture[e].res);
+	data->plane->texture[e].txt_ppm = parse_ppm(data->plane->texture[e].txt_ppm,
+	data->plane->texture[e].path, &data->plane->texture[e].res);
 		if (data->plane->texture[e].txt_ppm != NULL)
 		data->plane->texture[e].txt_loaded = TRUE;
-	
 		}
-	if (data->plane->texture[e].txt_loaded == TRUE || data->plane->texture[e].txt_pattern == TRUE)
+	if (data->plane->texture[e].txt_loaded == TRUE ||
+	data->plane->texture[e].txt_pattern == TRUE)
 data->scene->texture = TRUE;
-
-	
 }
 
 void			copy_plane_data(t_data *data, char **parts, int e)

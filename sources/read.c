@@ -77,25 +77,11 @@ if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 		//parse_texture(line, data);
 }
 
-
-
-int				read_scene(t_data *data)
+static void get_data(t_data *data, int fd)
 {
-	char	*line;
-	int		i;
-	int		x;
-	int 	fd;
-	
+	int i;
+	char *line;
 
-	fd = 0; 
-if ((fd = open(data->scene_name, O_RDONLY)) > 0)
-		init_data(data);
-	else
-		wrong_scene_name();
-	if (!(data->obj_name = (char *)malloc((sizeof(char) * (8 + 1)))))
-		memory_allocation_fail();
-			
-	x = 0;
 	i = 0;
 	while ((get_next_line(fd, &line)) == 1)
 	{
@@ -109,21 +95,24 @@ if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		if (line[i] != '*')
 			free(line);
 	}
+}
+
+int				read_scene(t_data *data)
+{
+int 	fd;
 	
+
+	fd = 0; 
+if ((fd = open(data->scene_name, O_RDONLY)) > 0)
+		init_data(data);
+	else
+		wrong_scene_name();
+	if (!(data->obj_name = (char *)malloc((sizeof(char) * (8 + 1)))))
+		memory_allocation_fail();
+	get_data(data, fd);
 	close(fd);
-//init_obj(data);
-////init_obj(data);
 init_mlx(data);
-
-	//data->scene->texture = FALSE;
-	//if (data->scene->texture == TRUE)
-	//draw(data);
-	//else
-	pthread(data);
-
-	
-
-	//handle_expose(data);
-
-	return (0);
+pthread(data);
+//handle_expose(data);
+return (0);
 }

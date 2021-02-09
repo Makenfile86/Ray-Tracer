@@ -25,7 +25,8 @@ static void			search_intersection(t_data *data, t_ray ray)
 		y = (data->modelnbr - 1);
 		while (y >= 0)
 		{
-		if ((int)data->obj[y].num_polygonals > i  && intersecttriangle(ray, data, y, i) == 1)
+		if ((int)data->obj[y].num_polygonals > i  &&
+		intersecttriangle(ray, data, y, i) == 1)
 			set_hit(data, "triangle", y);
 			y--;
 		}
@@ -34,9 +35,8 @@ static void			search_intersection(t_data *data, t_ray ray)
 }
 
 
-static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
+static t_ray new_hit_dir(t_data *data, t_ray org_ray, t_vector *n)
 {
-	
 	t_ray		ray;
 
 	ray.newstart = vectornew(0, 0, 0);
@@ -60,7 +60,6 @@ static t_ray		new_hit_direction(t_data *data, t_ray org_ray, t_vector *n)
 		*n = new_start_dir_triangle(data, &ray);
 		else
 		data->hit.normal = *n;
-
 	copy_hit(data, data->hit.obj_name);
 	return (ray);
 }
@@ -83,6 +82,19 @@ static t_rgb		search_light_and_shadow(t_data *data, t_ray ray,
 	return (rgb);
 }
 
+static int	manage_iter(int iter, int mater, int preobj_mater,
+char *preobj_name)
+{
+		if (mater != 3 && mater != 4)
+		iter--;
+		if ((ft_strcmp(preobj_name, "plane") == 0) && mater == 4)
+		iter--;
+		if ((ft_strcmp(preobj_name, "empty") != 0) &&
+		mater == 3 && preobj_mater != 4)
+		iter = 0;
+		return (iter);
+}
+
 void				get_color(t_data *data, int x, int y)
 {
 	t_vector	n;
@@ -96,16 +108,12 @@ void				get_color(t_data *data, int x, int y)
 		search_intersection(data, ray);
 		if (data->hit.obj_idx == -1)
 			break ;
-		ray = new_hit_direction(data, ray, &n);
+		ray = new_hit_dir(data, ray, &n);
 		if (n.x == 101010)
 			break ;
 		rgb = search_light_and_shadow(data, ray, n, rgb);
-		if (data->hit.mater != 3 && data->hit.mater != 4)
-		data->iter--;
-		if ((ft_strcmp(data->hit.preobj_name, "plane") == 0) && data->hit.mater == 4)
-		data->iter--;
-		if ((ft_strcmp(data->hit.preobj_name, "empty") != 0) && data->hit.mater == 3 && data->hit.preobj_mater != 4)
-		data->iter = 0;
+		manage_iter(data->iter, data->hit.mater,
+		data->hit.preobj_mater, data->hit.preobj_name);
 		set_old_hit(data);
 		ray = reflection_dir(ray, n, data);
 		put_color(data, rgb, x, y);
