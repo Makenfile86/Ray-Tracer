@@ -70,7 +70,6 @@ t_ray		reflection_dir(t_ray ray, t_vector n, t_data *data)
 {
 	
 t_vector	tmp;
-	double		reflect;
 	double		r_factor;
 
 	data->hit.org_start = vector_copy(ray.start);
@@ -79,7 +78,7 @@ t_vector	tmp;
   data->hit.fresnel = calc_fresnel(n, ray.target, get_ior(data->hit.texture.scale));
 if (data->hit.refract == TRUE && data->hit.fresnel < 1)
 {
-    ray.target = refract_dir(ray.target, n, get_ior(data->hit.texture.scale));	
+    ray.target = refract_dir(ray.target, n, get_ior(data->hit.texture.scale));
     data->hit.refract = FALSE;
 	data->hit.was_refract = TRUE;
 	data->hit.org_normal = normalized_vector(data->hit.org_normal);
@@ -87,8 +86,7 @@ if (data->hit.refract == TRUE && data->hit.fresnel < 1)
 	else
 	{
 	r_factor = fabs(data->scene->reflection - 9.5);
-	reflect = r_factor * vectordot(ray.target, n);
-	tmp = vectorscale(reflect, n);
+	tmp = vectorscale(r_factor * vectordot(ray.target, n), n);
 	ray.target = vector_minus(ray.target, tmp);
 	if (data->hit.was_refract == 1)
 	data->hit.was_refract = FALSE;
