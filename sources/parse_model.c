@@ -104,24 +104,20 @@ static void		read_obj_data(int fd, t_obj *obj)
 t_obj			init_obj(t_obj *obj, int *obj_nbr)
 {
 	int			fd;
-	char		*filename;
-
-	if ((ft_strcmp(obj->model.name, "crate") == 0))
-		filename = "crate.obj";
-	if ((ft_strcmp(obj->model.name, "chair") == 0))
-		filename = "chair.obj";
-	if ((ft_strcmp(obj->model.name, "cat") == 0))
-		filename = "cat.obj";
-	if ((ft_strcmp(obj->model.name, "table") == 0))
-		filename = "table.obj";
-	fd = open(filename, O_RDONLY);
+	char		*path;
+	path = get_objpath(obj->model.name);
+	if ((fd = open(path, O_RDONLY)) > 0)
+	{
 	read_obj(obj, fd);
 	close(fd);
-	fd = open(filename, O_RDONLY);
+	}
+	if ((fd = open(path, O_RDONLY)) > 0)
+	{
 	read_obj_data(fd, obj);
 	close(fd);
+	}
 	if (*obj_nbr < (int)obj->num_polygonals)
 		*obj_nbr = obj->num_polygonals;
-	ft_putnbr(*obj_nbr);
+		free(path);
 	return (*obj);
 }

@@ -36,3 +36,14 @@ void		copy_cone_data(t_data *data, char **parts, int e)
 		data->cone->mater[e] = ft_atoi(parts[10]);
 
 }
+
+void copy_hit_cone(t_data *data, int i)
+{
+	data->hit.mater = data->cone->mater[i];
+data->hit.color.red = data->cone->rgb2[i].red;
+data->hit.color.green = data->cone->rgb2[i].green;
+data->hit.color.blue = data->cone->rgb2[i].blue;
+data->hit.texture.scale = 1;
+data->hit.texture.txt_loaded = FALSE;
+data->hit.texture.txt_pattern = FALSE;
+}

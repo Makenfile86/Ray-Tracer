@@ -28,8 +28,8 @@ void			init_parsed_data(t_data *data, char *type, int e)
 	init_cone(data, e);
 		else if (ft_strcmp(data->obj_name, "CAMERA") == 0)
 	init_camera(data);
-	else if (ft_strcmp(data->obj_name, "SCENE") == 0)
-	init_scene(data);
+	//else if (ft_strcmp(data->obj_name, "SCENE") == 0)
+	//init_scene(data);
 		else if (ft_strcmp(data->obj_name, "MODEL") == 0)
 	init_model(data, e);
 }
@@ -53,20 +53,9 @@ t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
 	ray.target = vec_rot_z(ray.target, data->camera->rot.z);
 	ray.target = normalized_vector(ray.target);
 	data->light_scale = (double)((data->scene->light_scale) * 0.2);
-	data->hit.fresnel = 1;
 	data->iter = data->org_iter;
-	data->hit.preobj_name = "empty";
-	data->hit.obj_name = "empty";
-	data->hit.preobj_mater = 1;
-	data->hit.mater = 1;
-	data->hit.refract = 0;
-	data->hit.was_refract = 0;
-	data->hit.refract_lent = 1200;
-		data->hit.texture.name = "empty";
-		data->hit.texture.txt_loaded = FALSE;
-			data->hit.texture.txt_pattern = FALSE;
-			data->hit.texture.res.x = 0;
-		data->hit.texture.res.y = 0;
+	
+	
 	return (ray);
 }
 
@@ -79,12 +68,9 @@ void			init_data(t_data *data)
 	data->cone->nbr = 0;
 	data->cylinder->nbr = 0;
 	data->plane->nbr = 0;
-	
-	//data->sphere->texture[1].type = 0;
-	data->hit.find_shadow = 0;
+	data->hit.find_shadow = FALSE;
 	data->hit.preobj_name = "empty";
 	data->hit.obj_name = NULL;
-	data->mat = 2;
 }
 
 void			init_mlx(t_data *data)

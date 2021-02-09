@@ -56,14 +56,6 @@ t_vector			new_start_dir_cone(t_data *data, t_ray *ray)
 	return (n);
 }
 
-static t_ray		update_ray(t_data *data, t_ray ray)
-{
-	data->hit.t = 1000;
-	ray.target = vector_minus(ray.target, ray.start);
-	ray.target = normalized_vector(ray.target);
-	return (ray);
-}
-
 int					intersectcone(t_ray ray, t_data *data, int h)
 {
 	t_vector		to_cone;
@@ -71,8 +63,6 @@ int					intersectcone(t_ray ray, t_data *data, int h)
 	double			discr;
 	double			t[2];
 
-	if (data->hit.find_shadow == 1)
-		ray = update_ray(data, ray);
 	pos = vector_copy(data->cone->start_xyz[h]);
 	to_cone = vector_minus(ray.start, pos);
 	discr = get_discr_cone(data, ray, to_cone, h);

@@ -111,11 +111,10 @@ if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 	}
 	
 	close(fd);
-free(data->obj_name);
 //init_obj(data);
 ////init_obj(data);
 init_mlx(data);
-init_scene(data);
+
 	//data->scene->texture = FALSE;
 	//if (data->scene->texture == TRUE)
 	//draw(data);

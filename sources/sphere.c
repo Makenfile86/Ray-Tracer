@@ -17,10 +17,10 @@ void init_sphere(t_data *data, int e)
 {
 		
 
-		ft_putendl("mmoikka");
+		
 		data->sphere->nbr += 1;
-if ((ft_strcmp(data->sphere->texture[e].name, "checker") == 0) || (ft_strcmp(data->sphere->texture[e].name, "gradient") == 0) || (ft_strcmp(data->sphere->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->sphere->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->sphere->texture[e].name, "hstripe") == 0))
-data->sphere->texture[e].txt_pattern = TRUE;
+
+data->sphere->texture[e].txt_pattern = check_texture_pattern(data->sphere->texture[e].name);
 
 		if (data->sphere->texture[e].txt_pattern != TRUE && (validate_file(data->sphere->texture[e].name, &data->sphere->texture[e].path) == 1))
 		{
@@ -34,7 +34,7 @@ data->sphere->texture[e].txt_pattern = TRUE;
 if (data->sphere->texture[e].txt_loaded == TRUE || data->sphere->texture[e].txt_pattern == TRUE)
 data->scene->texture = TRUE;
 
-	ft_putendl("hoikka");
+
 
 }
 /*
@@ -83,22 +83,37 @@ data->sphere->xyz[e].z = ft_atoi(parts[2]);
 
 	data->sphere->texture[e].scale = ft_atoi(parts[12]);
 if (parts[13])
-{
-		ft_putendl("miksi");
+
 		data->sphere->texture[e].color.red = ft_atoi(parts[13]);
-		ft_putendl("siksi");
-}
+
 ft_putendl(parts[14]);
 if (parts[14])
-{
-		ft_putendl("moi");
+
 		data->sphere->texture[e].color.green = ft_atoi(parts[14]);
-		ft_putendl("hoi");
-}
+
 if (parts[15])
-{
-	ft_putendl("koira");
+
 		data->sphere->texture[e].color.blue = ft_atoi(parts[15]);
-		ft_putendl("moi");
+
+
 }
+
+void copy_hit_sphere(t_data *data, int i)
+{
+	data->hit.texture.name = data->sphere->texture[i].name;
+		data->hit.texture.txt_loaded = data->sphere->texture[i].txt_loaded;
+		data->hit.texture.txt_pattern = data->sphere->texture[i].txt_pattern;
+		data->hit.texture.res.x = data->sphere->texture[i].res.x;
+		data->hit.texture.res.y = data->sphere->texture[i].res.y;
+	data->hit.texture.scale = data->sphere->texture[i].scale;
+	data->hit.texture.color.red = data->sphere->texture[i].color.red;
+	data->hit.texture.color.green = data->sphere->texture[i].color.green;
+	data->hit.texture.color.blue = data->sphere->texture[i].color.blue;
+	data->hit.color.red = data->sphere->rgb2[i].red;
+	data->hit.color.green = data->sphere->rgb2[i].green;
+	data->hit.color.blue = data->sphere->rgb2[i].blue;
+	data->hit.mater = data->sphere->mater[i];
+	data->hit.radius = data->sphere->radius[i];
+	data->hit.rot = data->sphere->rot[i];
+	data->hit.pos = data->sphere->xyz[i];
 }

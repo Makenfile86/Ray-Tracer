@@ -1,5 +1,5 @@
 #include "rt.h"
-
+#include "stdio.h"
 #include "math.h"
 
 static t_vec2 scale_planar_uv(t_vec2 uv, t_hit hit, double scale)
@@ -20,28 +20,54 @@ return (uv);
 static t_vec2 cylindrical_map(t_vector point, t_vector pos, t_vector axis, t_vector rot)
 {
 	t_vec2 uv;
-	t_vector up;
-	t_vector temp;
-	double angle;
+	//t_vector up;
+	//t_vector temp;
+	//double angle;
+	double theta;
+double raw_u;
 
 
 
-
-
-
-up = vectornew(0, 1, 0);
-angle = atan(axis.x / vectordot(up, axis));
-temp = vec_rot_zyx(axis, vectornew(0, 0, angle * 180 / M_PI));
-point = vec_rot_zyx(point, vectornew(0, 0, angle * 180 / M_PI));
-angle = atan(temp.z / vectordot(up, temp));
-point = vec_rot_zyx(point, vectornew(angle * 180 / M_PI, 0, 0));
-point = vector_minus(point, pos);
-point = vec_rot_zyx(point, vectornew(0, -rot.y, 0));
+rot = vectornew(0, 0, 0);
+axis = vectornew(0, 0, 0);
+pos = vectornew(0, 0, 0);
+//point.x = 0.70711;
+//point.y = 0.5;
+//point.z = 0.70711;
+//0, -0.25, 1
+//0.70711, 0.5, -0.70711
+//-0.70711, 0.5, -0.70711)
+//-1, 1.25, 0
+//up = vectornew(0, 1, 0);
+//angle = atan(axis.x / vectordot(up, axis));
+//temp = vec_rot_zyx(axis, vectornew(0, 0, angle * 180 / M_PI));
+//point = vec_rot_zyx(point, vectornew(0, 0, angle * 180 / M_PI));
+//angle = atan(temp.z / vectordot(up, temp));
+//point = vec_rot_zyx(point, vectornew(angle * 180 / M_PI, 0, 0));
+//point = vector_minus(point, pos);
+//point = vec_rot_zyx(point, vectornew(0, -rot.y, 0));
 	
-	uv.u = (atan2(point.x, point.z)) / (2.0 * M_PI) + 0.5;
+	theta = atan2(point.x, point.z);
+raw_u = theta / (2 * M_PI);
+uv.u = 1 - (raw_u + 0.5);
+	
+	//uv.u = 1 - (atan2(point.x, point.z)) / (2.0 * M_PI) + 0.5;
+	//uv.v = point.y - floor(point.y);
 	uv.v = point.y - floor(point.y);
-	uv.u *= 12;
-
+	uv.u *= 6;
+	//uv.u *= 6;
+	//uv.v = fmod(point.y, 10);
+  //uv.v /= 4;
+  //uv.u /= 10;
+  //uv.v /= (10 / 10);
+  //let theta ← arctan2(p.x, p.z)
+  //let raw_u ← theta / (2 * π)
+  //let u ← 1 - (raw_u + 0.5)
+//uv.u *= 12;
+//if (uv.u > 1)
+//printf("U: %f\n", uv.u);
+//if (uv.v > 1)
+//printf("V: %f\n", uv.v);
 	return (uv);
 }
 

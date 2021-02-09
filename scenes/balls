@@ -5,7 +5,7 @@
 * SPOT coord-XYZ power 
 0 100 50 75
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 -1 0 , 0 0 0 , 125 125 125 , 0 0 0 , 1 , checker , 6 , 25 25 25
+0 -1 0 , 1000 , 0 0 0 , 125 125 125 , 0 0 0 , 1 , checker , 6 , 25 25 25
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
 55 20 40 , 18 , 25 65 176 , 0 0 0 , 2 , gradient , 1 , 0 0 0 
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color

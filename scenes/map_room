@@ -21,12 +21,12 @@
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_scale txt_color
 0 45 75 , 50 , 200 0 0 , 0 0 0 , 3 , 0 , 2 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_scale txt_color
-0 0 -180 , 0 0 0 , 150 150 0 , 0 0 0 , 1 , tile , 1 , 0 0 0
+0 0 -180 , 1000 , 0 0 0 , 150 150 0 , 0 0 0 , 1 , tile , 1 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_scale txt_color
-0 260 0 , 0 0 0 , 150 150 150 , 0 0 0 , 1 , 0 , 3 , 0 0 0
+0 260 0 , 1000 ,  0 0 0 , 150 150 150 , 0 0 0 , 1 , 0 , 3 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_scale txt_color
-0 -20 0 , 0 0 0 255  150 150 0 0 0 , 1 , checker , 1 , 0 0 0
+0 -20 0 , 1000 , 0 0 0 255  150 150 0 0 0 , 1 , checker , 1 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_scale txt_color
-240 0 0 , 0 0 0 , 50 25 150 , 0 0 0 , 1 , tile , 1 , 0 0 0
+240 0 0 , 1000 , 0 0 0 , 50 25 150 , 0 0 0 , 1 , tile , 1 , 0 0 0
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_scale txt_color
--240 0 0 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , tile , 1 , 0 0 0
+-240 0 0 , 1000 , 0 0 0 , 150 50 25 , 0 0 0 , 1 , tile , 1 , 0 0 0

@@ -36,32 +36,56 @@ char		*parse_name(char *line, char *name)
 	return (name);
 }
 
+static char *padding(char *str, int start, int len)
+{
+	str[start++] = ' ';
+	while (start < len)
+	{
+		if (start % 2 == 0)
+		str[start++] = ' ';
+		else
+		str[start++] = '0';
+	}
+		str[start] = '\0';
+return (str);
+}
+
+static int get_object_index(char *type, int modelnbr, int *obj_idx)
+{
+	
+
+
+	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0))
+	return (0);
+	else if (ft_strcmp(type, "model") == 0)
+	return (modelnbr);
+	else 
+	return (*obj_idx);
+}
 
 void			parse_obj(char *line, t_data *data, int *obj_idx, char *type)
 {
-	int e;
+	
 	char **parts;
 	int x;
 	int i;
 	char *str;
+	
 	x = 0;
 	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_strlen(line) + 1);
-	if ((ft_strcmp(type, "scene") == 0) ||  (ft_strcmp(type, "camera") == 0))
-	e = 0;
-	else if (ft_strcmp(type, "model") == 0)
-	e = data->modelnbr;
-	else 
-	e = *obj_idx;
+	str = (char *)malloc(sizeof(char) * ft_strlen(line) + 50);
+
+
 	while (line[x] != '\0')
 	{
 		while (ft_isdigit(line[x]) != 1 && line[x] != '\0' && line[x] != ' ' && line[x] != '-' && ft_isalpha(line[x]) != 1)
 		x++;
 		str[i++] = line[x++];
 	}
-	//while (i < ft_strlen(line))
-	//ft_putendl(str);
+	str = padding(str, i, (int)ft_strlen(line) + 50);
 	parts = ft_strsplit(str, ' ');
-	copy_data(data, parts, e);
-	init_parsed_data(data, type, e);
+	copy_data(data, parts, get_object_index(type, data->modelnbr, obj_idx));
+	init_parsed_data(data, type, get_object_index(type, data->modelnbr, obj_idx));
+	free(str);
+ft_free_strarray(parts);
 }

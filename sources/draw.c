@@ -16,14 +16,14 @@
 static void					put_pixel(t_data *data, int x, int y, t_color color)
 {
 	int					i;
-//pthread_mutex_lock(&data->mutexsum);
+
 	i = (x * data->bits_per_pixel / 8) + (y * data->size_line);
 
 	data->data_addr[i] = color.channel[3];
 	data->data_addr[++i] = color.channel[2];
 	data->data_addr[++i] = color.channel[1];
 	data->data_addr[++i] = color.channel[0];
-	//pthread_mutex_unlock(&data->mutexsum);
+	
 	
 }
 
@@ -31,21 +31,13 @@ void						put_color(t_data *data, t_rgb rgb, int x, int y)
 {
 	t_color			color;
 
-		if (data->hit.texture.type == 9)
-		{
-			color.channel[0] = 0;
-		color.channel[3] = (int)(min(rgb.red, 255));
-	color.channel[2] = (int)(min(rgb.green, 255));
-	color.channel[1] = (int)(min(rgb.blue, 255));
-	}
-	else
-	{
+
 	
 	color.channel[0] = 0;
 	color.channel[1] = (int8_t)((min(rgb.red * 255, 255)));
 	color.channel[2] = (int8_t)((min(rgb.green * 255, 255)));
 	color.channel[3] = (int8_t)((min(rgb.blue * 255, 255)));
-	}
+	
 
 	put_pixel(data, x, y, color);
 }

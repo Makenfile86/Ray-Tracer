@@ -21,11 +21,7 @@ void		init_cylinder(t_data *data, int e)
 	data->cylinder->axis[e] = normalized_vector(data->cylinder->axis[e]);
 	data->cylinder->nbr += 1;
 	
-
-
-		if ((ft_strcmp(data->cylinder->texture[e].name, "checker") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "gradient") == 0) ||
-		(ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "vstripe") == 0) || (ft_strcmp(data->cylinder->texture[e].name, "hstripe") == 0))
-data->cylinder->texture[e].txt_pattern = TRUE;
+data->cylinder->texture[e].txt_pattern = check_texture_pattern(data->cylinder->texture[e].name);
 		if (data->cylinder->texture[e].txt_pattern != TRUE && (validate_file(data->cylinder->texture[e].name, &data->cylinder->texture[e].path) == 1))
 		{
 
@@ -39,12 +35,6 @@ data->scene->texture = TRUE;
 
 }
 
-static void		copy_cylinder_color(t_data *data, char **parts, int e)
-{
-		data->cylinder->rgb2[e].red = ft_atoi(parts[7]);
-		data->cylinder->rgb2[e].green = ft_atoi(parts[8]);
-		data->cylinder->rgb2[e].blue = ft_atoi(parts[9]);
-}
 
 void		copy_cylinder_data(t_data *data, char **parts, int e)
 {
@@ -55,26 +45,44 @@ void		copy_cylinder_data(t_data *data, char **parts, int e)
 		data->cylinder->end_xyz[e].x = ft_atoi(parts[3]);
 		data->cylinder->end_xyz[e].y = ft_atoi(parts[4]);
 		data->cylinder->end_xyz[e].z = ft_atoi(parts[5]);
-		data->cylinder->radius[e] = ft_atoi(parts[6]);
-		copy_cylinder_color(data, parts, e);
-		data->cylinder->rot[e].x = ft_atoi(parts[10]);
+		data->cylinder->length[e] = ft_atoi(parts[6]);
+		data->cylinder->radius[e] = ft_atoi(parts[7]);
+		data->cylinder->rgb2[e].red = ft_atoi(parts[8]);
+		data->cylinder->rgb2[e].green = ft_atoi(parts[9]);
+		data->cylinder->rgb2[e].blue = ft_atoi(parts[10]);
+		data->cylinder->rot[e].x = ft_atoi(parts[11]);
+			data->cylinder->rot[e].y = ft_atoi(parts[12]);
+data->cylinder->rot[e].z = ft_atoi(parts[13]);
+data->cylinder->mater[e] = ft_atoi(parts[14]);
+{
+	data->cylinder->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(parts[15]) + 1);
+	ft_strcpy(data->cylinder->texture[e].name, parts[15]);
+}
+data->cylinder->texture[e].scale = ft_atoi(parts[16]);
+data->cylinder->texture[e].color.red = ft_atoi(parts[17]);
+data->cylinder->texture[e].color.green = ft_atoi(parts[18]);
+data->cylinder->texture[e].color.blue = ft_atoi(parts[19]);
 
-		data->cylinder->rot[e].y = ft_atoi(parts[11]);
+}
 
-		data->cylinder->rot[e].z = ft_atoi(parts[12]);
-
-		data->cylinder->mater[e] = ft_atoi(parts[13]);
-
-	{
-	data->cylinder->texture[e].name = (char *)malloc(sizeof(char) * ft_strlen(parts[14]) + 1);
-	ft_strcpy(data->cylinder->texture[e].name, parts[14]);
-	}
-		data->cylinder->texture[e].scale = ft_atoi(parts[15]);
-
-		data->cylinder->texture[e].color.red = ft_atoi(parts[16]);
-
-		data->cylinder->texture[e].color.green = ft_atoi(parts[17]);
-
-		data->cylinder->texture[e].color.blue = ft_atoi(parts[18]);
-
+void copy_hit_cylinder(t_data *data, int i)
+{
+	data->hit.rot = data->cylinder->rot[i];
+		data->hit.pos = data->cylinder->start_xyz[i];
+		data->hit.axis = data->cylinder->axis[i];
+	data->hit.radius = data->cylinder->radius[i];
+		data->hit.texture.name = data->cylinder->texture[i].name;
+		data->hit.texture.txt_loaded = data->cylinder->texture[i].txt_loaded;
+			data->hit.texture.txt_pattern = data->cylinder->texture[i].txt_pattern;
+			data->hit.texture.res.x = data->cylinder->texture[i].res.x;
+		data->hit.texture.res.y = data->cylinder->texture[i].res.y;
+	data->hit.texture.scale = data->cylinder->texture[i].scale;
+	data->hit.texture.color.red = data->cylinder->texture[i].color.red;
+	data->hit.texture.color.green = data->cylinder->texture[i].color.green;
+	data->hit.texture.color.blue = data->cylinder->texture[i].color.blue;
+	data->hit.color.red = data->cylinder->rgb2[i].red;
+	data->hit.color.green = data->cylinder->rgb2[i].green;
+	data->hit.color.blue = data->cylinder->rgb2[i].blue;
+	data->hit.mater = data->cylinder->mater[i];
+	
 }

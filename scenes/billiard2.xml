@@ -1,0 +1,38 @@
+* SCENE background(0-1) lambert(1-10)    light(1-10)       shadows(0-1) reflection_iterations(1-5) color_intensi(1-10) reflection(1-10)
+           0          ,    3         ,       6     ,         1   ,                   2   ,       3                 ,     5
+* CAMERA coord-XYZ target-XYZ rot-XYZ
+0 100 300 0 -1 0 0 0 0 0
+* SPOT coord-XYZ power 
+0 20 120 75
+* SPOT coord-XYZ power 
+0 80 160 75
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
+0 -1 0 , 500 , 0 0 0 , 50 255 50 , 0 0 0 , 1 , pooltable , 4 , 25 25 25
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+85 20 -60 , 18 , 25 65 176 , 0 0 0 , 2 , ball3 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+25 20 -40 , 18 , 176 25 65 , 0 0 0 , 2 , ball1 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-125 20 0 , 18 , 176 25 65 , 0 0 0 , 2 , ball2 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+60 20 0 , 18 , 25 65 176 , 0 0 0 , 2 , ball4 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+15 20 20 , 18 , 176 25 65 , 0 0 0 , 2 , ball5 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-25 20 35 , 18 , 176 25 65 , 0 0 0 , 2 , ball6 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+52 20 55 , 18 , 25 65 176 , 0 0 0 , 2 , ball7 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+28 20 75 , 18 , 176 25 65 , 0 0 0 , 2 , ball8 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-81 20 74 , 18 , 176 25 65 , 0 0 0 , 2 , ball9 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+95 20 102 , 18 , 25 65 176 , 0 0 0 , 2 , ball10 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+65 20 98 , 18 , 176 25 65 , 0 0 0 , 2 , ball11 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+-64 20 95 , 18 , 176 25 65 , 0 0 0 , 2 , ball12 , 3 , 0 0 0 
+* SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
+0 20 140 , 18 , 176 25 65 , 0 0 0 , 2 , ball0 , 3 , 0 0 0 
+* CYLINDER    start-XYZ  end-XYZ length radius color-RGB  rotation-XYZ
+-1     5 300	,   0 5 300  ,  125 ,  7  ,  150   75 0 , 0 90 0 , 2 , 0 , 2 , 255 255 255
