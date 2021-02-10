@@ -86,7 +86,6 @@ typedef	struct		s_hit
 	t_vector		org_normal;
 	t_vector		normal;
 	t_texturemap 	texture;
-	t_ray 			*pre_refract_ray;
 	t_vector		point;
 	t_vector		pos;
 	t_vector		rot;
@@ -96,8 +95,6 @@ typedef	struct		s_hit
 	int				mater;
 	int				refract;
 	int				was_refract;
-	double			refract_lent;
-	int				double_target;
 	double			a;
 	double			b;
 	double			fresnel;
@@ -126,11 +123,6 @@ typedef struct		s_scene
 
 }					t_scene;
 
-typedef struct		s_texture
-{
-	char *name;
-}					t_texture;
-
 typedef struct		s_data
 {
 	void			*win;
@@ -148,16 +140,7 @@ typedef struct		s_data
 	int				org_iter;
 	int				iter;
 	char			*scene_name;
-	int				exposure;
-	int				texture_found;
-	double			mat;
-	double			x;
-	double 			y;
-	int				test_x;
-	int				test_y;
-	double 			pattern;
 	char 			*obj_name;
-	pthread_mutex_t mutexsum;
 	t_hit			hit;
 	t_sphere		*sphere;
 	t_cylinder		*cylinder;

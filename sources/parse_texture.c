@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "stdio.h"
 
 int				validate_file(char *txt_name, char **path)
 {
@@ -56,58 +57,93 @@ unsigned char	*fourth_channel_padding(unsigned char *texture,
 	return (texture);
 }
 
-unsigned char	*init_texture(unsigned char *texture, char *path, t_res *res)
+static int validate_format(int fd)
 {
-	int			fd;
-	char		*resolution;
-	char		*line;
-	int			i;
-	int			x;
-	int			y;
+	char *line;
+
+	if ((get_next_line(fd, &line)) == 1)
+	{
+	if (line[0] == 'P' && line[1] == '6')
+    ft_putendl("Loading new texture");
+	else
+    {
+	ft_putendl("Wrong texture format, not loaded");
+	free (line);
+				return (0);
+	}
+	free (line);
+	return (1);
+	}
+	return (0);
+		}
+
+static char *get_res_line(int fd)
+{
+	int i;
+	i = 0;
+	char *line;
+
+while (i < 2 && ((get_next_line(fd, &line)) == 1))
+	{
+		if (i == 0)
+		free(line);
+		i++;
+	}
+	return (line);
+}
+
+static void get_resolution(int fd, double *x, double *y)
+{
+	char *line;
+	char *resolution;
+	int h;
+	int i;
+	
 
 	i = 0;
-	x = 0;
-	y = 0;
-	if ((fd = open(path, O_RDONLY)) < 0)
-		return (NULL);
-	while (((get_next_line(fd, &line)) == 1) && x < 2)
-	{
-		if (x == 0)
-		{
-			if (line[0] == 'P' && line[1] == '6')
-                ft_putendl("Loading new texture");
-			else
-            {
-				ft_putendl("Wrong texture format, not loaded");
-				return (NULL);
-			}
-		}
-		if (x == 1)
-		{
-			resolution = (char *)malloc(sizeof(char) * ft_strlen(line));
-			while ((ft_isdigit(line[i]) == 1) && line[i] != '\0')
+	h = 0;
+	
+   line = get_res_line(fd);
+	resolution = (char *)malloc(sizeof(char) * ft_strlen(line));
+	while ((ft_isdigit(line[i]) == 1) && line[i] != '\0')
 			{
 				resolution[i] = line[i];
 				i++;
 			}
 			resolution[i] = '\0';
-			res->x = ft_atoi(resolution);
+			*x = ft_atoi(resolution);
 			i++;
 			while (ft_isdigit(line[i] == 1))
-				resolution[y++] = line[i++];
+				resolution[h++] = line[i++];
 			resolution[i] = '\0';
-			res->y = ft_atoi(resolution);
-		}
-		x++;
-		free(line);
-	}
-	free(line);
-	close (fd);
-	free(resolution);
+			*y = ft_atoi(resolution);
+			free(line);
+			free(resolution);
+}
+
+unsigned char	*init_texture(unsigned char *texture, char *path, t_res *res)
+{
+	int			fd;
+	int			y;
+
+	
+	y = 0;
+	if ((fd = open(path, O_RDONLY)) > 0)
+	{
+		if (!(validate_format(fd)))
+		return (NULL);
+		close(fd);
+		if ((fd = open(path, O_RDONLY)) > 0)
+		{
+			get_resolution(fd, &res->x, &res->y);
+			close (fd);
 	if (!(texture = (unsigned char*)malloc(sizeof(unsigned char) * res->x * res->y * 4)))
 		memory_allocation_fail();
 	texture = fourth_channel_padding(texture, res->x, res->y);
 	return (texture);
+		}
+	}
+	return (NULL);
 }
 
 unsigned char			*parse_ppm(unsigned char *texture, char *path, t_res *res)
@@ -121,8 +157,6 @@ unsigned char			*parse_ppm(unsigned char *texture, char *path, t_res *res)
 	x = 0;
 	i = 0;
 	texture = init_texture(texture, path, res);
-	if (res->x == 0 && res->y == 0)
-		return (NULL);
 	if (texture != NULL)
 	{
 		if ((fd = open(path, O_RDONLY)) > 0)
@@ -132,8 +166,7 @@ unsigned char			*parse_ppm(unsigned char *texture, char *path, t_res *res)
 				if (x % 3 == 0)
 					i++;
 				x++;
-				texture[i] = text_data[0];
-				i++;
+				texture[i++] = text_data[0];
 			}
 		}
 		close (fd);

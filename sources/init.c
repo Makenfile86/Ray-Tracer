@@ -75,17 +75,11 @@ void			init_data(t_data *data)
 
 void			init_mlx(t_data *data)
 {
-	if (data->exposure == 0)
-	{
+
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "name");
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	}
-	if (data->exposure == 1)
-	{
-		mlx_destroy_image(data->mlx, data->image);
-		data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-		ft_memset(data->data_addr, 0, ft_strlen(data->data_addr));
-	}
+	
+
 	data->size_line = 1000;
 	data->endian = 0;
 	data->bits_per_pixel /= 8;

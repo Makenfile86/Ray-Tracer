@@ -29,7 +29,6 @@ data = (t_data *)tmp_data;
 	data->hit.find_shadow = 0;
 	data->hit.preobj_name = "empty";
 	data->hit.obj_name = NULL;
-	data->exposure = 1;
 	read_scene((t_data *)data);
 
 	return (0);
