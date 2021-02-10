@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reflection.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anikkane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/18 12:37:25 by anikkane          #+#    #+#             */
+/*   Updated: 2020/11/18 12:38:32 by anikkane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
-static double get_ior(double scale)
+static double		get_ior(double scale)
 {
-	double ior;
+	double			ior;
 
 	ior = (1 + (scale * 0.05));
 	if (ior == 1)
-	return (1.01);
+		return (1.01);
 	return (ior);
 }
 
-static double calc_fresnel(t_vector normal, t_vector target, double ior)
+static double		calc_fresnel(t_vector normal, t_vector target, double ior)
 {
-	double etai;
-	double etat;
-	double cosi;
-	double cost;
-	double sint;
+	double			etai;
+	double			etat;
+	double			cosi;
+	double			cost;
+	double			sint;
 
 	etai = 1;
 	etat = ior;
-	cosi = ft_dclamp(-1, 1 , (vectordot(target, normal)));
+	cosi = ft_dclamp(-1, 1, (vectordot(target, normal)));
 	if (cosi > 0)
-ft_dswap(&etai, &etat);
+		ft_dswap(&etai, &etat);
 	sint = etai / etat * sqrtf(ft_dmax(0.0f, 1 - cosi * cosi));
 	if (sint >= 1)
 		return (1);
@@ -31,26 +43,26 @@ ft_dswap(&etai, &etat);
 		cost = sqrtf(ft_dmax(0.f, 1 - sint * sint));
 		cosi = fabs(cosi);
 		return ((((etat * cosi) - (etai * cost))
-			/ ((etat * cosi) + (etai * cost)) * ((etat * cosi) - (etai * cost))
-			/ ((etat * cosi) + (etai * cost)) + ((etai * cosi) - (etat * cost))
-			/ ((etai * cosi) + (etat * cost)) * ((etai * cosi) - (etat * cost))
-			/ ((etai * cosi) + (etat * cost))) / 2);
+					/ ((etat * cosi) + (etai * cost)) * ((etat * cosi) - (etai * cost))
+					/ ((etat * cosi) + (etai * cost)) + ((etai * cosi) - (etat * cost))
+					/ ((etai * cosi) + (etat * cost)) * ((etai * cosi) - (etat * cost))
+					/ ((etai * cosi) + (etat * cost))) / 2);
 	}
 }
 
-static t_vector refract_dir(t_vector target, t_vector n, double ior)
+static t_vector		refract_dir(t_vector target, t_vector n, double ior)
 {
-double etai;
-	double etat;
-	double eta;
-	double cosi;
-	double k;
+	double			etai;
+	double			etat;
+	double			eta;
+	double			cosi;
+	double			k;
 
 	etai = 1;
 	etat = ior;
 	cosi = ft_dclamp(-1, 1, vectordot(target, n));
 	if (cosi < 0)
-	cosi = cosi * -1;
+		cosi = cosi * -1;
 	else
 	{
 		ft_dswap(&etai, &etat);
@@ -59,38 +71,38 @@ double etai;
 	eta = etai / etat;
 	k = 1 - eta * eta * (1 - cosi * cosi);
 	if (k < 0)
-	target = vectornew(0, 0, 0);
+		target = vectornew(0, 0, 0);
 	else
-	target = vectoradd(vectorscale(eta, target),
-		vectorscale((eta * cosi - sqrtf(k)), n));
-        return (normalized_vector(target));
+		target = vectoradd(vectorscale(eta, target),
+				vectorscale((eta * cosi - sqrtf(k)), n));
+	return (normalized_vector(target));
 }
 
-t_ray		reflection_dir(t_ray ray, t_vector n, t_data *data)
+t_ray				reflection_dir(t_ray ray, t_vector n, t_data *data)
 {
-	
-t_vector	tmp;
-	double		r_factor;
+	t_vector		tmp;
+	double			r_factor;
 
 	data->hit.org_start = vector_copy(ray.start);
-  data->hit.org_target = vector_copy(ray.target);
-  ray.start = vector_copy(ray.newstart);
-  data->hit.fresnel = calc_fresnel(n, ray.target, get_ior(data->hit.texture.scale));
-if (data->hit.refract == TRUE && data->hit.fresnel < 1)
-{
-    ray.target = refract_dir(ray.target, n, get_ior(data->hit.texture.scale));
-    data->hit.refract = FALSE;
-	data->hit.was_refract = TRUE;
-	data->hit.org_normal = normalized_vector(data->hit.org_normal);
-}
+	data->hit.org_target = vector_copy(ray.target);
+	ray.start = vector_copy(ray.newstart);
+	data->hit.fresnel = calc_fresnel(n, ray.target,
+			get_ior(data->hit.texture.scale));
+	if (data->hit.refract == TRUE && data->hit.fresnel < 1)
+	{
+		ray.target = refract_dir(ray.target, n, get_ior(data->hit.texture.scale));
+		data->hit.refract = FALSE;
+		data->hit.was_refract = TRUE;
+		data->hit.org_normal = normalized_vector(data->hit.org_normal);
+	}
 	else
 	{
-	r_factor = fabs(data->scene->reflection - 9.5);
-	tmp = vectorscale(r_factor * vectordot(ray.target, n), n);
-	ray.target = vector_minus(ray.target, tmp);
-	if (data->hit.was_refract == 1)
-	data->hit.was_refract = FALSE;
+		r_factor = fabs(data->scene->reflection - 9.5);
+		tmp = vectorscale(r_factor * vectordot(ray.target, n), n);
+		ray.target = vector_minus(ray.target, tmp);
+		if (data->hit.was_refract == 1)
+			data->hit.was_refract = FALSE;
 	}
-    data->hit.fresnel = 1 - data->hit.fresnel;
+	data->hit.fresnel = 1 - data->hit.fresnel;
 	return (ray);
 }

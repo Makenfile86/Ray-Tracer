@@ -19,9 +19,7 @@
 # include <fcntl.h>
 # include "vectors.h"
 # include "objects.h"
-# include "renderer.h"
 # include "model.h"
-# include "pthread.h"
 
 
 
@@ -37,6 +35,8 @@
 
 # define DTR(k)	((double)k * (M_PI / 180))
 
+# define THREAD_WIDTH 50
+# define THREAD_NUMBER 20
 
 
 
@@ -169,22 +169,16 @@ void				parse_camera(char *line, t_data *data);
 void				parse_scene(char *line, t_data *data);
 void				draw(t_data *data);
 void				get_color(t_data *data, int x, int y);
-double				vectordot(t_vector v1, t_vector v2);
-t_vector			vectoradd(t_vector v1, t_vector v2);
-t_vector			vectorscale(double c, t_vector v);
-t_vector			vector_minus(t_vector v1, t_vector v2);
-t_vector			normalized_vector(t_vector v);
-t_vector			vector_plus(t_vector v1, t_vector v2);
-t_vector			return_vector(int x, int y, int z);
+
+
+
 int					intersectsphere(t_ray ray, t_data *data, int i);
 t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i);
-t_vector			cross_vector(t_vector v1, t_vector v2);
-t_vector			rotate_vector(t_vector origin, t_vector target,
-		t_vector rot, int no_z);
+
+
 int					intersectcylinder(t_ray ray, t_data *data, int i);
 double				double_sqr(double n);
-t_vector			vectorsub(t_vector a, t_vector b);
-t_vector			vectoradd(t_vector v1, t_vector v2);
+
 int					intersectplane(t_data *data, int i, t_ray ray);
 int					intersectcone(t_ray ray, t_data *data, int i);
 void				set_hit(t_data *data, char *name, int i);
@@ -201,13 +195,7 @@ int					shadow_cylinder(t_vector newstart, int i, t_data *data,
 int					shadow_plane(t_vector newstart, int i, t_data *data,
 		t_vector light_pos);
 int					shadow(t_data *data, t_vector newstart, int i);
-t_vector			vectornew(double x, double y, double z);
-double				vector_length(t_vector v);
-t_vector			vector_copy(t_vector v);
-t_vector			vec_rot_zyx(t_vector v, t_vector r);
-t_vector			vec_rot_z(t_vector v, double a);
-t_vector			vec_rot_y(t_vector v, double a);
-t_vector			vec_rot_x(t_vector v, double a);
+
 void				memory_allocation_fail(void);
 void				wrong_argument_nbr(void);
 void				data_read_error(void);
@@ -249,7 +237,6 @@ void		init_plane(t_data *data, int e);
 void			init_model(t_data *data, int e);
 void init_sphere(t_data *data, int e);
 void			init_parsed_data(t_data *data, char *type, int e);
-void	pthread(t_data *data);
 t_obj    init_obj(t_obj *obj, int *obj_nbr);
 int		intersecttriangle(t_ray ray, t_data *data, int y, int h);
 int validate_file(char *txt_name, char **path);
@@ -263,9 +250,7 @@ t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit);
 t_rgb2 split_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
 t_material plane_reflection(t_data *data, int i);
 t_vector				new_start_dir_triangle(t_data *data, t_ray *ray);
-t_vector	vector_div(t_vector v, double div);
-void			dswap(double *a, double *b);
-t_vector		reverse_vector(t_vector v);
+
 t_material get_material(t_data *data, t_hit hit, int light_power);
 t_rgb2 cyl_checker_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
 char *get_objpath(char *model);
@@ -280,6 +265,7 @@ int check_texture_pattern(char *name);
 t_ray		shadow_ray(double *t, t_hit hit, t_ray ray, char *obj_name);
 t_hit init_hit(t_hit hit);
 t_ray		reflection_dir(t_ray ray, t_vector n, t_data *data);
+void	pthread(t_data *data);
 
 
 

@@ -25,7 +25,6 @@ typedef struct	s_vertices
 	t_vector		no[3];
     t_vector		normal;
 	t_vec2		uv[3];
-//	t_bounds	bounds;
 }				t_vertices;
 
 typedef struct	s_obj

@@ -12,30 +12,6 @@
 
 #include "rt.h"
 
-int		handle_expose(t_data *tmp_data)
-{
-
-t_data *data;
-
-data = (t_data *)tmp_data;
-	data->bits_per_pixel = '\0';
-	data->objnbr = 0;
-	data->sphere->nbr = 0;
-	data->spot->nbr = 0;
-	data->cone->nbr = 0;
-	data->cylinder->nbr = 0;
-	data->plane->nbr = 0;
-	data->org_iter = 2;
-	data->hit.find_shadow = 0;
-	data->hit.preobj_name = "empty";
-	data->hit.obj_name = NULL;
-	read_scene((t_data *)data);
-
-	return (0);
-
-
-}
-
 char			*if_negative(char *line, char *str, int *i, int *y)
 {
 	if (line[*i] == '-')
@@ -51,8 +27,7 @@ char			*if_negative(char *line, char *str, int *i, int *y)
 
 static void		check_name(t_data *data, char *data_name, char *line)
 {
-	
-if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
+	if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 		parse_obj(line, data, &data->sphere->nbr, "object");
 	else if ((ft_strcmp(data_name, "CYLINDER") == 0) && data->cylinder->nbr
 			< 30)
@@ -64,22 +39,19 @@ if ((ft_strcmp(data_name, "SPHERE") == 0) && data->sphere->nbr < 30)
 	else if ((ft_strcmp(data_name, "PLANE") == 0) && data->cone->nbr < 30)
 		parse_obj(line, data, &data->plane->nbr, "object");
 	else if (ft_strcmp(data_name, "SCENE") == 0)
-	parse_obj(line, data, 0, "scene");
+		parse_obj(line, data, 0, "scene");
 	else if (ft_strcmp(data_name, "CAMERA") == 0)
 		parse_obj(line, data, 0, "camera");
 	else if ((ft_strcmp(data_name, "MODEL") == 0))
-	{	
-		
+	{
 		parse_obj(line, data, 0, "model");
 	}
-	//else if (ft_strcmp(data_name, "TEXTURE") == 0)
-		//parse_texture(line, data);
 }
 
-static void get_data(t_data *data, int fd)
+static void		get_data(t_data *data, int fd)
 {
-	int i;
-	char *line;
+	int			i;
+	char		*line;
 
 	i = 0;
 	while ((get_next_line(fd, &line)) == 1)
@@ -98,11 +70,10 @@ static void get_data(t_data *data, int fd)
 
 int				read_scene(t_data *data)
 {
-int 	fd;
-	
+	int			fd;
 
-	fd = 0; 
-if ((fd = open(data->scene_name, O_RDONLY)) > 0)
+	fd = 0;
+	if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		init_data(data);
 	else
 		wrong_scene_name();
@@ -110,8 +81,7 @@ if ((fd = open(data->scene_name, O_RDONLY)) > 0)
 		memory_allocation_fail();
 	get_data(data, fd);
 	close(fd);
-init_mlx(data);
-pthread(data);
-//handle_expose(data);
-return (0);
+	init_mlx(data);
+	pthread(data);
+	return (0);
 }
