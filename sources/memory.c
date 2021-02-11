@@ -27,26 +27,15 @@ t_data	*allocate_memory(t_data *data)
 		memory_allocation_fail();
 	if (!(data->camera = (t_camera *)malloc(sizeof(t_camera))))
 		memory_allocation_fail();
-		if (!(data->texture = (t_texturemap *)malloc(sizeof(t_texturemap))))
+	if (!(data->texture = (t_texturemap *)malloc(sizeof(t_texturemap))))
 		memory_allocation_fail();
-			if (!(data->scene = (t_scene *)malloc(sizeof(t_scene))))
+	if (!(data->scene = (t_scene *)malloc(sizeof(t_scene))))
 		memory_allocation_fail();
-	
-			//if (!(data->obj = (t_obj *)malloc(sizeof(t_obj))))
-			//memory_allocation_fail();
-		//if (!(data->obj->model = (t_model *)malloc(sizeof(t_model))))
-		//	memory_allocation_fail();
-	     // data->obj->model = NULL;
-
-	//data->obj->bounds.min = ft_make_vec3(MAX_BOUNDS, MAX_BOUNDS, MAX_BOUNDS);
-	//data->obj->bounds.max = ft_make_vec3(MIN_BOUNDS, MIN_BOUNDS, MIN_BOUNDS);
-
 	return (data);
 }
 
 void	free_memory(t_data *data)
 {
-	
 	free(data->cylinder);
 	free(data->cone);
 	free(data->plane);

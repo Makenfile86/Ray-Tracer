@@ -89,6 +89,7 @@ typedef struct		s_plane
 	t_vector		rot[30];
 	double				mater[30];
 	int				checker[30];
+	int				ring[30];
 	t_texturemap	texture[30];
 }					t_plane;
 

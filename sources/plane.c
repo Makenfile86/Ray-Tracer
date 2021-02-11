@@ -64,6 +64,7 @@ void			copy_plane_data(t_data *data, char **parts, int e)
 	data->plane->texture[e].color.red = ft_atoi(parts[16]);
 	data->plane->texture[e].color.green = ft_atoi(parts[17]);
 	data->plane->texture[e].color.blue = ft_atoi(parts[18]);
+	data->plane->ring[e] = ft_atoi(parts[19]);
 }
 
 void			copy_hit_plane(t_data *data, int i)

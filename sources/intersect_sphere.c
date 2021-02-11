@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include "../libft/libft.h"
 
 static double		get_discr_sphere(t_data *data, t_ray ray, int h)
 {
@@ -34,20 +33,20 @@ t_vector			new_start_dir_sphere(t_data *data, t_ray *ray)
 {
 	t_vector	n;
 	t_vector	scaled;
-	double temp;
+	double		temp;
 
 	scaled = vectorscale(data->hit.t, ray->target);
 	ray->newstart = vectoradd(ray->start, scaled);
 	n = vector_minus(ray->newstart, data->sphere->xyz[data->hit.obj_idx]);
 	temp = vectordot(n, n);
-		if (temp == 0)
-		{
-			n.x = 101010;
-			return (n);
-		}
-		temp = 1.0f / sqrt(temp);
-		n = vectorscale(temp, n);
-		data->hit.point = n;
+	if (temp == 0)
+	{
+		n.x = 101010;
+		return (n);
+	}
+	temp = 1.0f / sqrt(temp);
+	n = vectorscale(temp, n);
+	data->hit.point = n;
 	return (n);
 }
 
@@ -69,9 +68,9 @@ int					intersectsphere(t_ray ray, t_data *data, int h)
 			t[0] = t[1];
 		if ((t[0] > 0.001f) && (t[0] < data->hit.t))
 		{
-		data->hit.t = t[0];
-		return (1);
+			data->hit.t = t[0];
+			return (1);
 		}
 		return (0);
-	}	
+	}
 }

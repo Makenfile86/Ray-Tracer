@@ -31,6 +31,22 @@ i = data->hit.obj_idx;
 	data->hit.normal = data->plane->normal[i];
 	return (n);
 }
+static int get_disc_ring(t_data *data, t_ray ray, int h, double t)
+{
+	if (vector_length(vector_minus(vectoradd(ray.start,
+		vectorscale(t, ray.target)), data->plane->xyz[h]))
+		> (double)data->plane->radius[h])
+		return (0);
+		if (data->plane->ring[h] > 0.9)
+		{
+		if (vector_length(vector_minus(vectoradd(ray.start,
+		vectorscale(t, ray.target)), data->plane->xyz[h]))
+		< ((double)data->plane->radius[h] / (data->plane->radius[h]
+		/ (data->plane->ring[h] * 4))))
+		return (0);
+		}
+		return (1);
+}
 
 int						intersectplane(t_data *data, int h, t_ray ray)
 {
@@ -45,12 +61,8 @@ int						intersectplane(t_data *data, int h, t_ray ray)
 	if (t1 < 0.001 || t1 > 9999999)
 		return (0);
 	if (data->plane->radius > 0)
-	{
-		if (vector_length(vector_minus(vectoradd(ray.start,
-		vectorscale(t1, ray.target)), data->plane->xyz[h]))
-		> (double)data->plane->radius[h])
-		return (0);
-	}
+	if (!(get_disc_ring(data, ray, h, t1)))
+	return (0);
 	if (t1 < data->hit.t)
 	{
 		data->hit.t = t1;
