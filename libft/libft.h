@@ -72,5 +72,7 @@ void	    ft_free_strarray(char **array);
 void		ft_dswap(double *a, double *b);
 double	    ft_dmax(double a, double b);
 double		ft_dclamp(double min, double max, double value);
+double      ft_fabs(double value);
+double	    ft_atof(const char *str);
 
 #endif
