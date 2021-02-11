@@ -108,16 +108,16 @@ t_obj			init_obj(t_obj *obj, int *obj_nbr)
 	path = get_objpath(obj->model.name);
 	if ((fd = open(path, O_RDONLY)) > 0)
 	{
-	read_obj(obj, fd);
-	close(fd);
+		read_obj(obj, fd);
+		close(fd);
 	}
 	if ((fd = open(path, O_RDONLY)) > 0)
 	{
-	read_obj_data(fd, obj);
-	close(fd);
+		read_obj_data(fd, obj);
+		close(fd);
 	}
 	if (*obj_nbr < (int)obj->num_polygonals)
 		*obj_nbr = obj->num_polygonals;
-		free(path);
+	free(path);
 	return (*obj);
 }

@@ -244,6 +244,15 @@ t_ray		shadow_ray(double *t, t_hit hit, t_ray ray, char *obj_name);
 t_hit init_hit(t_hit hit);
 t_ray		reflection_dir(t_ray ray, t_vector n, t_data *data);
 void	pthread(t_data *data);
+t_vector		get_dist(t_vector light_pos, t_vector newstart);
+t_rgb		get_light_intensity(t_data *data);
+t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color);
+double		shadow_scale(int in_shadow, int iter, int org_iter);
+double		get_lambert(t_data *data, t_vector target, t_vector newstart, t_vector dist);
+void		get_resolution(int fd, double *x, double *y);
+char		*get_res_line(int fd);
+int		validate_format(int fd);
+unsigned char	*fourth_channel_padding(unsigned char *texture, int width, int height);
 
 
 

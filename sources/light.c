@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static double		get_lambert(t_data *data, t_vector target,
+double		get_lambert(t_data *data, t_vector target,
 		t_vector newstart, t_vector dist)
 {
 	t_ray			lightray;
@@ -29,7 +29,7 @@ static double		get_lambert(t_data *data, t_vector target,
 	return (lambert);
 }
 
-static t_vector		get_dist(t_vector light_pos, t_vector newstart)
+t_vector		get_dist(t_vector light_pos, t_vector newstart)
 {
 	t_vector		dist;
 
@@ -37,7 +37,7 @@ static t_vector		get_dist(t_vector light_pos, t_vector newstart)
 	return (dist);
 }
 
-static t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color)
+t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color)
 {
 	t_rgb			intensity;
 
@@ -50,7 +50,7 @@ static t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color)
 	return (intensity);
 }
 
-static t_rgb		get_light_intensity(t_data *data)
+t_rgb		get_light_intensity(t_data *data)
 {
 	t_rgb2			color;
 	int				i;
@@ -79,7 +79,7 @@ static t_rgb		get_light_intensity(t_data *data)
 	return (color_intensity(data->scene->color_intensity, color));
 }
 
-static double		shadow_scale(int in_shadow, int iter, int org_iter)
+double		shadow_scale(int in_shadow, int iter, int org_iter)
 {
 	double			shadow;
 
@@ -89,49 +89,4 @@ static double		shadow_scale(int in_shadow, int iter, int org_iter)
 	if (in_shadow == TRUE && iter != org_iter)
 		shadow = 0.005;
 	return (shadow);
-}
-
-int					check_if_in_shadow(t_ray ray, double *dist,
-		int *in_shadow, t_vector light_pos)
-{
-	if (vectordot(ray.target, get_dist(light_pos, ray.newstart)) <= 0.0f)
-	{
-		*in_shadow = TRUE;
-		return (1);
-	}
-	*dist = sqrt(vectordot(get_dist(light_pos, ray.newstart),
-				get_dist(light_pos, ray.newstart)));
-	if (*dist <= 0.0f)
-	{
-		*in_shadow = TRUE;
-		return (1);
-	}
-	return (0);
-}
-
-t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i)
-{
-	t_material		material;
-	t_vector		light_pos;
-	t_rgb			intensity;
-	double			shadow;
-	int				h;
-
-	h = data->hit.obj_idx;
-	light_pos = copy_lightpos(data, i);
-	intensity = get_light_intensity(data);
-	if (check_if_in_shadow(ray, &data->hit.t, &data->hit.in_shadow, light_pos))
-		return (rgb);
-	material = get_material(data, data->hit, data->spot->power[i]);
-	shadow = shadow_scale(data->hit.in_shadow, data->iter, data->org_iter);
-	rgb.red += get_lambert(data, ray.target, ray.newstart,
-			get_dist(light_pos, ray.newstart)) *
-		intensity.red * material.diffuse_red * data->hit.fresnel * shadow;
-	rgb.green += get_lambert(data, ray.target, ray.newstart,
-			get_dist(light_pos, ray.newstart)) *
-		intensity.green * material.diffuse_green * data->hit.fresnel * shadow;
-	rgb.blue += get_lambert(data, ray.target, ray.newstart,
-			get_dist(light_pos, ray.newstart)) *
-		intensity.blue * material.diffuse_blue * data->hit.fresnel * shadow;
-	return (rgb);
 }

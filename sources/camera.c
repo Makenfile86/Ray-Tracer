@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include "stdio.h"
 
 void				init_camera(t_data *data)
 {
@@ -20,7 +19,6 @@ void				init_camera(t_data *data)
 	t_vector		cam_direction;
 	t_vector		cam_up;
 	t_vector		cam_right;
-
 
 	camera_pos = vector_copy(data->camera->xyz);
 	target = vector_copy(data->camera->target);
@@ -36,23 +34,15 @@ void				init_camera(t_data *data)
 	data->camera->right = vector_copy(cam_right);
 }
 
-void			copy_camera_data(t_data *data, char **parts)
+void				copy_camera_data(t_data *data, char **parts)
 {
-
-		data->camera->xyz.x = ft_atoi(parts[0]);
-
-		data->camera->xyz.y = ft_atoi(parts[1]);
-
-		data->camera->xyz.z = ft_atoi(parts[2]);
-
-		data->camera->target.x = ft_atoi(parts[3]);
-
-		data->camera->target.y = ft_atoi(parts[4]);
-
-		data->camera->target.z = ft_atoi(parts[5]);
-
-		data->camera->rot.x = ft_atoi(parts[6]);
-
-		data->camera->rot.y = ft_atoi(parts[7]);
-		data->camera->rot.z = ft_atoi(parts[8]);
+	data->camera->xyz.x = ft_atoi(parts[0]);
+	data->camera->xyz.y = ft_atoi(parts[1]);
+	data->camera->xyz.z = ft_atoi(parts[2]);
+	data->camera->target.x = ft_atoi(parts[3]);
+	data->camera->target.y = ft_atoi(parts[4]);
+	data->camera->target.z = ft_atoi(parts[5]);
+	data->camera->rot.x = ft_atoi(parts[6]);
+	data->camera->rot.y = ft_atoi(parts[7]);
+	data->camera->rot.z = ft_atoi(parts[8]);
 }

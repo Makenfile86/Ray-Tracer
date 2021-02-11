@@ -17,21 +17,19 @@ void			init_parsed_data(t_data *data, char *type, int e)
 	if (ft_strcmp(type, "object") == 0)
 		data->objnbr++;
 	if (ft_strcmp(data->obj_name, "SPHERE") == 0)
-	init_sphere(data, e);
+		init_sphere(data, e);
 	if (ft_strcmp(data->obj_name, "SPOT") == 0)
-	data->spot->nbr += 1;
+		data->spot->nbr += 1;
 	if (ft_strcmp(data->obj_name, "CYLINDER") == 0)
-	init_cylinder(data, e);
+		init_cylinder(data, e);
 	else if (ft_strcmp(data->obj_name, "PLANE") == 0)
-	init_plane(data, e);
+		init_plane(data, e);
 	else if (ft_strcmp(data->obj_name, "CONE") == 0)
-	init_cone(data, e);
-		else if (ft_strcmp(data->obj_name, "CAMERA") == 0)
-	init_camera(data);
-	//else if (ft_strcmp(data->obj_name, "SCENE") == 0)
-	//init_scene(data);
-		else if (ft_strcmp(data->obj_name, "MODEL") == 0)
-	init_model(data, e);
+		init_cone(data, e);
+	else if (ft_strcmp(data->obj_name, "CAMERA") == 0)
+		init_camera(data);
+	else if (ft_strcmp(data->obj_name, "MODEL") == 0)
+		init_model(data, e);
 }
 
 t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
@@ -54,8 +52,6 @@ t_ray			init_pixel(t_data *data, int x, int y, t_rgb *rgb)
 	ray.target = normalized_vector(ray.target);
 	data->light_scale = (double)((data->scene->light_scale) * 0.2);
 	data->iter = data->org_iter;
-	
-	
 	return (ray);
 }
 
@@ -75,15 +71,11 @@ void			init_data(t_data *data)
 
 void			init_mlx(t_data *data)
 {
-
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "name");
 	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	
-
 	data->size_line = 1000;
 	data->endian = 0;
 	data->bits_per_pixel /= 8;
-	
 	data->data_addr = mlx_get_data_addr(
 		data->image,
 		&(data->bits_per_pixel),

@@ -56,7 +56,7 @@ unsigned char	*fourth_channel_padding(unsigned char *texture,
 	return (texture);
 }
 
-static int		validate_format(int fd)
+int		validate_format(int fd)
 {
 	char		*line;
 
@@ -76,7 +76,7 @@ static int		validate_format(int fd)
 	return (0);
 }
 
-static char		*get_res_line(int fd)
+char		*get_res_line(int fd)
 {
 	int			i;
 	char		*line;
@@ -91,7 +91,7 @@ static char		*get_res_line(int fd)
 	return (line);
 }
 
-static void		get_resolution(int fd, double *x, double *y)
+void		get_resolution(int fd, double *x, double *y)
 {
 	char		*line;
 	char		*resolution;
@@ -116,58 +116,4 @@ static void		get_resolution(int fd, double *x, double *y)
 	*y = ft_atoi(resolution);
 	free(line);
 	free(resolution);
-}
-
-unsigned char	*init_texture(unsigned char *texture, char *path, t_res *res)
-{
-	int			fd;
-	int			y;
-
-	y = 0;
-	if ((fd = open(path, O_RDONLY)) > 0)
-	{
-		if (!(validate_format(fd)))
-			return (NULL);
-		close(fd);
-		if ((fd = open(path, O_RDONLY)) > 0)
-		{
-			get_resolution(fd, &res->x, &res->y);
-			close(fd);
-			if (!(texture = (unsigned char*)malloc(sizeof(unsigned char)
-							* res->x * res->y * 4)))
-				memory_allocation_fail();
-			texture = fourth_channel_padding(texture, res->x, res->y);
-			return (texture);
-		}
-	}
-	return (NULL);
-}
-
-unsigned char	*parse_ppm(unsigned char *texture, char *path, t_res *res)
-{
-	int			fd;
-	char		text_data[1];
-	int			i;
-	int			ret;
-	int			x;
-
-	x = 0;
-	i = 0;
-	texture = init_texture(texture, path, res);
-	if (texture != NULL)
-	{
-		if ((fd = open(path, O_RDONLY)) > 0)
-		{
-			while ((ret = read(fd, text_data, 1)) > 0 &&
-					i < res->x * res->y * 4)
-			{
-				if (x % 3 == 0)
-					i++;
-				x++;
-				texture[i++] = text_data[0];
-			}
-		}
-		close(fd);
-	}
-	return (texture);
 }

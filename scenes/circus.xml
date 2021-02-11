@@ -12,3 +12,5 @@
 -15     0 80  ,  -10 5 80  ,  1000 ,  10  ,  200   50 50 , 0 0 0 , 2 , vstripe , 8 , 255 255 255
 * CONE start-XYZ angle	color-RGB	rotation-XYZ
 0 50 100 10 100 200 50 0 0 0 0
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
+0 50 100 , 25 , 0 0 0 249  166 2 0 0 0 , 3 , checker , 9 , 0 0 0 , 1

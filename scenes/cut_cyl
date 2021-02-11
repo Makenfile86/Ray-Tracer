@@ -9,16 +9,16 @@
 
 * PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
 0 -20 0 , 1000 ,  0 0 0 , 125  166 45 0 0 0 , 1 , checker , 8 , 0 0 0
-* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 20 0 , 15 ,  0 0 0 , 200   50 50 , 0 0 0 , 2 , 0 , 1,  255 255 255
+* PLANE coord-XYZ normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color ring
+0 20 0 , 15 ,  0 0 0 , 200   50 50 , 0 0 0 , 2 , 0 , 1,  255 255 255 2
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-0 22 0  , 5 , 255 255 255 , 0 0 0 , 2 , 0 , 1 , 0 0 0 
+0 22 0  , 5 , 255 255 255 , 0 0 0 , 2 , numbers , 1 , 0 0 0 
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
-53 23 0  , 15 , 255 45 25 , 0 0 0 , 2 , gradient , 1 , 0 0 0 
+53 23 0  , 15 , 255 45 25 , 0 0 -45 , 2 , letters , 1 , 0 0 0 
 * SPHERE  coord-XYZ  radius  color-RGB  rotation-XYZ material txt_type txt_size txt_color
--48 65 -12  , 7 , 25 45 255 , 0 0 0 , 2 , gradient , 1 , 0 0 0 
+-48 65 -12  , 7 , 25 45 255 , 45 0 0 , 2 , numbers , 1 , 0 0 0 
 * PLANE coord-XYZ radius normal-XYZ color-RGB rotation-XYZ material txt_type txt_size txt_color
-0 33 0 ,  60 , 0  0 0 , 125 125 125 , 5 0 25 , 3 , 0 , 1 , 25 25 25
+0 33 0 ,  60 , 0  0 0 , 125 125 125 , 5 0 25 , 3 , 0 , 1 , 25 25 25 7
 * CYLINDER      start-XYZ        end-XYZ radius color-RGB  rotation-XYZ
 0     0 0 	,   0 -1 0  ,   15  ,  200   50 50 , 0 0 0 , 2 , 0 , 18 , 255 255 255
 * CONE start-XYZ angle	color-RGB	rotation-XYZ
