@@ -105,6 +105,7 @@ t_obj			init_obj(t_obj *obj, int *obj_nbr)
 {
 	int			fd;
 	char		*path;
+
 	path = get_objpath(obj->model.name);
 	if ((fd = open(path, O_RDONLY)) > 0)
 	{

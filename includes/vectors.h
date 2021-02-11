@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vectors.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anikkane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/05 09:35:11 by anikkane          #+#    #+#             */
+/*   Updated: 2020/10/05 10:10:11 by anikkane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTORS_H
 # define VECTORS_H
 
-#include "rt.h"
-
+# include "rt.h"
 
 typedef struct		s_vector
 {
@@ -13,7 +24,7 @@ typedef struct		s_vector
 
 typedef struct		s_vect
 {
-	double		u;
+	double			u;
 	double			v;
 }					t_vec2;
 
@@ -34,7 +45,7 @@ t_vector			vectorscale(double c, t_vector v);
 t_vector			vector_minus(t_vector v1, t_vector v2);
 t_vector			normalized_vector(t_vector v);
 double				vectordot(t_vector v1, t_vector v2);
-t_vector	vector_div(t_vector v, double div);
-t_vector		reverse_vector(t_vector v);
+t_vector			vector_div(t_vector v, double div);
+t_vector			reverse_vector(t_vector v);
 
 #endif

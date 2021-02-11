@@ -28,7 +28,8 @@ void			init_model(t_data *data, int e)
 
 void			copy_model_data(t_data *data, char **parts, int e)
 {
-	data->obj[e].model.name = (char *)malloc(sizeof(char) * ft_strlen(parts[0]) + 1);
+	data->obj[e].model.name = (char *)malloc(sizeof(char) *
+	ft_strlen(parts[0]) + 1);
 	ft_strcpy(data->obj[e].model.name, parts[0]);
 	data->obj[e].model.xyz.x = ft_atoi(parts[1]);
 	data->obj[e].model.xyz.y = ft_atoi(parts[2]);
@@ -47,7 +48,7 @@ void			copy_hit_model(t_data *data, int i)
 {
 	data->hit.mater = data->obj[i].model.mater;
 	data->hit.texture.txt_loaded = FALSE;
-	data->hit.color.red =  data->obj[i].model.rgb2.red;
+	data->hit.color.red = data->obj[i].model.rgb2.red;
 	data->hit.color.green = data->obj[i].model.rgb2.green;
 	data->hit.color.blue = data->obj[i].model.rgb2.blue;
 }

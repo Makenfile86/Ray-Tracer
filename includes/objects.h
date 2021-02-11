@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
@@ -48,14 +47,14 @@ typedef struct		s_rgb2
 typedef	struct		s_texturemap
 {
 	int				scale;
-	t_res		res;
+	t_res			res;
 	int				txt_loaded;
 	int				txt_pattern;
 	int				type;
 	t_rgb2			color;
 	char			*name;
-	char 			*path;
-	unsigned char			*txt_ppm;
+	char			*path;
+	unsigned char	*txt_ppm;
 }					t_texturemap;
 
 typedef struct		s_rgb
@@ -73,7 +72,7 @@ typedef struct		s_sphere
 	t_vector		rot[30];
 	t_rgb2			rgb2[30];
 	int				nbr;
-	double				mater[30];
+	double			mater[30];
 	int				checker[30];
 	t_texturemap	texture[30];
 }					t_sphere;
@@ -83,11 +82,11 @@ typedef struct		s_plane
 	int				nbr;
 	t_vector		xyz[30];
 	int				radius[30];
-	t_vector 		point[30];
+	t_vector		point[30];
 	t_vector		normal[30];
 	t_rgb2			rgb2[30];
 	t_vector		rot[30];
-	double				mater[30];
+	double			mater[30];
 	int				checker[30];
 	int				ring[30];
 	t_texturemap	texture[30];
@@ -116,7 +115,7 @@ typedef struct		s_cylinder
 	int				length[30];
 	int				nbr;
 	t_rgb2			rgb2[30];
-	double				mater[30];
+	double			mater[30];
 	t_texturemap	texture[30];
 }					t_cylinder;
 
@@ -128,7 +127,7 @@ typedef struct		s_cone
 	double			angle[30];
 	t_rgb2			rgb2[30];
 	int				nbr;
-	double				mater[30];
+	double			mater[30];
 	t_texturemap	texture[30];
 
 }					t_cone;

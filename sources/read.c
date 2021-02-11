@@ -52,10 +52,13 @@ static void		get_data(t_data *data, int fd)
 {
 	int			i;
 	char		*line;
+	int			line_count;
 
+	line_count = 0;
 	i = 0;
-	while ((get_next_line(fd, &line)) == 1)
+	while (((get_next_line(fd, &line)) == 1) && line_count < 50)
 	{
+		line_count++;
 		if (line[i] == '*')
 		{
 			data->obj_name = parse_name(line, data->obj_name);

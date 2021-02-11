@@ -54,9 +54,8 @@ int						intersecttriangle(t_ray ray, t_data *data, int y, int h)
 	if (t < 0.00001 || t > 1000)
 		return (0);
 	if (in_out_test(data->obj[y].polygonals[h].normal,
-				data->obj[y].polygonals[h].te, vectoradd(ray.start,
-					vectorscale(t, ray.target)),
-				data->obj[y].polygonals[h].ve))
+	data->obj[y].polygonals[h].te, vectoradd(ray.start,
+	vectorscale(t, ray.target)), data->obj[y].polygonals[h].ve))
 	{
 		if (t < data->hit.t)
 		{

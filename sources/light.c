@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-double		get_lambert(t_data *data, t_vector target,
+double			get_lambert(t_data *data, t_vector target,
 		t_vector newstart, t_vector dist)
 {
 	t_ray			lightray;
@@ -37,7 +37,7 @@ t_vector		get_dist(t_vector light_pos, t_vector newstart)
 	return (dist);
 }
 
-t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color)
+t_rgb			color_intensity(int scene_col_intensity, t_rgb2 color)
 {
 	t_rgb			intensity;
 
@@ -50,7 +50,7 @@ t_rgb		color_intensity(int scene_col_intensity, t_rgb2 color)
 	return (intensity);
 }
 
-t_rgb		get_light_intensity(t_data *data)
+t_rgb			get_light_intensity(t_data *data)
 {
 	t_rgb2			color;
 	int				i;
@@ -79,7 +79,7 @@ t_rgb		get_light_intensity(t_data *data)
 	return (color_intensity(data->scene->color_intensity, color));
 }
 
-double		shadow_scale(int in_shadow, int iter, int org_iter)
+double			shadow_scale(int in_shadow, int iter, int org_iter)
 {
 	double			shadow;
 

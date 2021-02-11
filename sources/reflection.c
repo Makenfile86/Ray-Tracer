@@ -22,6 +22,19 @@ static double		get_ior(double scale)
 	return (ior);
 }
 
+static double		fresnel_result(double etat, double etai,
+double cosi, double cost)
+{
+	return ((((etat * cosi) - (etai * cost))
+					/ ((etat * cosi) + (etai * cost)) *
+					((etat * cosi) - (etai * cost))
+					/ ((etat * cosi) + (etai * cost)) +
+					((etai * cosi) - (etat * cost))
+					/ ((etai * cosi) + (etat * cost)) *
+					((etai * cosi) - (etat * cost))
+					/ ((etai * cosi) + (etat * cost))) / 2);
+}
+
 static double		calc_fresnel(t_vector normal, t_vector target, double ior)
 {
 	double			etai;
@@ -42,11 +55,7 @@ static double		calc_fresnel(t_vector normal, t_vector target, double ior)
 	{
 		cost = sqrtf(ft_dmax(0.f, 1 - sint * sint));
 		cosi = ft_fabs(cosi);
-		return ((((etat * cosi) - (etai * cost))
-					/ ((etat * cosi) + (etai * cost)) * ((etat * cosi) - (etai * cost))
-					/ ((etat * cosi) + (etai * cost)) + ((etai * cosi) - (etat * cost))
-					/ ((etai * cosi) + (etat * cost)) * ((etai * cosi) - (etat * cost))
-					/ ((etai * cosi) + (etat * cost))) / 2);
+		return (fresnel_result(etat, etai, cosi, cost));
 	}
 }
 
@@ -80,7 +89,6 @@ static t_vector		refract_dir(t_vector target, t_vector n, double ior)
 
 t_ray				reflection_dir(t_ray ray, t_vector n, t_data *data)
 {
-	t_vector		tmp;
 	double			r_factor;
 
 	data->hit.org_start = vector_copy(ray.start);
@@ -90,7 +98,8 @@ t_ray				reflection_dir(t_ray ray, t_vector n, t_data *data)
 			get_ior(data->hit.texture.scale));
 	if (data->hit.refract == TRUE && data->hit.fresnel < 1)
 	{
-		ray.target = refract_dir(ray.target, n, get_ior(data->hit.texture.scale));
+		ray.target = refract_dir(ray.target, n,
+		get_ior(data->hit.texture.scale));
 		data->hit.refract = FALSE;
 		data->hit.was_refract = TRUE;
 		data->hit.org_normal = normalized_vector(data->hit.org_normal);
@@ -98,8 +107,8 @@ t_ray				reflection_dir(t_ray ray, t_vector n, t_data *data)
 	else
 	{
 		r_factor = ft_fabs(data->scene->reflection - 9.5);
-		tmp = vectorscale(r_factor * vectordot(ray.target, n), n);
-		ray.target = vector_minus(ray.target, tmp);
+		ray.target = vector_minus(ray.target,
+		vectorscale(r_factor * vectordot(ray.target, n), n));
 		if (data->hit.was_refract == 1)
 			data->hit.was_refract = FALSE;
 	}

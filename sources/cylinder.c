@@ -24,7 +24,7 @@ void				init_cylinder(t_data *data, int e)
 		check_texture_pattern(data->cylinder->texture[e].name);
 	if (data->cylinder->texture[e].txt_pattern != TRUE &&
 			(validate_file(data->cylinder->texture[e].name,
-						   &data->cylinder->texture[e].path) == 1))
+			&data->cylinder->texture[e].path) == 1))
 	{
 		data->cylinder->texture[e].txt_ppm = parse_ppm(data->cylinder->
 				texture[e].txt_ppm, data->cylinder->texture[e].path,

@@ -56,7 +56,7 @@ unsigned char	*fourth_channel_padding(unsigned char *texture,
 	return (texture);
 }
 
-int		validate_format(int fd)
+int				validate_format(int fd)
 {
 	char		*line;
 
@@ -76,7 +76,7 @@ int		validate_format(int fd)
 	return (0);
 }
 
-char		*get_res_line(int fd)
+char			*get_res_line(int fd)
 {
 	int			i;
 	char		*line;
@@ -91,7 +91,7 @@ char		*get_res_line(int fd)
 	return (line);
 }
 
-void		get_resolution(int fd, double *x, double *y)
+void			get_resolution(int fd, double *x, double *y)
 {
 	char		*line;
 	char		*resolution;

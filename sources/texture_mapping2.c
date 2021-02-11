@@ -33,7 +33,7 @@ t_rgb2				add_texture(t_vec2 uv, t_rgb2 color, t_hit hit)
 		else if ((ft_strcmp(hit.texture.name, "gradient") == 0))
 			return (gradient_pattern(uv, color, pat_size(hit.texture.scale,
 						name, hit.radius)));
-		if ((ft_strcmp(hit.texture.name, "split") == 0))
+		else if ((ft_strcmp(hit.texture.name, "split") == 0))
 			return (split_pattern(uv, color, hit.texture.color,
 						pat_size(hit.texture.scale, name, hit.radius)));
 		else

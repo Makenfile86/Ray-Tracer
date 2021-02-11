@@ -63,22 +63,19 @@ static int		search_shadow_intersection(t_data *data, t_ray ray, int i)
 	while (i >= 0)
 	{
 		if (data->sphere->nbr > i && (intersectsphere(shadow_ray(
-							&data->hit.t, data->hit, ray, "sphere"),
-						data, i) == 1))
+			&data->hit.t, data->hit, ray, "sphere"), data, i)))
 		{
 			if (hit_dist(data->hit.t, ray, data->sphere->mater[i]))
 				return (1);
 		}
 		if (data->cone->nbr > i && (intersectcone(shadow_ray(
-							&data->hit.t, data->hit, ray, "cone"), data, i)
-					== 1))
+			&data->hit.t, data->hit, ray, "cone"), data, i)))
 		{
 			if (hit_dist(data->hit.t, ray, data->cone->mater[i]))
 				return (1);
 		}
 		if (data->cylinder->nbr > i && (intersectcylinder(shadow_ray(
-							&data->hit.t, data->hit, ray, "cylinder"),
-						data, i) == 1))
+			&data->hit.t, data->hit, ray, "cylinder"), data, i)))
 		{
 			if (hit_dist(data->hit.t, ray, data->cylinder->mater[i]))
 				return (1);
