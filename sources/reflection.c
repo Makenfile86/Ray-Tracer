@@ -41,7 +41,7 @@ static double		calc_fresnel(t_vector normal, t_vector target, double ior)
 	else
 	{
 		cost = sqrtf(ft_dmax(0.f, 1 - sint * sint));
-		cosi = fabs(cosi);
+		cosi = ft_fabs(cosi);
 		return ((((etat * cosi) - (etai * cost))
 					/ ((etat * cosi) + (etai * cost)) * ((etat * cosi) - (etai * cost))
 					/ ((etat * cosi) + (etai * cost)) + ((etai * cosi) - (etat * cost))
@@ -97,7 +97,7 @@ t_ray				reflection_dir(t_ray ray, t_vector n, t_data *data)
 	}
 	else
 	{
-		r_factor = fabs(data->scene->reflection - 9.5);
+		r_factor = ft_fabs(data->scene->reflection - 9.5);
 		tmp = vectorscale(r_factor * vectordot(ray.target, n), n);
 		ray.target = vector_minus(ray.target, tmp);
 		if (data->hit.was_refract == 1)

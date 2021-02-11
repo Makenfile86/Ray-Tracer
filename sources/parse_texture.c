@@ -21,7 +21,7 @@ int				validate_file(char *txt_name, char **path)
 	char		*tmp_path3;
 	char		*filename;
 
-	tmp_path1 = ft_strdup("./textures/");
+	tmp_path1 = ft_strdup("./resources/");
 	tmp_path2 = ft_strdup(".ppm");
 	tmp_path3 = ft_strjoin(tmp_path1, txt_name);
 	filename = ft_strjoin(tmp_path3, tmp_path2);

@@ -32,9 +32,9 @@ t_vector			parse_normals(char *line)
 	char		**parts;
 
 	parts = ft_strsplit(line + 1, ' ');
-	vector.x = atof(parts[0]);
-	vector.y = atof(parts[1]);
-	vector.z = atof(parts[2]);
+	vector.x = ft_atof(parts[0]);
+	vector.y = ft_atof(parts[1]);
+	vector.z = ft_atof(parts[2]);
 	ft_free_strarray(parts);
 	return (vector);
 }
@@ -45,9 +45,9 @@ t_vector			parse_geo(char *line)
 	char		**parts;
 
 	parts = ft_strsplit(line + 1, ' ');
-	vector.x = atof(parts[0]);
-	vector.y = atof(parts[1]);
-	vector.z = atof(parts[2]);
+	vector.x = ft_atof(parts[0]);
+	vector.y = ft_atof(parts[1]);
+	vector.z = ft_atof(parts[2]);
 	ft_free_strarray(parts);
 	return (vector);
 }
@@ -58,8 +58,8 @@ t_vec2				parse_coord(char *line)
 	char		**parts;
 
 	parts = ft_strsplit(line + 1, ' ');
-	vector.u = atof(parts[0]);
-	vector.v = atof(parts[1]);
+	vector.u = ft_atof(parts[0]);
+	vector.v = ft_atof(parts[1]);
 	ft_free_strarray(parts);
 	return (vector);
 }

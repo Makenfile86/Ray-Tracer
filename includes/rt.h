@@ -53,22 +53,6 @@ typedef	struct		s_ray
 
 
 
-
-typedef struct			s_fresnel
-{
-	double				kr;
-	double				cosi;
-	double				etai;
-	double				etat;
-	double				sint;
-	double				cost;
-	double				rs;
-	double				rp;
-}						t_fresnel;
-
-
-
-
 typedef	struct		s_hit
 {
 	double			t;
@@ -177,7 +161,6 @@ t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i);
 
 
 int					intersectcylinder(t_ray ray, t_data *data, int i);
-double				double_sqr(double n);
 
 int					intersectplane(t_data *data, int i, t_ray ray);
 int					intersectcone(t_ray ray, t_data *data, int i);
@@ -209,16 +192,12 @@ t_ray  				init_pixel(t_data *data, int x, int y, t_rgb *rgb);
 void 				put_color(t_data *data, t_rgb rgb, int x, int y);
 void				wrong_scene_name(void);
 t_vector 			copy_lightpos(t_data *data, int i);
-int		handle_expose(t_data *tmp_data);
 t_vec2 texture_mapping(t_hit hit, char *obj_name);
 unsigned char    *parse_ppm(unsigned char *texture, char *path, t_res *res);
 t_rgb2 assign_ppm_texture(t_data *data, unsigned char *ppm_image, t_vec2 uv);
 unsigned char *copy_ppm(t_data *data, char *name);
 char *parse_data_line(char *str, char *line, int *i, int y);
-t_rgb get_background_color(t_data *data, int x, int y);
-void		draw_background(t_data *data);
-t_material mirror_effect(t_data *data, int i);
-t_material glass_effect(t_data *data, int i);
+
 void set_old_hit(t_data *data);
 char		*parse_name(char *line, char *name);
 void			parse_obj(char *line, t_data *data, int *obj_idx, char *type);
@@ -248,7 +227,6 @@ t_rgb2 hstripe_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double
 t_rgb2 gradient_pattern(t_vec2 uv, t_rgb2 obj_color, double pat_size);
 t_rgb2 add_texture(t_vec2 uv, t_rgb2 color, t_hit hit);
 t_rgb2 split_pattern(t_vec2 uv, t_rgb2 obj_color, t_rgb2 texture_color, double pat_size);
-t_material plane_reflection(t_data *data, int i);
 t_vector				new_start_dir_triangle(t_data *data, t_ray *ray);
 
 t_material get_material(t_data *data, t_hit hit, int light_power);

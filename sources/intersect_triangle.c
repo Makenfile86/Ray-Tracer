@@ -43,7 +43,7 @@ int		intersecttriangle(t_ray ray, t_data *data, int y, int h)
 	double	discr;
 
 discr = vectordot(data->obj[y].polygonals[h].normal, ray.target);
-if (fabs(discr) < 0.00001)
+if (ft_fabs(discr) < 0.00001)
 return (0);
 	t = vectordot(vectorsub(data->obj[y].polygonals[h].ve[0], ray.start),
     data->obj[y].polygonals[h].normal) / discr;

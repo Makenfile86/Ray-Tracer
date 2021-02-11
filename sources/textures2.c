@@ -14,11 +14,11 @@
 
 t_rgb2			gradient_pattern(t_vec2 uv, t_rgb2 obj_color, double pat_size)
 {
-	obj_color.red += (min(fabs(obj_color.red * uv.v * uv.v * pat_size * 0.8),
+	obj_color.red += (min(ft_fabs(obj_color.red * uv.v * uv.v * pat_size * 0.8),
 				255));
-	obj_color.green += (min(fabs(obj_color.green *
+	obj_color.green += (min(ft_fabs(obj_color.green *
 					uv.v * uv.v * pat_size * 0.8), 255));
-	obj_color.blue += (min(fabs(obj_color.blue *
+	obj_color.blue += (min(ft_fabs(obj_color.blue *
 					uv.v * uv.v * pat_size * 0.8), 255));
 	return (obj_color);
 }
