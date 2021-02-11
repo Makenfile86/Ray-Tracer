@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_free_strarray.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkivipur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,10 +13,11 @@
 #include "libft.h"
 
 void	ft_free_strarray(char **array)
-{	size_t i;
-	
-    i = 0;	
-    while (array[i])		
-    free(array[i++]);	
-    free(array);
+{
+	size_t i;
+
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
