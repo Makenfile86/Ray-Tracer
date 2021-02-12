@@ -11,21 +11,25 @@ The objective was to get familiar with the concept of ray tracing and creating s
 (Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and has a few different texture mapping patterns. 
 
 
-# Quakeish scene:
+# Little bit of everything:
 
-![scene eval09 image:](https://github.com/Makenfile86/ray-tracer/blob/main/rt1.jpg?raw=true)
+![scene eval09 image:](https://github.com/Makenfile86/ray-tracer/blob/main/circus.jpg?raw=true)
 
-# From other camera angle:
+# Classic RT three spheres:
 
-![scene eval09 image2:](https://github.com/Makenfile86/ray-tracer/blob/main/rt2.jpg?raw=true)
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/balls.jpg?raw=true)
 
-# something more cartoonish: 
+# something more outlandish: 
 
-![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom1.jpg?raw=true)
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/space.jpg?raw=true)
 
-# angle from behind:
+# Pool shots:
 
-![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/ballroom2.jpg?raw=true)
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/billiard.jpg?raw=true)
+
+# Room:
+
+![scene eval09 image3:](https://github.com/Makenfile86/ray-tracer/blob/main/room.jpg?raw=true)
 
 # ** Installation
 
