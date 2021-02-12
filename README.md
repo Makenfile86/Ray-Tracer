@@ -103,5 +103,10 @@ Each object has its variables you can manage to create your own scenes, most of 
 |--------------------|------------------------------------------------------------------------------------------------------------------------|
 | power              | Each spot has its own power variable, determines how much light the spot produces                                      |  
 
+| MODEL variables    | Explanation                                                
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+|                    |Other than the "name" of the .obj file model has only COORD-XYZ, Color-RGB, Rotation-XYZ, material                      |
+                      and TXT-type variables.                                                                                                 
+
 
 
