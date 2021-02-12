@@ -43,43 +43,55 @@ You need a SCENE, CAMERA, atleast one SPOT (light) and a object.
 
 So first line is  "* SCENE...", Where you first declare where your second lines input goes. To declare data you only need the "* NAME". The variables after that are simply to help you fill the values for them in the same order in the second line. 
 
-Each object has its coordinates, size, color and position according to possible rotation values. There is also a camera you can move that faces towards "target". Spot(s) are light sources and you can change their position and light power.
+Each object has its variables you can manage to create your own scenes, most of the variables overlap but some are unique to a object.
 
-# The variables: 
+# Scene variables:
 
-background (You can only use this with the SCENE and it draws a background to your scene, its not working completely yet so its recommended to leave at 0).
+| Scene variables.   | Explanation                                                |
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+| background.        | Not in operation Right now. Leave it at 0 or 999999, doesnt matter.                                                    |                     | lambert.           | How much lambert you want in your scene, 3-4 is recommended.                                                           |
+| light.             | How much overall light power your SPOTS have. 5-7 recommended.                                                         |
+| shadows.           | 0 for no shadows, otherwise shadows.                                                                                   |         
+| reflection iter.   | Reflection iteration, in theory you dont want reflections reflections. 0-1 is no reflections. 2 is realistic.          |   
+| color intensity.   | How intense you want your colors to be, 2-5 is recommended.                                                            |
+| reflections.       | How intense you want your reflections to be, 1-5 is realistic.                                                         |
 
-lambert (how much lambert you want in your scene, 3-4 is recommended).
 
-light (You can change all of the light sources "power").
+# The object variables:
 
-shadows (0 no shadows, otherwise shadows).
+//the usual variables
 
-reflection_iteration (1 is no reflections, 2 is realistic reflections, more than 2 your reflections will have reflections and not really recommended).
+| Variable        | Explanation                                                |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------|
+| Coord-XYZ       | Objects point on 3D space (X, Y, Z), (0, 0, 0) is middle of the screen                                                    |
+| Radius / angle  | Objects radius determines the size for sphere,plane and cylinder.	Angle for cone.                                         |
+| Color-RGB       | Objects color in RGB format (red, green, blue) , (255, 255, 255) is whitest, (0, 0, 0) is blackest.                       |
+| Rotation        | You can rotate the object in 3D space using (X, Y, Z), (0, 0, 0) is no rotation                                           |
+| Material        | The material of your object. With "3" the object is see through, with "4" its a mirror. Adjust with Scale variable        |
+| TXT-type.       | You can add your own texture to a object or use existing from the resource folder. The format has to be in P6 .ppm format |
+|                 | There are also several texture patterns that you can use, like "checker" , "vstripe" , "hstripe" , "gradient" and "split".|
+| TXT-size/scale  | You can modify your textures size and you can modify your see through or mirror objects with this variable.               |
+|                 | -See through (material 3) with value 1 is thin glass like, the bigger the variable the thicker the glass becomes.         |
+|                 | -Mirror (material 4) the bigger the variable to more the mirror has its own objects color blended into it.                |
+|                 | -Textures the bigger the value the bigger the texture pattern is.                                                         |
+| TXT-color       | When using texture patterns they often use two different colors, this is where you can add the other color in RGB format. |
 
-color_intesity (How intense you want your colors to be ?, 2-5 is recommended).
+//Object specific variables
 
-reflection (How intense you want your reflections to be? 1-5 is recommended).
+| Plane variable  | Explanation                                                |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------|
+| Normal-XYZ      | To move the Plane in 3D space you need to adjust the Planes normal. if Coord-XYZ is (-75, 19, 35) and you want the plane  |
+|                 | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                        |
+| Ring            | You can make a ring out of a plane by adjusting the Ring variable, bigger the variable the larger the hole.               |
 
-power (spots lights power).
+| Cylinder variable  | Explanation                                                |
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+| End-XYZ            | The Cylinder has a starting and ending point (X, Y, Z) in 3D space. With endpoint you can determine in which direction |                     | the cylinder points to. If start is (-15, 0, 80)  and end is (-10, 5, 80) The cylinder is  tilted towards right.                            |
+|                    | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                     |
+| Height             | Height determines the length of the cylinder.                                                                          |
 
-coord-XYZ (ALl the objects, spots and camera has the XYZ value that determine the location of that item in the 3D space. 0 0 0 is the center).
 
-radius (The radius of the object. Determines the size of the object)
 
-color-RGB (The objects color in RGB, red green blue values between 0-255).
-
-rotation (objects rotational angle, you can rotate certain objects in the 3D space. 0 0 0 is no roation).
-
-material (What kind of material is the object, 1 is very little reflection, 2 is the normal, 4 is like a mirror).
-
-txt_type (You can texture map a texture on the objects surface, 1 is a checker pattern, 3 is a earth texture, 4 is a moon texture, 5 is a marble texture).
-
-txt_size (This determines the size of the texture or the pattern if you are using one, you can choose how big your checker patterns are for example).
-
-txt_color (This determines the "other" color in the checker pattern, default is 0 0 0 black).
-
-normal (Only for planes, planes are flat rounded massive surfaces but you can turn their center to face other directions, 0 0 0 is default).
 
 
 
