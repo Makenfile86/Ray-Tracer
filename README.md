@@ -106,7 +106,7 @@ Each object has its variables you can manage to create your own scenes, most of 
 | MODEL variables    | Explanation                                                
 |--------------------|------------------------------------------------------------------------------------------------------------------------|
 |                    |Other than the "name" of the .obj file model has only COORD-XYZ, Color-RGB, Rotation-XYZ, material                      |
-                      and TXT-type variables.                                                                                                 
+|                    | and TXT-type variables.                                                                                                | 
 
 
 
