@@ -7,8 +7,9 @@ This is a 42 school project. Done with C using Minilibx https://harm-smits.githu
 
 Right now this project is only supported by Mac os. There is a user tutorial at the end.
 
-The objective was to get familiar with the concept of ray tracing and creating scenes using it. Our ray tracing program uses four different objects to create its scenes.
-(Plane, sphere, cylinder and cone). The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and has a few different texture mapping patterns. 
+The objective was to get familiar with the concept of ray tracing and creating scenes using it. Our ray tracing program uses four different main objects to create its scenes. (Plane, sphere, cylinder and cone). Ring is an extra object you can make from a plane, example in the pic below. 
+
+The program reads the "scene" from a file and creates the 3D images with "realistic" shadows and reflections. It supports textures in P6 ppm format and models/objects in .obj format.
 
 
 # Little bit of everything:
@@ -82,24 +83,25 @@ Each object has its variables you can manage to create your own scenes, most of 
 
 //Object specific variables
 
-| Plane variable  | Explanation                                                |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------|
-| Normal-XYZ      | To move the Plane in 3D space you need to adjust the Planes normal. if Coord-XYZ is (-75, 19, 35) and you want the plane  |
-|                 | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                        |
-| Ring            | You can make a ring out of a plane by adjusting the Ring variable, bigger the variable the larger the hole.               |
+| Plane variables  | Explanation                                                
+|------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Normal-XYZ       | To move the Plane in 3D space you need to adjust the Planes normal. if Coord-XYZ is (-75, 19, 35) and you want the plane  |
+|                  | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                        |
+| Ring             | You can make a ring out of a plane by adjusting the Ring variable, bigger the variable the larger the hole.               |
 
-| Cylinder variable  | Explanation                                                |
+| Cylinder variables  | Explanation                                                
 |--------------------|------------------------------------------------------------------------------------------------------------------------|
 | End-XYZ            | The Cylinder has a starting and ending point (X, Y, Z) in 3D space. With endpoint you can determine in which direction |                     | the cylinder points to. If start is (-15, 0, 80)  and end is (-10, 5, 80) The cylinder is  tilted towards right.                            |
 |                    | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                     |
 | Height             | Height determines the length of the cylinder.                                                                          |
 
+| Camera variables   | Explanation                                                
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+| Target-XYZ         | Target is the point where the camera faces in 3D space. (0, 0, 0) is middle                                            |    
 
-
-
-
-
-
+| SPOT variables     | Explanation                                                
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+| power              | Each spot has its own power variable, determines how much light the spot produces                                      |  
 
 
 
