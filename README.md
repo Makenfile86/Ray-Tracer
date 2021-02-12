@@ -1,5 +1,5 @@
 # Ray-Tracer
-42 School project. Done with fellow student https://github.com/n0-tail.
+42 School project. Done with a fellow student https://github.com/n0-tail.
 
 # rt
 
