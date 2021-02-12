@@ -105,8 +105,8 @@ Each object has its variables you can manage to create your own scenes, most of 
 
 | MODEL variables    | Explanation                                                
 |--------------------|------------------------------------------------------------------------------------------------------------------------|
-|                    |Other than the "name" of the .obj file model has only COORD-XYZ, Color-RGB, Rotation-XYZ, material                      |
-|                    | and TXT-type variables.                                                                                                | 
+| .obj               | name of the .obj file. Example crate.obj is called with only "crate". It has to be located in the resources folder     |
+                                                                                                                                       
 
 
 
