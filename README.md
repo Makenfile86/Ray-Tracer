@@ -44,7 +44,7 @@ run ./rt scenes/"scene name" to open a scene.
 
 ![scene eval09 file:](https://github.com/Makenfile86/ray-tracer/blob/main/scene_file.jpg?raw=true)
 
-You need a SCENE, CAMERA, atleast one SPOT (light) and a object.
+You need a SCENE, CAMERA, atleast one SPOT (light) and a object. 
 
 So first line is  "* SCENE...", Where you first declare where your second lines input goes. To declare data you only need the "* NAME". The variables after that are simply to help you fill the values for them in the same order in the second line. 
 
