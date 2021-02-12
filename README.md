@@ -83,13 +83,13 @@ Each object has its variables you can manage to create your own scenes, most of 
 
 //Object specific variables
 
-| Plane variables  | Explanation                                                
-|------------------|---------------------------------------------------------------------------------------------------------------------------|
-| Normal-XYZ       | To move the Plane in 3D space you need to adjust the Planes normal. if Coord-XYZ is (-75, 19, 35) and you want the plane  |
-|                  | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                        |
-| Ring             | You can make a ring out of a plane by adjusting the Ring variable, bigger the variable the larger the hole.               |
+| Plane variables    | Explanation                                                
+|--------------------|------------------------------------------------------------------------------------------------------------------------|
+| Normal-XYZ         | To move the Plane in 3D space you need to adjust the Planes normal. if Coord-XYZ is (-75, 19, 35) and you want         |
+|                    | the plane in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).           |
+| Ring               | You can make a ring out of a plane by adjusting the Ring variable, bigger the variable the larger the hole.            |
 
-| Cylinder variables  | Explanation                                                
+| Cylinder variables | Explanation                                                
 |--------------------|------------------------------------------------------------------------------------------------------------------------|
 | End-XYZ            | The Cylinder has a starting and ending point (X, Y, Z) in 3D space. With endpoint you can determine in which direction |                     | the cylinder points to. If start is (-15, 0, 80)  and end is (-10, 5, 80) The cylinder is  tilted towards right.                            |
 |                    | in that position while being flat to the ground you need to adjust the Normal-XYZ to (-75, 0, 35).                     |
