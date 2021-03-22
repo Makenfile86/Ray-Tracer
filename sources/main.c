@@ -27,6 +27,7 @@ int				main(int argc, char **argv)
 	read_scene(data);
 	mlx_key_hook(data->win, keypressed, data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
+	mlx_expose_hook(data->win, hook_expose, data);
 	mlx_loop(data->mlx);
 	free(data);
 }

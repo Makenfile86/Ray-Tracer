@@ -246,5 +246,6 @@ int					validate_format(int fd);
 unsigned char		*fourth_channel_padding(unsigned char *texture,
 		int width, int height);
 double				dtr(double value);
+int					hook_expose(t_data *data);
 
 #endif

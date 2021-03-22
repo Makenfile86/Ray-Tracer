@@ -51,7 +51,6 @@ void		copy_sphere_data(t_data *data, char **parts, int e)
 	data->sphere->texture[e].scale = ft_atoi(parts[12]);
 	if (parts[13])
 		data->sphere->texture[e].color.red = ft_atoi(parts[13]);
-	ft_putendl(parts[14]);
 	if (parts[14])
 		data->sphere->texture[e].color.green = ft_atoi(parts[14]);
 	if (parts[15])
