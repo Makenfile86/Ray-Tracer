@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-
 t_vector		rotate_vector(t_vector origin, t_vector target,
 		t_vector rot, int no_z)
 {
@@ -75,8 +74,8 @@ t_vector		vec_rot_z(t_vector v, double a)
 
 t_vector		vec_rot_zyx(t_vector v, t_vector r)
 {
-	v = vec_rot_z(v, DTR(r.z));
-	v = vec_rot_y(v, DTR(r.y));
-	v = vec_rot_x(v, DTR(r.x));
+	v = vec_rot_z(v, dtr(r.z));
+	v = vec_rot_y(v, dtr(r.y));
+	v = vec_rot_x(v, dtr(r.x));
 	return (v);
 }

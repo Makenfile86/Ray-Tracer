@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-
 double			vector_length(t_vector v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
@@ -61,24 +60,4 @@ t_vector		vector_minus(t_vector v1, t_vector v2)
 	v3.y = v1.y - v2.y;
 	v3.z = v1.z - v2.z;
 	return (v3);
-}
-
-t_vector	vector_div(t_vector v, double div)
-{
-	t_vector result;
-
-	if (div == 0.0)
-		return (v);
-	result.x = v.x / div;
-	result.y = v.y / div;
-	result.z = v.z / div;
-	return (result);
-}
-
-t_vector	reverse_vector(t_vector v)
-{
-	v.x = -v.x;
-	v.y *= -v.y;
-	v.z *= -v.z;
-	return (v);
 }

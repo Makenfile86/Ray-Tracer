@@ -12,45 +12,22 @@
 
 #include "rt.h"
 
-t_vector		vector_copy(t_vector v)
+t_vector	reverse_vector(t_vector v)
 {
-	t_vector	v2;
-
-	v2.x = v.x;
-	v2.y = v.y;
-	v2.z = v.z;
-	return (v2);
+	v.x = -v.x;
+	v.y *= -v.y;
+	v.z *= -v.z;
+	return (v);
 }
 
-t_vector		vectornew(double x, double y, double z)
+t_vector	vector_div(t_vector v, double div)
 {
-	t_vector	new;
+	t_vector result;
 
-	new.x = x;
-	new.y = y;
-	new.z = z;
-	return (new);
-}
-
-t_vector		vectoradd(t_vector v1, t_vector v2)
-{
-	v1.x += v2.x;
-	v1.y += v2.y;
-	v1.z += v2.z;
-	return (v1);
-}
-
-double			vectordot(t_vector v1, t_vector v2)
-{
-	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
-}
-
-t_vector		vectorscale(double c, t_vector v)
-{
-	t_vector	result;
-
-	result.x = v.x * c;
-	result.y = v.y * c;
-	result.z = v.z * c;
+	if (div == 0.0)
+		return (v);
+	result.x = v.x / div;
+	result.y = v.y / div;
+	result.z = v.z / div;
 	return (result);
 }

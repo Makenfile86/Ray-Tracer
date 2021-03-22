@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-int			hook_expose(t_data *data)
+int							hook_expose(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
 	return (0);
