@@ -15,7 +15,7 @@
 void		init_cone(t_data *data, int e)
 {
 	data->cone->axis[e] = vec_rot_zyx(vectornew(0, 1, 0), data->cone->rot[e]);
-	data->cone->angle[e] = tan(DTR(data->cone->angle[e]));
+	data->cone->angle[e] = tan(dtr(data->cone->angle[e]));
 	data->cone->nbr += 1;
 }
 

@@ -31,8 +31,6 @@
 
 # define MAIN_PAD_ESC	53
 
-# define DTR(k)	((double)k * (M_PI / 180))
-
 # define THREAD_WIDTH 50
 # define THREAD_NUMBER 20
 
@@ -143,6 +141,7 @@ void				parse_plane(char *line, t_data *data);
 void				parse_camera(char *line, t_data *data);
 void				parse_scene(char *line, t_data *data);
 void				draw(t_data *data);
+void				memory_allocation_fail(void);
 void				get_color(t_data *data, int x, int y);
 int					intersectsphere(t_ray ray, t_data *data, int i);
 t_rgb				get_light(t_data *data, t_rgb rgb, t_ray ray, int i);
@@ -246,5 +245,6 @@ char				*get_res_line(int fd);
 int					validate_format(int fd);
 unsigned char		*fourth_channel_padding(unsigned char *texture,
 		int width, int height);
+double				dtr(double value);
 
 #endif
